@@ -1,4 +1,4 @@
 package com.isa.BloodBank.model;
 
-public class SystemAdmin {
+public class SystemAdmin extends Person {
 }

@@ -1,6 +1,13 @@
 package com.isa.BloodBank.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "bloodBankCenters")
 public class BloodBankCenter {
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private int id;
     private String name;
     private String address;
     private String description;
@@ -14,6 +21,14 @@ public class BloodBankCenter {
         this.address = address;
         this.description = description;
         this.averageGrade = averageGrade;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
