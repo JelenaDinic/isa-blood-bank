@@ -1,5 +1,6 @@
 package com.isa.BloodBank.controller;
 
+import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class RegisteredUserController {
     public ResponseEntity<RegisteredUser> create(@RequestBody RegisteredUser registeredUser) {
         RegisteredUser newRegisteredUser = service.create(registeredUser);
         return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/allUsers")
+    public ResponseEntity<List<UserDisplayDTO>> getAllUsers() {
+        List<UserDisplayDTO> userDisplayDTOs = service.findAllUsers();
+        return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }
 }

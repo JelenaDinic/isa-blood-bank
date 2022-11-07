@@ -4,13 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BloodBankCenterComponent } from './blood-bank-center/blood-bank-center.component';
+import { SearchUsersComponent } from './search-users/search-users.component';
 
 const routes: Routes = [
     { path: 'blood-bank-center/:id', component: BloodBankCenterComponent },
+    {path: 'search-users', component: SearchUsersComponent}
   ];
   @NgModule({
     declarations: [
-      BloodBankCenterComponent
+      BloodBankCenterComponent,
+      SearchUsersComponent
     ],
     imports: [
       CommonModule,
