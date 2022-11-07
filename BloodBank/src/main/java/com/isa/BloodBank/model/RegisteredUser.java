@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "systemAdministrators")
+@Table(name = "registeredUsers")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class SystemAdmin extends Person {
+public class RegisteredUser extends Person {
+    private BloodType bloodType;
 }
