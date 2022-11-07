@@ -3,7 +3,10 @@ package com.isa.BloodBank.service;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BloodBankCenterService {
@@ -13,8 +16,8 @@ public class BloodBankCenterService {
     public BloodBankCenterService(BloodBankCenterRepository bloodBankCenterRepository) {
         this.bloodBankCenterRepository = bloodBankCenterRepository;
     }
-    public BloodBankCenter getById(int id) {
-        return bloodBankCenterRepository.getReferenceById(id);
+    public Optional<BloodBankCenter> getById(int id) {
+        return bloodBankCenterRepository.findById(id);
     }
     public void create(BloodBankCenter bloodBankCenter){
         bloodBankCenterRepository.save(bloodBankCenter);
