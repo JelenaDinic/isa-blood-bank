@@ -1,0 +1,27 @@
+<div *ngIf="bloodBankCenter">
+    <div> 
+          <form class="update-form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Id</mat-label>
+                        <input matInput [(ngModel)]="bloodBankCenter.id" disabled>
+                    </mat-form-field><br>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput [(ngModel)]="bloodBankCenter.name">
+                    </mat-form-field><br>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <input matInput [(ngModel)]="bloodBankCenter.description">
+                    </mat-form-field><br>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Average grade</mat-label>
+                        <input matInput [(ngModel)]="bloodBankCenter.averageGrade" disabled>
+                    </mat-form-field>
+                <mat-card-actions>
+                    <button mat-stroked-button (click)="update(bloodBankCenter)">
+                        Submit
+                    </button>
+                </mat-card-actions>
+            </form>
+    </div>
+</div>

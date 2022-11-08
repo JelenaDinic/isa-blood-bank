@@ -3,7 +3,6 @@ package com.isa.BloodBank.controller;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.service.BloodBankCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -25,4 +24,9 @@ public class BloodBankCenterController {
         return bloodBankCenterService.getById(id);
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable int id, @RequestBody BloodBankCenter bloodBankCenter) {
+        //provjeriti poklapanje id-a
+        bloodBankCenterService.update(bloodBankCenter);
+    }
 }

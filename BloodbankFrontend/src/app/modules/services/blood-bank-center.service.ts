@@ -12,7 +12,12 @@ import { BloodBankCenter } from "../model/blood-bank-center.model";
     headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     constructor(private http: HttpClient) { }
-    getBloodBankCenter(id: number): Observable<BloodBankCenter> {
-        return this.http.get<BloodBankCenter>(this.apiHost + 'api/blood-bank-center/' + id, {headers: this.headers});
+
+    getBloodBankCenter(id: number): Observable<any> {
+        return this.http.get<any>(this.apiHost + 'api/blood-bank-center/' + id, {headers: this.headers});
+      }
+    
+    update(bloodBankCenter: BloodBankCenter): Observable<any> {
+        return this.http.put<BloodBankCenter>(this.apiHost + 'api/blood-bank-center/' + bloodBankCenter.id, bloodBankCenter, {headers: this.headers});
       }
   }
