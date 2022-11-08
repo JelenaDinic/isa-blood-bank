@@ -10,7 +10,9 @@ import { UserService } from '../services/user.service';
 })
 export class SearchUsersComponent implements OnInit {
 
-  public users!: UserDisplayDTO[];
+  public users: UserDisplayDTO[] = [];
+  public allUsers: UserDisplayDTO[] = [];
+  searchTerm = '';
 
   constructor(private userService: UserService) { }
 
@@ -18,12 +20,19 @@ export class SearchUsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe(
       (response: UserDisplayDTO[]) => {
         this.users = response;
+        this.allUsers = this.users;
       }
      );
   }
 
   ngOnInit(): void {
     this.getAllUsers();
+  }
+
+  search(value: string): void {
+    this.users = this.allUsers.filter((val) =>
+      val.name.toLowerCase().includes(value)
+    );
   }
 
 }

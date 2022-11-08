@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BloodBankCenterComponent } from './blood-bank-center/blood-bank-center.component';
 import { SearchUsersComponent } from './search-users/search-users.component';
+import { UserSearchFilterPipe } from './pipes/user-search-filter.pipe';
 
 const routes: Routes = [
     { path: 'blood-bank-center/:id', component: BloodBankCenterComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   @NgModule({
     declarations: [
       BloodBankCenterComponent,
-      SearchUsersComponent
+      SearchUsersComponent,
+      UserSearchFilterPipe
     ],
     imports: [
       CommonModule,

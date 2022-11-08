@@ -11,8 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UserDisplayDTO {
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private String role;
     private String address;
@@ -22,8 +21,7 @@ public class UserDisplayDTO {
     private String bloodType;
 
     public UserDisplayDTO(RegisteredUser registeredUser) {
-        this.setFirstName(registeredUser.getFirstName());
-        this.setLastName(registeredUser.getLastName());
+        this.setName(registeredUser.getFirstName() + " " + registeredUser.getLastName());
         this.setAddress(registeredUser.getAddress());
         this.setDob(registeredUser.getDob().toString());
         this.setPhoneNumber(registeredUser.getPhoneNumber());
@@ -50,8 +48,7 @@ public class UserDisplayDTO {
     }
 
     public UserDisplayDTO(Staff staff) {
-        this.setFirstName(staff.getFirstName());
-        this.setLastName(staff.getLastName());
+        this.setName(staff.getFirstName() + " " + staff.getLastName());
         this.setAddress(staff.getAddress());
         this.setDob(staff.getDob().toString());
         this.setPhoneNumber(staff.getPhoneNumber());

@@ -1,3 +1,32 @@
-<div *ngFor = "let user of users">
-    <div *ngIf="user.bloodBankName!= null">{{user.firstName}} {{user.bloodBankName}}</div>
-</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<form class="container search-form">
+    <div class="row">
+      <h3 class="col-md-3">Search by name: </h3>
+      <input class="search-term col-md-3" type="text" name="searchTerm" 
+        placeholder="Type name"
+        [(ngModel)]="searchTerm" (input)="search(searchTerm)" />
+    </div>
+  </form>
+
+<div class="container all-users-container" id="main-container">
+    <div class="row">
+      <div *ngFor="let user of users | userSearchFilter: searchTerm; index as i" class="col-md-6 col-xl-3">
+         <div class="card m-b-30">
+            <div class="card-body row">
+               <div class="col-12 card-title align-self-center mb-0">
+                  <h5>{{user?.name}}</h5>
+                  <p class="m-0">{{user?.role}}</p>
+               </div>
+            </div>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user?.email}}</li>
+               <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{user?.phoneNumber}}</li>
+               <li class="list-group-item"><i class="fa fa-home float-right"></i>Address : {{user?.address}}</li>
+               <li class="list-group-item"><i class="fa fa-calendar float-right"></i>DoB : {{user?.dob}}</li>
+               <li *ngIf="user.bloodBankName != null" class="list-group-item"><i class="fa fa-stethoscope float-right"></i>Works in : {{user?.bloodBankName}}</li>
+               <li *ngIf="user.bloodType != null" class="list-group-item"><i class="fa fa-tint float-right"></i>BloodType : {{user?.bloodType}}</li>
+            </ul>
+         </div>
+      </div>
+    </div>
