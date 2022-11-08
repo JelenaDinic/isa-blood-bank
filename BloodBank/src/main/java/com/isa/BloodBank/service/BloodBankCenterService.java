@@ -22,4 +22,7 @@ public class BloodBankCenterService {
     public void create(BloodBankCenter bloodBankCenter){
         bloodBankCenterRepository.save(bloodBankCenter);
     }
+    public void update(BloodBankCenter bloodBankCenter) {
+        bloodBankCenterRepository.save(bloodBankCenter);
+    }
 }
