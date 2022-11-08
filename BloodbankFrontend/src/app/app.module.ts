@@ -14,12 +14,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { SearchUsersComponent } from './modules/search-users/search-users.component';
+import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     UpdateBloodBankCenterComponent,
-    BloodBankCenterComponent
+    BloodBankCenterComponent,
+    SearchUsersComponent,
+    UserSearchFilterPipe
   ],
   imports: [
     BrowserModule,
