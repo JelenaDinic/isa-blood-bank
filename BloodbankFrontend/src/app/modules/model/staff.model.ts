@@ -1,12 +1,12 @@
 export class Staff {
-    firstName!: string;
-    lastName!: string;
-    email!: string;
-    password!: string;
+    firstName: string = "";
+    lastName: string = "";
+    email: string = "";
+    password: string = "";
     role: string = "STAFF";
-    address!: string;
+    address: string = "";
     dob!: Date;
-    phoneNumber!: string;
+    phoneNumber: string = "";
     bloodBankId!: number;
 
 

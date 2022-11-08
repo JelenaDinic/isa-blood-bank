@@ -24,4 +24,9 @@ import { BloodBankCenter } from "../model/blood-bank-center.model";
     create(bloodBankCenter: BloodBankCenter): Observable<any> {
       return this.http.post<any>(this.apiHost + 'api/blood-bank-center', bloodBankCenter, {headers: this.headers});
     }
+
+    getAll(): Observable<BloodBankCenter[]> {
+      return this.http.get<BloodBankCenter[]>(this.apiHost + 'api/blood-bank-center', {headers: this.headers});
+    }
+
   }
