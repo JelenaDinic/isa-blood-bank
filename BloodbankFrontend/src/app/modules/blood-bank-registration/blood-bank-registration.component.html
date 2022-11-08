@@ -1,0 +1,62 @@
+<!-- <div class="container">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="bloodBankCenter.name">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput [(ngModel)]="bloodBankCenter.address">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="bloodBankCenter.description">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Average grade</mat-label>
+            <input matInput [(ngModel)]="bloodBankCenter.averageGrade">
+        </mat-form-field><br>
+        <button mat-stroked-button (click)="registerBloodBank()">
+            Register
+        </button>
+    </div>
+</div> -->
+
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+            <div class="d-table-cell align-middle">
+
+                <div class="text-center mt-4">
+                    <h1 class="h2">Register a new blood bank</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-sm-4">
+                            <form>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input [(ngModel)]="bloodBankCenter.name" class="form-control form-control-lg" type="text" name="name" placeholder="Enter blood bank name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input [(ngModel)]="bloodBankCenter.address" class="form-control form-control-lg" type="text" name="company" placeholder="Enter blood bank address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input [(ngModel)]="bloodBankCenter.description" class="form-control form-control-lg" type="email" name="email" placeholder="Enter blood bank description">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <!-- <a href="index.html" class="btn btn-lg btn-primary">Register</a> -->
+                                    <button type="submit" class="btn btn-lg btn-primary" (click)="registerBloodBank()">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
