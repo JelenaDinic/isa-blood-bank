@@ -20,4 +20,13 @@ import { BloodBankCenter } from "../model/blood-bank-center.model";
     update(bloodBankCenter: BloodBankCenter): Observable<any> {
         return this.http.put<BloodBankCenter>(this.apiHost + 'api/blood-bank-center/' + bloodBankCenter.id, bloodBankCenter, {headers: this.headers});
       }
+
+    create(bloodBankCenter: BloodBankCenter): Observable<any> {
+      return this.http.post<any>(this.apiHost + 'api/blood-bank-center', bloodBankCenter, {headers: this.headers});
+    }
+
+    getAll(): Observable<BloodBankCenter[]> {
+      return this.http.get<BloodBankCenter[]>(this.apiHost + 'api/blood-bank-center', {headers: this.headers});
+    }
+
   }
