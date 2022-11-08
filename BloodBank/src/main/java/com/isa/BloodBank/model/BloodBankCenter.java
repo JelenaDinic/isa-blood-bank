@@ -1,5 +1,6 @@
 package com.isa.BloodBank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class BloodBankCenter {
     private String address;
     private String description;
     private double averageGrade;
-    @OneToMany(mappedBy="bloodBankCenter", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="bloodBankCenter")
+    @JsonIgnore
     private Set<Staff> staff;
 }
