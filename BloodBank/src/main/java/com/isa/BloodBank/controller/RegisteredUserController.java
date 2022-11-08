@@ -34,7 +34,7 @@ public class RegisteredUserController {
     }
 
     @GetMapping(path = "/allUsers")
-    public ResponseEntity<List<UserDisplayDTO>> getAllUsers() {
+    public ResponseEntity<List<UserDisplayDTO>> findAllUsers() {
         List<UserDisplayDTO> userDisplayDTOs = service.findAllUsers();
         return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }

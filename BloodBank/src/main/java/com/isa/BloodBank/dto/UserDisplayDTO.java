@@ -2,6 +2,7 @@ package com.isa.BloodBank.dto;
 
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.Staff;
+import com.isa.BloodBank.model.SystemAdmin;
 import com.isa.BloodBank.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,6 +55,15 @@ public class UserDisplayDTO {
         this.setPhoneNumber(staff.getPhoneNumber());
         this.setEmail(staff.getEmail());
         this.setRole("Staff");
+    }
+
+    public UserDisplayDTO(SystemAdmin systemAdmin) {
+        this.setName(systemAdmin.getFirstName() + " " + systemAdmin.getLastName());
+        this.setAddress(systemAdmin.getAddress());
+        this.setDob(systemAdmin.getDob().toString());
+        this.setPhoneNumber(systemAdmin.getPhoneNumber());
+        this.setEmail(systemAdmin.getEmail());
+        this.setRole("System administrator");
     }
 
 }
