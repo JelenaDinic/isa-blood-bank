@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { SearchUsersComponent } from './modules/search-users/search-users.component';
 import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
+import { BloodBankRegistrationComponent } from './modules/blood-bank-registration/blood-bank-registration.component';
+import { StaffRegistrationComponent } from './modules/staff-registration/staff-registration.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
     UpdateBloodBankCenterComponent,
     BloodBankCenterComponent,
     SearchUsersComponent,
-    UserSearchFilterPipe
+    UserSearchFilterPipe,
+    BloodBankRegistrationComponent,
+    StaffRegistrationComponent
   ],
   imports: [
     BrowserModule,

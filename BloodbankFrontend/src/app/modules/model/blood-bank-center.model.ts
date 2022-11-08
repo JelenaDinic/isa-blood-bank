@@ -3,7 +3,7 @@ export class BloodBankCenter {
     name: string = "";
     address: string = "";
     description: string = "";
-    averageGrade: number = 0 
+    averageGrade: number = 0;
 
 
     public constructor(obj?: any) {
