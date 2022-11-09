@@ -17,6 +17,8 @@ import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
 import {MatButtonModule} from '@angular/material/button';
 import { BloodBankRegistrationComponent } from './modules/blood-bank-registration/blood-bank-registration.component';
 import { StaffRegistrationComponent } from './modules/staff-registration/staff-registration.component';
+import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { StaffRegistrationComponent } from './modules/staff-registration/staff-r
     SearchUsersComponent,
     UserSearchFilterPipe,
     BloodBankRegistrationComponent,
-    StaffRegistrationComponent
+    StaffRegistrationComponent,
+    StaffProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { StaffRegistrationComponent } from './modules/staff-registration/staff-r
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

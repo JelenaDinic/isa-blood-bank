@@ -49,3 +49,10 @@ mat-card {
     border: none;
     outline: none;
 }
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
+}

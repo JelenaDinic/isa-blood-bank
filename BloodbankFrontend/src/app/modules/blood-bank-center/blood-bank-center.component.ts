@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class BloodBankCenterComponent implements OnInit {
 
   public bloodBankCenter: BloodBankCenter = new BloodBankCenter;
-  public showUpdateBloodBankCenterComponent : boolean = false
 
   constructor(private bloodBankCenterService: BloodBankService, private router: Router) { }
 

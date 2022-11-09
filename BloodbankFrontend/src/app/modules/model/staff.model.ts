@@ -1,4 +1,5 @@
 export class Staff {
+    id: number = 0;
     firstName: string = "";
     lastName: string = "";
     email: string = "";
@@ -12,6 +13,7 @@ export class Staff {
 
     public constructor(obj?: any) {
         if (obj) {
+            this.id = obj.id;
             this.firstName = obj.firstName;
             this.lastName = obj.lastName;
             this.email = obj.email;

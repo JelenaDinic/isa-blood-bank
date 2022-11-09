@@ -1,0 +1,10 @@
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
+}
+body {
+    margin: 0;
+}
