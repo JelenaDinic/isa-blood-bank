@@ -24,3 +24,10 @@ body{
 h1 {
     margin-bottom: 20px;
 }
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
+}

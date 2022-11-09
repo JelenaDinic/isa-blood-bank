@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class BloodBankCenterComponent implements OnInit {
 
   public bloodBankCenter: BloodBankCenter = new BloodBankCenter;
-  public showUpdateBloodBankCenterComponent : boolean = false
 
   constructor(private bloodBankCenterService: BloodBankService, private router: Router) { }
 
@@ -20,9 +19,22 @@ export class BloodBankCenterComponent implements OnInit {
           this.bloodBankCenter = res;
         })
   }
-  public updateBloodBankCenter(id: number){
-    this.router.navigate(['/blood-bank-center/' + id + '/update']);
-    this.showUpdateBloodBankCenterComponent = true
+  public update(bloodBankCenter: BloodBankCenter): void {
+    if (!this.isValidInput())
+    {
+      alert("Field cannot be empty!")
+        this.router.navigate(['/blood-bank-center']);
+    }
+    else
+    {
+      this.bloodBankCenterService.update(bloodBankCenter).subscribe(res => {
+        this.router.navigate(['/blood-bank-center']);
+      });
+    }
+  }
+
+  private isValidInput(): boolean {
+    return this.bloodBankCenter?.name != '' && this.bloodBankCenter?.description != '';
   }
 
 }

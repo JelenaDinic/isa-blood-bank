@@ -31,8 +31,14 @@ public class StaffService {
         staff.setBloodBankCenter(bloodBankCenter);
         return repository.save(staff);
     }
+    public Staff update(Staff staff) {
+        return repository.save(staff);
+    }
 
     public List<Staff> findAll() {
         return repository.findAll();
+    }
+    public Optional<Staff> getById(int id) {
+        return repository.findById(id);
     }
 }

@@ -1,9 +1,7 @@
 import { BloodBankCenterComponent } from './modules/blood-bank-center/blood-bank-center.component';
-import { UpdateBloodBankCenterComponent } from './modules/update-blood-bank-center/update-blood-bank-center.component';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './modules/services/user.service';
@@ -16,18 +14,21 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { SearchUsersComponent } from './modules/search-users/search-users.component';
 import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
+import {MatButtonModule} from '@angular/material/button';
 import { BloodBankRegistrationComponent } from './modules/blood-bank-registration/blood-bank-registration.component';
 import { StaffRegistrationComponent } from './modules/staff-registration/staff-registration.component';
+import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UpdateBloodBankCenterComponent,
     BloodBankCenterComponent,
     SearchUsersComponent,
     UserSearchFilterPipe,
     BloodBankRegistrationComponent,
-    StaffRegistrationComponent
+    StaffRegistrationComponent,
+    StaffProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,9 @@ import { StaffRegistrationComponent } from './modules/staff-registration/staff-r
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

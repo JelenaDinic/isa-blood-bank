@@ -6,3 +6,53 @@ mat-card {
     border: #DCD6CC 1px solid;
     background-color: white;
 }
+
+.bloodBank {
+    border: 1px solid #343a40;
+    border-radius: 20px 0px;   
+    margin: auto;
+    margin-top: 30px;
+    padding: 10px;
+    width: 50%;
+}
+
+.bloodBank h4 {
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.bloodBank .content {
+    color: #343a40;
+}
+
+.bloodBank .content div {
+    margin-top: 30px;
+    border-bottom: 1px solid #343a40;
+}
+ 
+.bloodBank .content div h6 {
+    text-transform: lowercase;
+    background-color: #343a40;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px 0px 0px 0px;
+}
+
+.bloodBank .content input {
+    margin-left: 20px;
+    border: none;
+    width: 100%;
+}
+
+.bloodBank .content input:focus {
+    border: none;
+    outline: none;
+}
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
+}
