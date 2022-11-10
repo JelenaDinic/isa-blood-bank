@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Staff extends Person{
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
 

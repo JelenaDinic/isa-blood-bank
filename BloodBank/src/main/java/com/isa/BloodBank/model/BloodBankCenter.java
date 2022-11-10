@@ -23,7 +23,7 @@ public class BloodBankCenter {
     private String address;
     private String description;
     private double averageGrade;
-    @OneToMany(mappedBy="bloodBankCenter")
+    @OneToMany(mappedBy="bloodBankCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Staff> staff;
 }

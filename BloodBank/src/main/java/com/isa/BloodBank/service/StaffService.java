@@ -25,8 +25,7 @@ public class StaffService {
     }
 
     public Staff create(StaffCreationDTO staffCreationDTO) {
-        BloodBankCenter bloodBankCenter = new BloodBankCenter();
-        bloodBankCenter.setId(staffCreationDTO.getBloodBankId());
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(staffCreationDTO.getBloodBankId());
         Staff staff = new Staff(staffCreationDTO);
         staff.setBloodBankCenter(bloodBankCenter);
         return repository.save(staff);
