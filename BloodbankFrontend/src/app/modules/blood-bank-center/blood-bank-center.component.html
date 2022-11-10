@@ -1,27 +1,45 @@
-<div class="bloodBank" *ngIf="bloodBankCenter">
-    <h4>{{bloodBankCenter.name}}</h4>
-    
-    <div class="content">
-        <div class="name">
-            <h6>Name:</h6>
-            <input  matInput [(ngModel)]="bloodBankCenter.name"/>
-        </div>
+<div style="background-image: url('../../../assets/bg5.webp'); max-width: 100% ;background-size: cover;" class="container h-100">
+    <div  style ="margin: 0;" class="row h-100">
+        <div  class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+            <div  class="d-table-cell align-middle">
 
-        <div class="address">
-            <h6>Address:</h6>
-            <input  matInput [(ngModel)]="bloodBankCenter.address"/>
-        </div>
+                <div class="text-center mt-4">
+                    <h1 class="h2">Your blood bank center</h1>
+                </div>
 
-        <div class="description">
-            <h6>Description:</h6>
-            <input matInput [(ngModel)]="bloodBankCenter.description"/>
-        </div>
-        
-        <div class="averageGrade">
-            <h6>Average grade:</h6>
-            <input  matInput [(ngModel)]="bloodBankCenter.averageGrade" disabled/>
-        </div>
+                <div  class="card">
+                    <div class="card-body">
+                        <div class="m-sm-4">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input [(ngModel)]="bloodBankCenter.name" class="form-control form-control-lg" type="text" name="firstname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input [(ngModel)]="bloodBankCenter.address" class="form-control form-control-lg" type="text" name="lastname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input [(ngModel)]="bloodBankCenter.description" class="form-control form-control-lg" type="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Average grade</label>
+                                    <input [(ngModel)]="bloodBankCenter.averageGrade" class="form-control form-control-lg" type="text" name="password">
+                                </div>
+                                <div>
+                                    <label>Staff</label>
+                                    <ul class="list-group">
+                                        <li *ngFor="let staff of staffList" class="list-group-item">{{staff.fullName}}</li>
+                                      </ul>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button class="btn btn-lg btn-primary" (click)="update(bloodBankCenter)">Change</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
 
-        <button style="margin: auto; margin-top: 20px;" mat-raised-button color="warn" (click)="update(bloodBankCenter)">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
