@@ -13,9 +13,14 @@ import { StaffService } from '../services/staff.service';
 export class BloodBankCenterComponent implements OnInit {
 
   public bloodBankCenter: BloodBankCenter = new BloodBankCenter;
+  public bloodBanks : BloodBankCenter[] = [];
+  public allBloodBanks : BloodBankCenter[] = [];
+  public showUpdateBloodBankCenterComponent : boolean = false
   public staffList: any;
 
   constructor(private bloodBankCenterService: BloodBankService, private staffService: StaffService, private router: Router) { }
+
+  
 
   ngOnInit(): void {
         this.bloodBankCenterService.getBloodBankCenter(4).subscribe(res => {
@@ -25,7 +30,6 @@ export class BloodBankCenterComponent implements OnInit {
             console.log(this.staffList)
           })
         })
-        
   }
   public update(bloodBankCenter: BloodBankCenter): void {
     if (!this.isValidInput())
@@ -44,5 +48,6 @@ export class BloodBankCenterComponent implements OnInit {
   private isValidInput(): boolean {
     return this.bloodBankCenter?.name != '' && this.bloodBankCenter?.description != '';
   }
+
 
 }
