@@ -25,7 +25,7 @@ export class StaffRegistrationComponent implements OnInit {
   }
 
   public registerStaff() {
-    if (this.staff.firstName.trim() == '' || this.staff.lastName.trim() == '' || this.staff.email.trim() == '' || this.staff.address.trim() == ''
+    if (this.staff.firstName.trim() == '' || this.staff.lastName.trim() == '' || this.staff.email.trim() == ''
     || this.staff.password.trim() == '' || this.staff.phoneNumber.trim() == '' || this.staff.dob == null) {
         alert('Please fill in all fields!');
         return;

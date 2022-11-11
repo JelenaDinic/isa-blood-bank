@@ -1,6 +1,7 @@
 package com.isa.BloodBank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.isa.BloodBank.dto.BloodBankCreationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,18 @@ public class BloodBankCenter {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private String address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
+    private Address address;
     private String description;
     private double averageGrade;
-    @OneToMany(mappedBy="bloodBankCenter")
+    @OneToMany(mappedBy="bloodBankCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Staff> staff;
+
+    public BloodBankCenter(BloodBankCreationDTO bloodBankCreationDTO) {
+        this.name = bloodBankCreationDTO.getName();
+        this.description = bloodBankCreationDTO.getDescription();
+        this.averageGrade = 0.0;
+    }
 }

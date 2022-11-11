@@ -18,7 +18,7 @@ export class BloodBankRegistrationComponent implements OnInit {
   }
 
   public registerBloodBank() {
-    if (this.bloodBankCenter.name == '' || this.bloodBankCenter.address == ''
+    if (this.bloodBankCenter.name == ''
      || this.bloodBankCenter.description == '' || this.bloodBankCenter.averageGrade == null) {
         alert('Please fill in all fields!');
         return;

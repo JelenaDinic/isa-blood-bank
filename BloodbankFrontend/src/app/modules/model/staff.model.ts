@@ -5,7 +5,10 @@ export class Staff {
     email: string = "";
     password: string = "";
     role: string = "STAFF";
-    address: string = "";
+    street: string = "";
+    city: string = "";
+    number: string = "";
+    country: string = "";
     dob!: Date;
     phoneNumber: string = "";
     bloodBankId!: number;
@@ -19,7 +22,10 @@ export class Staff {
             this.email = obj.email;
             this.password = obj.password;
             this.role = obj.role;
-            this.address = obj.address;
+            this.street = obj.street;
+            this.city = obj.city;
+            this.number = obj.number;
+            this.country = obj.country;
             this.dob = obj.dob;
             this.phoneNumber = obj.phoneNumber;
             this.bloodBankId = obj.bloodBankId;

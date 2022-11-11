@@ -1,10 +1,13 @@
 package com.isa.BloodBank.service;
 
 import com.isa.BloodBank.dto.StaffCreationDTO;
+import com.isa.BloodBank.model.Address;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.model.Staff;
+import com.isa.BloodBank.repository.AddressRepository;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
 import com.isa.BloodBank.repository.StaffRepository;
+import net.bytebuddy.build.Plugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +19,25 @@ import java.util.Optional;
 public class StaffService {
     private final StaffRepository repository;
     private final BloodBankCenterRepository bloodBankCenterRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public StaffService(StaffRepository repository, BloodBankCenterRepository  bloodBankCenterRepository) {
+    public StaffService(StaffRepository repository, BloodBankCenterRepository  bloodBankCenterRepository, AddressRepository addressRepository) {
         this.repository = repository;
         this.bloodBankCenterRepository = bloodBankCenterRepository;
+        this.addressRepository = addressRepository;
     }
 
     public Staff create(StaffCreationDTO staffCreationDTO) {
-        BloodBankCenter bloodBankCenter = new BloodBankCenter();
-        bloodBankCenter.setId(staffCreationDTO.getBloodBankId());
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(staffCreationDTO.getBloodBankId());
         Staff staff = new Staff(staffCreationDTO);
         staff.setBloodBankCenter(bloodBankCenter);
+
+        Address address = new Address(staffCreationDTO.getStreet(), staffCreationDTO.getNumber(), staffCreationDTO.getCity(), staffCreationDTO.getCountry());
+        addressRepository.save(address);
+
+        staff.setAddress(address);
+
         return repository.save(staff);
     }
     public Staff update(Staff staff) {
