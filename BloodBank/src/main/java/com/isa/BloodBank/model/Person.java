@@ -28,5 +28,5 @@ public class Person {
     private LocalDate dob;
     private String phoneNumber;
     private String gender;
-    private int personalId;
+    private Long personalId;
 }

@@ -12,6 +12,8 @@ export class Staff {
     dob!: Date;
     phoneNumber: string = "";
     bloodBankId!: number;
+    personalId!: number;
+    gender: string = "";
 
 
     public constructor(obj?: any) {

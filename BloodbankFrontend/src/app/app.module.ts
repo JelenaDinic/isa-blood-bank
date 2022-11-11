@@ -31,7 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
     BloodBankRegistrationComponent,
     StaffRegistrationComponent,
     UserRegistrationComponent,
-    HomePageComponent  
+    HomePageComponent,  
     StaffProfileComponent
   ],
   imports: [

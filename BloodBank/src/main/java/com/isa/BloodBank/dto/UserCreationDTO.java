@@ -22,5 +22,5 @@ public class UserCreationDTO {
         private String gender;
         private String profession;
         private String professionInfo;
-        private int personalId;
+        private Long personalId;
     }

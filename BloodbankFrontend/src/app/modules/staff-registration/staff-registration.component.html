@@ -59,6 +59,21 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Personal id</label>
+                                    <input [(ngModel)]="staff.personalId" class="form-control form-control-lg" type="text" name="personalId">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select  [(ngModel)]="staff.gender" class="form-control form-control-lg" name="gender">
+                                        <option value="Male">
+                                            Male
+                                        </option>
+                                        <option value="Female">
+                                            Female
+                                        </option>
+                                    </select>
+                                </div>
                                 <div class="text-center mt-3">
                                     <button type="submit" class="btn btn-lg btn-primary" (click)="registerStaff()">Register</button>
                                 </div>
