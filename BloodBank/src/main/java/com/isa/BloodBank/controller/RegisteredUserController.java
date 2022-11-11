@@ -1,5 +1,6 @@
 package com.isa.BloodBank.controller;
 
+import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.RegisteredUserService;
@@ -28,8 +29,8 @@ public class RegisteredUserController {
     }
 
     @PostMapping
-    public ResponseEntity<RegisteredUser> create(@RequestBody RegisteredUser registeredUser) {
-        RegisteredUser newRegisteredUser = service.create(registeredUser);
+    public ResponseEntity<RegisteredUser> create(@RequestBody UserCreationDTO userCreationDTO) {
+        RegisteredUser newRegisteredUser = service.create(userCreationDTO);
         return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,15 @@ public class StaffController {
     @GetMapping
     public ResponseEntity<List<Staff>> getAll() {
         List<Staff> staff = service.findAll();
+        return new ResponseEntity<>(staff, HttpStatus.OK);
+    }
+    @GetMapping("/all-bloodbank-staff/{id}")
+    public ResponseEntity<List<Staff>> getAllByCenterId(@PathVariable("id") int id) {
+        List<Staff> staff = service.findAllByCenterId(id);
+        List<StaffCreationDTO> staffDTOList = new ArrayList<>();
+//        for(Staff s: staff) {
+//            staffDTOList.add(new StaffCreationDTO(s));
+//        }
         return new ResponseEntity<>(staff, HttpStatus.OK);
     }
 

@@ -3,16 +3,15 @@ package com.isa.BloodBank.service;
 import com.isa.BloodBank.dto.StaffCreationDTO;
 import com.isa.BloodBank.model.Address;
 import com.isa.BloodBank.model.BloodBankCenter;
-import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.repository.AddressRepository;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
-import com.isa.BloodBank.repository.RegisteredUserRepository;
 import com.isa.BloodBank.repository.StaffRepository;
 import net.bytebuddy.build.Plugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +42,15 @@ public class StaffService {
     }
     public Staff update(Staff staff) {
         return repository.save(staff);
+    }
+    public List<Staff> findAllByCenterId(int id) {
+        List<Staff> bloodbankStaff = new ArrayList<>();
+        for(Staff staff: repository.findAll()) {
+            if(staff.getBloodBankCenter().getId() == id) {
+                bloodbankStaff.add(staff);
+            }
+        }
+        return bloodbankStaff;
     }
 
     public List<Staff> findAll() {

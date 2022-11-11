@@ -27,4 +27,6 @@ public class Person {
     private Address address;
     private LocalDate dob;
     private String phoneNumber;
+    private String gender;
+    private int personalId;
 }
