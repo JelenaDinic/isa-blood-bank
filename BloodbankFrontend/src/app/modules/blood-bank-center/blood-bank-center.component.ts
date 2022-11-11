@@ -1,7 +1,9 @@
+import { UserDisplayDTO } from './../dto/userDisplayDTO';
 import { BloodBankCenter } from './../model/blood-bank-center.model';
 import { BloodBankService } from './../services/blood-bank-center.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StaffService } from '../services/staff.service';
 
 @Component({
   selector: 'app-blood-bank-center',
@@ -14,26 +16,37 @@ export class BloodBankCenterComponent implements OnInit {
   public bloodBanks : BloodBankCenter[] = [];
   public allBloodBanks : BloodBankCenter[] = [];
   public showUpdateBloodBankCenterComponent : boolean = false
+  public staffList: any;
 
-  constructor(private bloodBankCenterService: BloodBankService, private router: Router) { }
+  constructor(private bloodBankCenterService: BloodBankService, private staffService: StaffService, private router: Router) { }
 
   
 
   ngOnInit(): void {
-        this.bloodBankCenterService.getBloodBankCenter(1).subscribe(res => {
+        this.bloodBankCenterService.getBloodBankCenter(4).subscribe(res => {
           this.bloodBankCenter = res;
+          this.staffService.getStaffByCenterId(this.bloodBankCenter.id).subscribe(res => {
+            this.staffList = res;
+            console.log(this.staffList)
+          })
         })
-
-        this.bloodBankCenterService.getAll().subscribe(
-          (response: BloodBankCenter[]) => {
-            this.bloodBanks = response;
-            this.allBloodBanks = this.bloodBanks;
-          }
-          );
   }
-  public updateBloodBankCenter(id: number){
-    this.router.navigate(['/blood-bank-center/' + id + '/update']);
-    this.showUpdateBloodBankCenterComponent = true
+  public update(bloodBankCenter: BloodBankCenter): void {
+    if (!this.isValidInput())
+    {
+      alert("Field cannot be empty!")
+        this.router.navigate(['/blood-bank-center']);
+    }
+    else
+    {
+      this.bloodBankCenterService.update(bloodBankCenter).subscribe(res => {
+        this.router.navigate(['/blood-bank-center']);
+      });
+    }
+  }
+
+  private isValidInput(): boolean {
+    return this.bloodBankCenter?.name != '' && this.bloodBankCenter?.description != '';
   }
 
 
