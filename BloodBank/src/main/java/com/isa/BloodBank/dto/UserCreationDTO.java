@@ -16,7 +16,10 @@ public class UserCreationDTO {
         private String email;
         public String password;
         private UserRole role;
-        private String address;
+        private String street;
+        private String number;
+        private String city;
+        private String country;
         private LocalDate dob;
         private String phoneNumber;
         private String gender;

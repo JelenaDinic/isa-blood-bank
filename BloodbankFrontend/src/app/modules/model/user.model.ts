@@ -6,7 +6,10 @@ export class User{
     gender: string = "";
     firstName: string = "";
     lastName: string = "";
-    address: string = "";
+    street: string = "";
+    number: string = "";
+    city: string = "";
+    country: string = "";
     dob!: Date;
     phoneNumber: string = "";
     personalId: number = 0;
@@ -19,7 +22,10 @@ export class User{
             this.lastName = obj.lastName;
             this.email = obj.email;
             this.password = obj.password;
-            this.address = obj.address;
+            this.street = obj.street;
+            this.city = obj.city;
+            this.number = obj.number;
+            this.country = obj.country;
             this.dob = obj.dob;
             this.phoneNumber = obj.phoneNumber;
             this.gender = obj.gender;
