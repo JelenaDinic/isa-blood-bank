@@ -2,14 +2,8 @@ package com.isa.BloodBank.service;
 
 import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
-import com.isa.BloodBank.model.BloodBankCenter;
-import com.isa.BloodBank.model.RegisteredUser;
-import com.isa.BloodBank.model.Staff;
-import com.isa.BloodBank.model.SystemAdmin;
-import com.isa.BloodBank.repository.BloodBankCenterRepository;
-import com.isa.BloodBank.repository.RegisteredUserRepository;
-import com.isa.BloodBank.repository.StaffRepository;
-import com.isa.BloodBank.repository.SystemAdminRepository;
+import com.isa.BloodBank.model.*;
+import com.isa.BloodBank.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +18,26 @@ public class RegisteredUserService {
     private final RegisteredUserRepository repository;
     private final StaffRepository staffRepository;
     private final BloodBankCenterRepository bloodBankCenterRepository;
+    private final AddressRepository addressRepository;
     private final SystemAdminRepository systemAdminRepository;
 
     @Autowired
-    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository) {
+    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository) {
         this.repository = repository;
         this.staffRepository = staffRepository;
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.systemAdminRepository = systemAdminRepository;
+        this.addressRepository = addressRepository;
     }
 
     public RegisteredUser create(UserCreationDTO userCreationDTO) {
         RegisteredUser registeredUser = new RegisteredUser(userCreationDTO);
+
+        Address address = new Address(userCreationDTO.getStreet(), userCreationDTO.getNumber(), userCreationDTO.getCity(), userCreationDTO.getCountry());
+
+        addressRepository.save(address);
+
+        registeredUser.setAddress(address);
         return repository.save(registeredUser);
     }
 

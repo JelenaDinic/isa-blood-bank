@@ -18,7 +18,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   userRegister(){
-    if (this.user.firstName.trim() == '' || this.user.lastName.trim() == '' || this.user.email.trim() == '' || this.user.address.trim() == ''
+    if (this.user.firstName.trim() == '' || this.user.lastName.trim() == '' || this.user.email.trim() == '' || this.user.street.trim() == ''
     || this.user.password.trim() == '' || this.user.confirmPassword.trim() == '' || this.user.phoneNumber.trim() == '' || this.user.dob == null) {
         alert('Please fill in all fields!');
         return;
