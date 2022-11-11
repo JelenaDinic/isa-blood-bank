@@ -20,6 +20,8 @@ public class UserDisplayDTO {
     private String phoneNumber;
     private String bloodBankName;
     private String bloodType;
+    private String gender;
+    private String personalId;
 
     public UserDisplayDTO(RegisteredUser registeredUser) {
         this.setName(registeredUser.getFirstName() + " " + registeredUser.getLastName());
@@ -46,6 +48,8 @@ public class UserDisplayDTO {
             case ZERO_POS: this.setBloodType("0+");
                 break;
         }
+        this.setGender(registeredUser.getGender());
+        this.setPersonalId(registeredUser.getPersonalId().toString());
     }
 
     public UserDisplayDTO(Staff staff) {
@@ -55,6 +59,8 @@ public class UserDisplayDTO {
         this.setPhoneNumber(staff.getPhoneNumber());
         this.setEmail(staff.getEmail());
         this.setRole("Staff");
+        this.setGender(staff.getGender());
+        this.setPersonalId(staff.getPersonalId().toString());
     }
 
     public UserDisplayDTO(SystemAdmin systemAdmin) {
@@ -64,6 +70,8 @@ public class UserDisplayDTO {
         this.setPhoneNumber(systemAdmin.getPhoneNumber());
         this.setEmail(systemAdmin.getEmail());
         this.setRole("System administrator");
+        this.setGender(systemAdmin.getGender());
+        this.setPersonalId(systemAdmin.getPersonalId().toString());
     }
 
 }
