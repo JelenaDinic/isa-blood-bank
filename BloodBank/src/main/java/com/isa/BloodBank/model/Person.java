@@ -28,4 +28,6 @@ public class Person {
     private String address;
     private LocalDate dob;
     private String phoneNumber;
+    private String gender;
+    private int personalId;
 }

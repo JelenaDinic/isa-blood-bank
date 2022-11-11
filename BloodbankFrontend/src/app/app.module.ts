@@ -18,6 +18,8 @@ import { SearchUsersComponent } from './modules/search-users/search-users.compon
 import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
 import { BloodBankRegistrationComponent } from './modules/blood-bank-registration/blood-bank-registration.component';
 import { StaffRegistrationComponent } from './modules/staff-registration/staff-registration.component';
+import { UserRegistrationComponent } from './modules/user-registration/user-registration.component';
+import { HomePageComponent } from './modules/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { StaffRegistrationComponent } from './modules/staff-registration/staff-r
     SearchUsersComponent,
     UserSearchFilterPipe,
     BloodBankRegistrationComponent,
-    StaffRegistrationComponent
+    StaffRegistrationComponent,
+    UserRegistrationComponent,
+    HomePageComponent  
   ],
   imports: [
     BrowserModule,

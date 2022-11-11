@@ -1,5 +1,6 @@
 package com.isa.BloodBank.service;
 
+import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.model.RegisteredUser;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.isa.BloodBank.model.UserRole.USER;
 
 @Service
 public class RegisteredUserService {
@@ -31,7 +34,8 @@ public class RegisteredUserService {
         this.systemAdminRepository = systemAdminRepository;
     }
 
-    public RegisteredUser create(RegisteredUser registeredUser) {
+    public RegisteredUser create(UserCreationDTO userCreationDTO) {
+        RegisteredUser registeredUser = new RegisteredUser(userCreationDTO);
         return repository.save(registeredUser);
     }
 

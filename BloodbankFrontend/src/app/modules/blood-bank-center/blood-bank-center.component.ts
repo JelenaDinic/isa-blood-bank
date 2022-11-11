@@ -11,18 +11,30 @@ import { Router } from '@angular/router';
 export class BloodBankCenterComponent implements OnInit {
 
   public bloodBankCenter: BloodBankCenter = new BloodBankCenter;
+  public bloodBanks : BloodBankCenter[] = [];
+  public allBloodBanks : BloodBankCenter[] = [];
   public showUpdateBloodBankCenterComponent : boolean = false
 
   constructor(private bloodBankCenterService: BloodBankService, private router: Router) { }
+
+  
 
   ngOnInit(): void {
         this.bloodBankCenterService.getBloodBankCenter(1).subscribe(res => {
           this.bloodBankCenter = res;
         })
+
+        this.bloodBankCenterService.getAll().subscribe(
+          (response: BloodBankCenter[]) => {
+            this.bloodBanks = response;
+            this.allBloodBanks = this.bloodBanks;
+          }
+          );
   }
   public updateBloodBankCenter(id: number){
     this.router.navigate(['/blood-bank-center/' + id + '/update']);
     this.showUpdateBloodBankCenterComponent = true
   }
+
 
 }
