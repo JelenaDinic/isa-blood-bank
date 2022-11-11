@@ -23,7 +23,7 @@ public class UserDisplayDTO {
 
     public UserDisplayDTO(RegisteredUser registeredUser) {
         this.setName(registeredUser.getFirstName() + " " + registeredUser.getLastName());
-        this.setAddress(registeredUser.getAddress());
+        this.setAddress(registeredUser.getAddress().toString());
         this.setDob(registeredUser.getDob().toString());
         this.setPhoneNumber(registeredUser.getPhoneNumber());
         this.setEmail(registeredUser.getEmail());
@@ -50,7 +50,7 @@ public class UserDisplayDTO {
 
     public UserDisplayDTO(Staff staff) {
         this.setName(staff.getFirstName() + " " + staff.getLastName());
-        this.setAddress(staff.getAddress());
+        this.setAddress(staff.getAddress().toString());
         this.setDob(staff.getDob().toString());
         this.setPhoneNumber(staff.getPhoneNumber());
         this.setEmail(staff.getEmail());
@@ -59,7 +59,7 @@ public class UserDisplayDTO {
 
     public UserDisplayDTO(SystemAdmin systemAdmin) {
         this.setName(systemAdmin.getFirstName() + " " + systemAdmin.getLastName());
-        this.setAddress(systemAdmin.getAddress());
+        this.setAddress(systemAdmin.getAddress().toString());
         this.setDob(systemAdmin.getDob().toString());
         this.setPhoneNumber(systemAdmin.getPhoneNumber());
         this.setEmail(systemAdmin.getEmail());

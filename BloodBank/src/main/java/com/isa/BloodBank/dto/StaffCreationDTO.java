@@ -14,7 +14,10 @@ public class StaffCreationDTO {
     private String email;
     private String password;
     private UserRole role;
-    private String address;
+    private String street;
+    private String number;
+    private String city;
+    private String country;
     private LocalDate dob;
     private String phoneNumber;
     private int bloodBankId;

@@ -1,5 +1,6 @@
 package com.isa.BloodBank.controller;
 
+import com.isa.BloodBank.dto.BloodBankCreationDTO;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.service.BloodBankCenterService;
@@ -20,7 +21,7 @@ public class BloodBankCenterController {
         this.bloodBankCenterService = bloodBankCenterService;
     }
     @PostMapping
-    public void create(@RequestBody BloodBankCenter bloodBankCenter) {
+    public void create(@RequestBody BloodBankCreationDTO bloodBankCenter) {
         bloodBankCenterService.create(bloodBankCenter);
     }
     @GetMapping("/{id}")

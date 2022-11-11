@@ -24,7 +24,6 @@ public class Staff extends Person{
         this.setLastName(dto.getLastName());
         this.setDob(dto.getDob());
         this.setEmail(dto.getEmail());
-        this.setAddress(dto.getAddress());
         this.setPhoneNumber(dto.getPhoneNumber());
         this.setPassword(dto.getPassword());
         this.setRole(dto.getRole());
