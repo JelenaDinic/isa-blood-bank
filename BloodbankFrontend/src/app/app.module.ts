@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { SearchUsersComponent } from './modules/search-users/search-users.component';
 import { UserSearchFilterPipe } from './modules/pipes/user-search-filter.pipe';
+import { BloodBankSortPipe } from './modules/pipes/blood-bank-sort.pipe';
 import {MatButtonModule} from '@angular/material/button';
 import { BloodBankRegistrationComponent } from './modules/blood-bank-registration/blood-bank-registration.component';
 import { StaffRegistrationComponent } from './modules/staff-registration/staff-registration.component';
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     BloodBankCenterComponent,
     SearchUsersComponent,
     UserSearchFilterPipe,
+    BloodBankSortPipe,
     BloodBankRegistrationComponent,
     StaffRegistrationComponent,
     UserRegistrationComponent,

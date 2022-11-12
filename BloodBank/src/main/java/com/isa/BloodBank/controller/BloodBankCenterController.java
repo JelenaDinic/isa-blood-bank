@@ -1,6 +1,7 @@
 package com.isa.BloodBank.controller;
 
 import com.isa.BloodBank.dto.BloodBankCreationDTO;
+import com.isa.BloodBank.dto.BloodbankDisplayDTO;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.service.BloodBankCenterService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +35,18 @@ public class BloodBankCenterController {
     public ResponseEntity<List<BloodBankCenter>> getAll() {
         List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();
         return new ResponseEntity<>(bloodBankCenters, HttpStatus.OK);
+    }
+    @GetMapping("/all-bloodbankDTOs")
+    public ResponseEntity<List<BloodbankDisplayDTO>> getAllDTOs() {
+
+        List<BloodbankDisplayDTO> bloodBanks = new ArrayList();
+        List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();
+
+        for(BloodBankCenter bloodBankCenter : bloodBankCenters){
+            BloodbankDisplayDTO bloodbankDisplayDTO = new BloodbankDisplayDTO(bloodBankCenter);
+            bloodBanks.add(bloodbankDisplayDTO);
+        }
+        return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

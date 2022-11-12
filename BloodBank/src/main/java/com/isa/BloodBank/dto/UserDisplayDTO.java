@@ -28,24 +28,24 @@ public class UserDisplayDTO {
         this.setPhoneNumber(registeredUser.getPhoneNumber());
         this.setEmail(registeredUser.getEmail());
         this.setRole("Regular user");
-        switch (registeredUser.getBloodType()) {
-            case A_NEG: this.setBloodType("A-");
-                break;
-            case A_POS: this.setBloodType("A+");
-                break;
-            case B_NEG: this.setBloodType("B-");
-                break;
-            case B_POS: this.setBloodType("B+");
-                break;
-            case AB_NEG: this.setBloodType("AB-");
-                break;
-            case AB_POS: this.setBloodType("AB+");
-                break;
-            case ZERO_NEG: this.setBloodType("0-");
-                break;
-            case ZERO_POS: this.setBloodType("0+");
-                break;
-        }
+//        switch (registeredUser.getBloodType()) {
+//            case A_NEG: this.setBloodType("A-");
+//                break;
+//            case A_POS: this.setBloodType("A+");
+//                break;
+//            case B_NEG: this.setBloodType("B-");
+//                break;
+//            case B_POS: this.setBloodType("B+");
+//                break;
+//            case AB_NEG: this.setBloodType("AB-");
+//                break;
+//            case AB_POS: this.setBloodType("AB+");
+//                break;
+//            case ZERO_NEG: this.setBloodType("0-");
+//                break;
+//            case ZERO_POS: this.setBloodType("0+");
+//                break;
+//        }
     }
 
     public UserDisplayDTO(Staff staff) {

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { BloodBankCenter } from "../model/blood-bank-center.model";
+import { BloodBankDisplayDTO } from "../dto/bloodBankDisplayDTO";
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +13,8 @@ import { BloodBankCenter } from "../model/blood-bank-center.model";
   
     constructor(private http: HttpClient) { }
 
-    getAll(): Observable<BloodBankCenter[]> {
-      return this.http.get<BloodBankCenter[]>(this.apiHost + 'api/blood-bank-center', {headers: this.headers});
+    getAll(): Observable<BloodBankDisplayDTO[]> {
+      return this.http.get<BloodBankDisplayDTO[]>(this.apiHost + 'api/blood-bank-center/all-bloodbankDTOs', {headers: this.headers});
     }
 
   }
