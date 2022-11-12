@@ -3,7 +3,6 @@ package com.isa.BloodBank.dto;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.model.SystemAdmin;
-import com.isa.BloodBank.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
