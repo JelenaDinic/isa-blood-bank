@@ -15,36 +15,4 @@ public class BloodSupply {
         this.amount = amount;
         this.type = type;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdCenter() {
-        return idCenter;
-    }
-
-    public void setIdCenter(String idCenter) {
-        this.idCenter = idCenter;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public BloodType getType() {
-        return type;
-    }
-
-    public void setType(BloodType type) {
-        this.type = type;
-    }
 }

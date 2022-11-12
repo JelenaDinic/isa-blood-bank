@@ -23,11 +23,10 @@ export class BloodBankCenterComponent implements OnInit {
   
 
   ngOnInit(): void {
-        this.bloodBankCenterService.getBloodBankCenter(4).subscribe(res => {
+        this.bloodBankCenterService.getBloodBankCenter(11).subscribe(res => {
           this.bloodBankCenter = res;
           this.staffService.getStaffByCenterId(this.bloodBankCenter.id).subscribe(res => {
             this.staffList = res;
-            console.log(this.staffList)
           })
         })
   }

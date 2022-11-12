@@ -40,7 +40,23 @@ public class StaffService {
 
         return repository.save(staff);
     }
-    public Staff update(Staff staff) {
+    public Staff update(StaffCreationDTO staffCreationDTO) {
+        Staff staff = repository.findStaffById(staffCreationDTO.getId());
+        Address address = addressRepository.findAddressById(staffCreationDTO.getAddressId());
+        address.setStreet(staffCreationDTO.getStreet());
+        address.setNumber(staffCreationDTO.getNumber());
+        address.setCity(staffCreationDTO.getCity());
+        address.setCountry(staffCreationDTO.getCountry());
+        addressRepository.save(address);
+        staff.setAddress(address);
+        staff.setDob(staffCreationDTO.getDob());
+        staff.setEmail(staffCreationDTO.getEmail());
+        staff.setFirstName(staffCreationDTO.getFirstName());
+        staff.setLastName(staffCreationDTO.getLastName());
+        staff.setPersonalId(staffCreationDTO.getPersonalId());
+        staff.setPhoneNumber(staffCreationDTO.getPhoneNumber());
+
+
         return repository.save(staff);
     }
     public List<Staff> findAllByCenterId(int id) {
@@ -56,7 +72,10 @@ public class StaffService {
     public List<Staff> findAll() {
         return repository.findAll();
     }
-    public Optional<Staff> getById(int id) {
-        return repository.findById(id);
+    public StaffCreationDTO getById(int id) {
+        Staff staff = repository.findStaffById(id);
+        StaffCreationDTO dto = new StaffCreationDTO(staff);
+        return dto;
+
     }
 }

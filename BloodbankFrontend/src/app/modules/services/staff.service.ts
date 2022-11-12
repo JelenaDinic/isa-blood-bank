@@ -20,7 +20,7 @@ export class StaffService {
     return this.http.get<any>(this.apiServerUrl + '/api/staff/' + id, {headers: this.headers});
   }
   update(staff: Staff): Observable<any> {
-    return this.http.put<Staff>(this.apiServerUrl + '/api/staff/' + staff.id, staff, {headers: this.headers});
+    return this.http.put<any>(this.apiServerUrl + '/api/staff/' + staff.id, staff, {headers: this.headers});
   }
   getStaffByCenterId(id: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + '/api/staff/all-bloodbank-staff/' + id, {headers: this.headers});
