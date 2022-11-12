@@ -27,7 +27,7 @@ public class BloodBankCenterController {
         bloodBankCenterService.create(bloodBankCenter);
     }
     @GetMapping("/{id}")
-    public Optional<BloodBankCenter> getById(@PathVariable("id") int id) {
+    public BloodBankCreationDTO getById(@PathVariable("id") int id) {
         return bloodBankCenterService.getById(id);
     }
 
@@ -50,8 +50,7 @@ public class BloodBankCenterController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody BloodBankCenter bloodBankCenter) {
-        //provjeriti poklapanje id-a
-        bloodBankCenterService.update(bloodBankCenter);
+    public void update(@PathVariable int id, @RequestBody BloodBankCreationDTO bloodBankDTO) {
+        bloodBankCenterService.update(bloodBankDTO);
     }
 }

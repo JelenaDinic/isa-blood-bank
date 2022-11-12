@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path="api/staff")
@@ -31,10 +29,6 @@ public class StaffController {
     @GetMapping("/all-bloodbank-staff/{id}")
     public ResponseEntity<List<Staff>> getAllByCenterId(@PathVariable("id") int id) {
         List<Staff> staff = service.findAllByCenterId(id);
-        List<StaffCreationDTO> staffDTOList = new ArrayList<>();
-//        for(Staff s: staff) {
-//            staffDTOList.add(new StaffCreationDTO(s));
-//        }
         return new ResponseEntity<>(staff, HttpStatus.OK);
     }
 
@@ -44,11 +38,11 @@ public class StaffController {
         return new ResponseEntity<>(staff, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody Staff staff) {
-        service.update(staff);
+    public void update(@PathVariable int id, @RequestBody StaffCreationDTO staffDTO) {
+        service.update(staffDTO);
     }
     @GetMapping("/{id}")
-    public Optional<Staff> getById(@PathVariable("id") int id) {
+    public StaffCreationDTO getById(@PathVariable("id") int id) {
         return service.getById(id);
     }
 

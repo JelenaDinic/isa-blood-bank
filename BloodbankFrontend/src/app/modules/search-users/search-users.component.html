@@ -27,7 +27,9 @@
                <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user?.email}}</li>
                <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{user?.phoneNumber}}</li>
                <li class="list-group-item"><i class="fa fa-home float-right"></i>Address : {{user?.address}}</li>
+               <li class="list-group-item"><i class="fa fa-user float-right"></i>Personal id : {{user?.personalId}}</li>
                <li class="list-group-item"><i class="fa fa-calendar float-right"></i>DoB : {{user?.dob}}</li>
+               <li class="list-group-item"><i class="fa fa-venus-mars float-right"></i>Gender : {{user?.gender}}</li>
                <li *ngIf="user.bloodBankName != null" class="list-group-item"><i class="fa fa-stethoscope float-right"></i>Works in : {{user?.bloodBankName}}</li>
                <!-- <li *ngIf="user.bloodType != null" class="list-group-item"><i class="fa fa-tint float-right"></i>BloodType : {{user?.bloodType}}</li> -->
             </ul>

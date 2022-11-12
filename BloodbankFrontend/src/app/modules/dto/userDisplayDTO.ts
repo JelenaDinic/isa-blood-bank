@@ -7,4 +7,6 @@ export interface UserDisplayDTO {
     phoneNumber: string;
     bloodBankName: string;
     // bloodType: string;
+    gender: string;
+    personalId: string;
 }

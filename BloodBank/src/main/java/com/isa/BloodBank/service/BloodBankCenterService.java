@@ -23,8 +23,10 @@ public class BloodBankCenterService {
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.addressRepository = addressRepository;
     }
-    public Optional<BloodBankCenter> getById(int id) {
-        return bloodBankCenterRepository.findById(id);
+    public BloodBankCreationDTO getById(int id) {
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(id);
+        BloodBankCreationDTO bloodBankCreationDTO = new BloodBankCreationDTO(bloodBankCenter);
+        return bloodBankCreationDTO;
     }
     public void create(BloodBankCreationDTO bloodBankCenterDTO){
         BloodBankCenter bloodBankCenter = new BloodBankCenter(bloodBankCenterDTO);
@@ -36,7 +38,18 @@ public class BloodBankCenterService {
 
         bloodBankCenterRepository.save(bloodBankCenter);
     }
-    public void update(BloodBankCenter bloodBankCenter) {
+    public void update(BloodBankCreationDTO bloodBankDTO) {
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(bloodBankDTO.getId());
+        Address address = addressRepository.findAddressById(bloodBankDTO.getAddressId());
+        address.setStreet(bloodBankDTO.getStreet());
+        address.setNumber(bloodBankDTO.getNumber());
+        address.setCity(bloodBankDTO.getCity());
+        address.setCountry(bloodBankDTO.getCountry());
+        addressRepository.save(address);
+
+        bloodBankCenter.setAddress(address);
+        bloodBankCenter.setName(bloodBankDTO.getName());
+        bloodBankCenter.setDescription(bloodBankDTO.getDescription());
         bloodBankCenterRepository.save(bloodBankCenter);
     }
 
