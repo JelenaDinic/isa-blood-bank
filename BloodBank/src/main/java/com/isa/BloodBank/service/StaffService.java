@@ -56,7 +56,6 @@ public class StaffService {
         staff.setPersonalId(staffCreationDTO.getPersonalId());
         staff.setPhoneNumber(staffCreationDTO.getPhoneNumber());
 
-
         return repository.save(staff);
     }
     public List<Staff> findAllByCenterId(int id) {

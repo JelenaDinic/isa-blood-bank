@@ -13,7 +13,7 @@
                         <div class="m-sm-4">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input [(ngModel)]="bloodBankCenter.name" class="form-control form-control-lg" type="text" name="firstname">
+                                    <input [(ngModel)]="bloodBankCenter.name" class="form-control form-control-lg" type="text" name="name">
                                 </div>
                                 
                                 <div class="form-group">
@@ -21,8 +21,24 @@
                                     <input [(ngModel)]="bloodBankCenter.description" class="form-control form-control-lg" type="email" name="email">
                                 </div>
                                 <div class="form-group">
+                                    <label>Street</label>
+                                    <input [(ngModel)]="bloodBankCenter.street" class="form-control form-control-lg" type="text" name="street">
+                                </div>
+                                <div class="form-group">
+                                    <label>Number</label>
+                                    <input [(ngModel)]="bloodBankCenter.number" class="form-control form-control-lg" type="text" name="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input [(ngModel)]="bloodBankCenter.city" class="form-control form-control-lg" type="text" name="city">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input [(ngModel)]="bloodBankCenter.country" class="form-control form-control-lg" type="text" name="country">
+                                </div>
+                                <div class="form-group">
                                     <label>Average grade</label>
-                                    <input [(ngModel)]="bloodBankCenter.averageGrade" class="form-control form-control-lg" type="text" name="password">
+                                    <input [(ngModel)]="bloodBankCenter.averageGrade" class="form-control form-control-lg" type="text" name="averageGrade" disabled>
                                 </div>
                                 <div>
                                     <label>Staff</label>
