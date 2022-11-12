@@ -29,7 +29,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Country</label>
-                                    <input [(ngModel)]="bloodBankCenter.country" class="form-control form-control-lg" type="text" name="country">
+                                    <select  [(ngModel)]="bloodBankCenter.country" class="form-control form-control-lg" name="country">
+                                        <option value="Serbia">
+                                            Serbia
+                                        </option>
+                                        <option value="BiH">
+                                            BiH
+                                        </option>
+                                        <option value="Montenegro">
+                                            Montenegro
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

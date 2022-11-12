@@ -18,14 +18,25 @@ export class BloodBankRegistrationComponent implements OnInit {
   }
 
   public registerBloodBank() {
-    if (this.bloodBankCenter.name == ''
-     || this.bloodBankCenter.description == '' || this.bloodBankCenter.averageGrade == null) {
-        alert('Please fill in all fields!');
-        return;
-     }
-    this.bloodBankService.create(this.bloodBankCenter).subscribe(res => {
-      this.router.navigate(['/']);
-    });
+
+    if(this.isInputValid()) {
+      this.bloodBankService.create(this.bloodBankCenter).subscribe(res => {
+        this.router.navigate(['/']);
+      });
+    }
+    
+  }
+
+  public isInputValid(): boolean {
+    if (this.bloodBankCenter.name == '' || this.bloodBankCenter.description == '' || this.bloodBankCenter.averageGrade == null || this.bloodBankCenter.street == ''
+    || this.bloodBankCenter.number == '' || this.bloodBankCenter.city == '' || this.bloodBankCenter.country == '') {
+      console.log(this.bloodBankCenter)
+      alert('Please fill in all fields!');
+      return false;
+    }
+
+
+    return true;
   }
 
 }
