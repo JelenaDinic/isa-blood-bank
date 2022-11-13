@@ -26,14 +26,22 @@ public class BloodBankCenterService {
         return bloodBankCenterRepository.findById(id);
     }
     public void create(BloodBankCreationDTO bloodBankCenterDTO){
-        BloodBankCenter bloodBankCenter = new BloodBankCenter(bloodBankCenterDTO);
+        try {
+            BloodBankCenter bloodBankCenter = new BloodBankCenter(bloodBankCenterDTO);
 
-        Address address = new Address(bloodBankCenterDTO.getStreet(), bloodBankCenterDTO.getNumber(), bloodBankCenterDTO.getCity(), bloodBankCenterDTO.getCountry());
-        addressRepository.save(address);
+            Address address = new Address(bloodBankCenterDTO.getStreet(), bloodBankCenterDTO.getNumber(), bloodBankCenterDTO.getCity(), bloodBankCenterDTO.getCountry());
+            addressRepository.save(address);
 
-        bloodBankCenter.setAddress(address);
+            bloodBankCenter.setAddress(address);
 
-        bloodBankCenterRepository.save(bloodBankCenter);
+            bloodBankCenterRepository.save(bloodBankCenter);
+        }
+
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            throw new UnsupportedOperationException("Can't save blood bank!");
+        }
+
     }
     public void update(BloodBankCenter bloodBankCenter) {
         bloodBankCenterRepository.save(bloodBankCenter);

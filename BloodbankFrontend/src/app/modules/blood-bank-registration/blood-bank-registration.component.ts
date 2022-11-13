@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class BloodBankRegistrationComponent implements OnInit {
 
   public bloodBankCenter : BloodBankCenter = new BloodBankCenter();
+  public errorMessage: Error = new Error;
+  public errorMap: Map<string, string> = new Map();
 
   constructor(private bloodBankService: BloodBankService, private router: Router) { }
 
@@ -22,6 +24,10 @@ export class BloodBankRegistrationComponent implements OnInit {
     if(this.isInputValid()) {
       this.bloodBankService.create(this.bloodBankCenter).subscribe(res => {
         this.router.navigate(['/']);
+      }, (error) => {
+        console.log(error)
+        this.errorMessage = error;
+        this.toastError();
       });
     }
     
@@ -37,6 +43,20 @@ export class BloodBankRegistrationComponent implements OnInit {
 
 
     return true;
+  }
+
+  private toastError() {
+    if (String(this.errorMessage).includes('406')){
+      var error = localStorage.getItem('errormap')!;
+      this.errorMap = new Map(JSON.parse(error));
+
+      for (let entry of this.errorMap.entries()) {
+        alert('Validation error: ' + entry[1]);
+      }
+    }
+    else{
+      alert(this.errorMessage.message);
+    }
   }
 
 }
