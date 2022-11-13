@@ -8,10 +8,15 @@ import com.isa.BloodBank.service.BloodBankCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -23,8 +28,22 @@ public class BloodBankCenterController {
         this.bloodBankCenterService = bloodBankCenterService;
     }
     @PostMapping
-    public void create(@RequestBody BloodBankCreationDTO bloodBankCenter) {
-        bloodBankCenterService.create(bloodBankCenter);
+    public ResponseEntity<Object> create(@Valid @RequestBody BloodBankCreationDTO bloodBankCenter, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            System.err.println("Error creating new staff!");
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error:bindingResult.getFieldErrors()){
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
+        }
+        try {
+            bloodBankCenterService.create(bloodBankCenter);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @GetMapping("/{id}")
     public BloodBankCreationDTO getById(@PathVariable("id") int id) {

@@ -1,5 +1,5 @@
 export class Staff {
-    id: number = 0;
+    id!: number;
     firstName: string = "";
     lastName: string = "";
     email: string = "";

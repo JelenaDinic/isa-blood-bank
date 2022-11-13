@@ -11,6 +11,7 @@ import net.bytebuddy.build.Plugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,17 +29,25 @@ public class StaffService {
         this.addressRepository = addressRepository;
     }
 
-    public Staff create(StaffCreationDTO staffCreationDTO) {
-        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(staffCreationDTO.getBloodBankId());
-        Staff staff = new Staff(staffCreationDTO);
-        staff.setBloodBankCenter(bloodBankCenter);
+    @Transactional
+    public void create(StaffCreationDTO staffCreationDTO) {
+        try{
+            BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(staffCreationDTO.getBloodBankId());
+            Staff staff = new Staff(staffCreationDTO);
+            staff.setBloodBankCenter(bloodBankCenter);
 
-        Address address = new Address(staffCreationDTO.getStreet(), staffCreationDTO.getNumber(), staffCreationDTO.getCity(), staffCreationDTO.getCountry());
-        addressRepository.save(address);
+            Address address = new Address(staffCreationDTO.getStreet(), staffCreationDTO.getNumber(), staffCreationDTO.getCity(), staffCreationDTO.getCountry());
+            addressRepository.save(address);
 
-        staff.setAddress(address);
+            staff.setAddress(address);
 
-        return repository.save(staff);
+            repository.save(staff);
+        }
+
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            throw new UnsupportedOperationException("Can't save staff!");
+        }
     }
     public Staff update(StaffCreationDTO staffCreationDTO) {
         Staff staff = repository.findStaffById(staffCreationDTO.getId());
