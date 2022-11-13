@@ -15,7 +15,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StaffCreationDTO {
+
     private String fullName;
+    
+    private int id;
+    
     @NotNull
     @NotBlank(message = "First name cannot be blank")
     @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)*", message="Invalid firstname input!")
@@ -72,8 +76,25 @@ public class StaffCreationDTO {
     @NotNull
     @NotBlank(message = "Gender cannot be blank")
     private String gender;
+    private int addressId;
 
     public StaffCreationDTO(Staff staff) {
-        this.setFullName(staff.getFirstName() + " " + staff.getLastName());
+        this.setId(staff.getId());
+        this.setFirstName(staff.getFirstName());
+        this.setLastName(staff.getLastName());
+        this.setEmail(staff.getEmail());
+        this.setPassword(staff.getPassword());
+        this.setRole(staff.getRole());
+        this.setStreet(staff.getAddress().getStreet());
+        this.setNumber(staff.getAddress().getNumber());
+        this.setCity(staff.getAddress().getCity());
+        this.setCountry(staff.getAddress().getCountry());
+        this.setDob(staff.getDob());
+        this.setPersonalId(staff.getPersonalId());
+        this.setBloodBankId(staff.getBloodBankCenter().getId());
+        this.setPhoneNumber(staff.getPhoneNumber());
+        this.setGender(staff.getGender());
+        this.setAddressId(staff.getAddress().getId());
+
     }
 }

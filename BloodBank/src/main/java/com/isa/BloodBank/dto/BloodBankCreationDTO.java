@@ -1,5 +1,6 @@
 package com.isa.BloodBank.dto;
 
+import com.isa.BloodBank.model.BloodBankCenter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BloodBankCreationDTO {
+    private int id;
+
     @NotNull
     @NotBlank(message = "Bank name cannot be blank")
     private String name;
@@ -36,4 +39,18 @@ public class BloodBankCreationDTO {
     @NotNull
     @NotBlank(message = "Description cannot be blank")
     private String description;
+    private double averageGrade;
+    private int addressId;
+
+    public BloodBankCreationDTO(BloodBankCenter bloodBankCenter) {
+        this.setId(bloodBankCenter.getId());
+        this.setName(bloodBankCenter.getName());
+        this.setDescription(bloodBankCenter.getDescription());
+        this.setStreet(bloodBankCenter.getAddress().getStreet());
+        this.setNumber(bloodBankCenter.getAddress().getNumber());
+        this.setCity(bloodBankCenter.getAddress().getCity());
+        this.setCountry(bloodBankCenter.getAddress().getCountry());
+        this.setAverageGrade(bloodBankCenter.getAverageGrade());
+        this.setAddressId(bloodBankCenter.getAddress().getId());
+    }
 }

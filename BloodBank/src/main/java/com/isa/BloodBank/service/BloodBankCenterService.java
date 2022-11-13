@@ -6,6 +6,7 @@ import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.repository.AddressRepository;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,10 @@ public class BloodBankCenterService {
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.addressRepository = addressRepository;
     }
-    public Optional<BloodBankCenter> getById(int id) {
-        return bloodBankCenterRepository.findById(id);
+    public BloodBankCreationDTO getById(int id) {
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(id);
+        BloodBankCreationDTO bloodBankCreationDTO = new BloodBankCreationDTO(bloodBankCenter);
+        return bloodBankCreationDTO;
     }
     public void create(BloodBankCreationDTO bloodBankCenterDTO){
         try {
@@ -43,11 +46,23 @@ public class BloodBankCenterService {
         }
 
     }
-    public void update(BloodBankCenter bloodBankCenter) {
+    public void update(BloodBankCreationDTO bloodBankDTO) {
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(bloodBankDTO.getId());
+        Address address = addressRepository.findAddressById(bloodBankDTO.getAddressId());
+        address.setStreet(bloodBankDTO.getStreet());
+        address.setNumber(bloodBankDTO.getNumber());
+        address.setCity(bloodBankDTO.getCity());
+        address.setCountry(bloodBankDTO.getCountry());
+        addressRepository.save(address);
+
+        bloodBankCenter.setAddress(address);
+        bloodBankCenter.setName(bloodBankDTO.getName());
+        bloodBankCenter.setDescription(bloodBankDTO.getDescription());
         bloodBankCenterRepository.save(bloodBankCenter);
     }
 
     public List<BloodBankCenter> findAll() {
         return bloodBankCenterRepository.findAll();
     }
+
 }

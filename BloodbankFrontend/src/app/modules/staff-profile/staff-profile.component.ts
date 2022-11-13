@@ -13,9 +13,8 @@ export class StaffProfileComponent implements OnInit {
   constructor(private staffService: StaffService) { }
 
   ngOnInit(): void {
-    this.staffService.getById(5).subscribe(res => {
+    this.staffService.getById(13).subscribe(res => {
       this.staff = res;
-      console.log(this.staff)
     })
   }
 

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface StaffRepository extends JpaRepository<Staff, Integer> {
-    Optional<BloodBankCenter> findStaffById(int id);
+    Staff findStaffById(int id);
 }

@@ -30,3 +30,23 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: #671717;
 }
+
+select{
+    height: 36px;
+}
+
+.labelSort{
+    height: 36px;
+}
+
+.bloodBanksHeading{
+    text-align: center;
+}
+
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
+}

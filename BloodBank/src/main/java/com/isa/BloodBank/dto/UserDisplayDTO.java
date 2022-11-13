@@ -3,7 +3,6 @@ package com.isa.BloodBank.dto;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.model.SystemAdmin;
-import com.isa.BloodBank.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,26 +29,24 @@ public class UserDisplayDTO {
         this.setPhoneNumber(registeredUser.getPhoneNumber());
         this.setEmail(registeredUser.getEmail());
         this.setRole("Regular user");
-        switch (registeredUser.getBloodType()) {
-            case A_NEG: this.setBloodType("A-");
-                break;
-            case A_POS: this.setBloodType("A+");
-                break;
-            case B_NEG: this.setBloodType("B-");
-                break;
-            case B_POS: this.setBloodType("B+");
-                break;
-            case AB_NEG: this.setBloodType("AB-");
-                break;
-            case AB_POS: this.setBloodType("AB+");
-                break;
-            case ZERO_NEG: this.setBloodType("0-");
-                break;
-            case ZERO_POS: this.setBloodType("0+");
-                break;
-        }
-        this.setGender(registeredUser.getGender());
-        this.setPersonalId(registeredUser.getPersonalId().toString());
+//        switch (registeredUser.getBloodType()) {
+//            case A_NEG: this.setBloodType("A-");
+//                break;
+//            case A_POS: this.setBloodType("A+");
+//                break;
+//            case B_NEG: this.setBloodType("B-");
+//                break;
+//            case B_POS: this.setBloodType("B+");
+//                break;
+//            case AB_NEG: this.setBloodType("AB-");
+//                break;
+//            case AB_POS: this.setBloodType("AB+");
+//                break;
+//            case ZERO_NEG: this.setBloodType("0-");
+//                break;
+//            case ZERO_POS: this.setBloodType("0+");
+//                break;
+//        }
     }
 
     public UserDisplayDTO(Staff staff) {
