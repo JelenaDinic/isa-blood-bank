@@ -22,6 +22,7 @@ import { UserRegistrationComponent } from './modules/user-registration/user-regi
 import { HomePageComponent } from './modules/home-page/home-page.component';
 import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
 import { MatIconModule } from '@angular/material/icon';
+import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MatIconModule } from '@angular/material/icon';
     StaffRegistrationComponent,
     UserRegistrationComponent,
     HomePageComponent,  
-    StaffProfileComponent
+    StaffProfileComponent,
+    BloodDonorFormComponent
   ],
   imports: [
     BrowserModule,

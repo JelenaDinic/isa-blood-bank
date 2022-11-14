@@ -38,6 +38,7 @@ public class RegisteredUserService {
         addressRepository.save(address);
 
         registeredUser.setAddress(address);
+        System.out.println(registeredUser);
         return repository.save(registeredUser);
     }
 

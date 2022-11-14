@@ -7,6 +7,7 @@ import { StaffRegistrationComponent } from './modules/staff-registration/staff-r
 import { UserRegistrationComponent } from './modules/user-registration/user-registration.component';
 import { HomePageComponent } from './modules/home-page/home-page.component';
 import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
+import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'register-blood-bank', component: BloodBankRegistrationComponent},
   { path: 'register-staff', component: StaffRegistrationComponent},
   { path: 'register-user', component: UserRegistrationComponent},
-  { path: 'home-page', component: HomePageComponent}
+  { path: 'home-page', component: HomePageComponent},
+  { path: 'blood-donor-form', component: BloodDonorFormComponent}
 
 ];
 
