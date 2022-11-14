@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "registeredUsers")
@@ -32,5 +31,6 @@ public class RegisteredUser extends Person {
         this.setProfession(dto.getProfession());
         this.setProfessionInfo(dto.getProfessionInfo());
         this.setPersonalId(dto.getPersonalId());
+        this.setGender(dto.getGender());
     }
 }

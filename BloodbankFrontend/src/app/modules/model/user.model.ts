@@ -12,7 +12,7 @@ export class User{
     country: string = "";
     dob!: Date;
     phoneNumber: string = "";
-    personalId: number = 0;
+    personalId!: number;
     profession: string = "";
     professionInfo: string = "";
     
