@@ -1,0 +1,59 @@
+<div style="background-image: url('../../../assets/bg5.webp'); max-width: 100% ;background-size: cover;" class="container h-100">
+    <div  style ="margin: 0;" class="row h-100">
+        <div  class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+            <div  class="d-table-cell align-middle">
+
+                <div class="text-center mt-4">
+                    <h1 class="h2">Your blood bank center</h1>
+                </div>
+
+
+                <div  class="card">
+                    <div class="card-body">
+                        <div class="m-sm-4">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input [(ngModel)]="bloodBankCenter.name" class="form-control form-control-lg" type="text" name="name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input [(ngModel)]="bloodBankCenter.description" class="form-control form-control-lg" type="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Street</label>
+                                    <input [(ngModel)]="bloodBankCenter.street" class="form-control form-control-lg" type="text" name="street">
+                                </div>
+                                <div class="form-group">
+                                    <label>Number</label>
+                                    <input [(ngModel)]="bloodBankCenter.number" class="form-control form-control-lg" type="text" name="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input [(ngModel)]="bloodBankCenter.city" class="form-control form-control-lg" type="text" name="city">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input [(ngModel)]="bloodBankCenter.country" class="form-control form-control-lg" type="text" name="country">
+                                </div>
+                                <div class="form-group">
+                                    <label>Average grade</label>
+                                    <input [(ngModel)]="bloodBankCenter.averageGrade" class="form-control form-control-lg" type="text" name="averageGrade" disabled>
+                                </div>
+                                <div>
+                                    <label>Staff</label>
+                                    <ul class="list-group">
+                                        <li *ngFor="let staff of staffList" class="list-group-item">{{staff.firstName}} {{staff.lastName}}</li>
+                                      </ul>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button class="btn btn-lg btn-primary" (click)="update(bloodBankCenter)">Change</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div  style="background-image: url('../../../assets/bg5.webp'); max-width: 100%;background-size: cover;" >
+
+<div class="container col-md-4">
+    <h1>Register user</h1>
+    <div class="card">
+        <div class="card-body">
+            <form (ngSubmit)="userRegister()">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Pera" [(ngModel)]="user.firstName">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Peric" [(ngModel)]="user.lastName">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="street" name="street" [(ngModel)]="user.street">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Number</label>
+                    <input type="text" class="form-control" id="number" name="number" [(ngModel)]="user.number">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.city">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" [(ngModel)]="user.country">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Date of birth</label>
+                    <input type="date" class="form-control" id="date" name="date" [(ngModel)]="user.dob">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" [(ngModel)]="user.email">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Confirm password</label>
+                    <input type="password" class="form-control" id="cpassword" name="cpassword" [(ngModel)]="user.confirmPassword">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Profession</label>
+                    <input type="text" class="form-control" id="profession" name="profession" [(ngModel)]="user.profession">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Informations about your profession</label>
+                    <input type="text" class="form-control" id="professionInfo" name="professionInfo" [(ngModel)]="user.professionInfo">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Personal id</label>
+                    <input type="text" class="form-control" id="personalId" name="personalId" [(ngModel)]="user.personalId">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Phone number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" [(ngModel)]="user.phoneNumber">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Gender</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="true7" value="female" [(ngModel)]="user.gender" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Female
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="false7" value="male" [(ngModel)]="user.gender">
+                        <label class="form-check-label" for="exampleRadios2">
+                        Male
+                        </label>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label>Gender</label>
+                    <select  [(ngModel)]="user.gender" class="form-control form-control-lg" name="gender">
+                        <option value="Male">
+                            Male
+                        </option>
+                        <option value="Female">
+                            Female
+                        </option>
+                    </select>
+                </div> -->
+
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
