@@ -23,6 +23,7 @@ import { HomePageComponent } from './modules/home-page/home-page.component';
 import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-
     MatInputModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot()
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
