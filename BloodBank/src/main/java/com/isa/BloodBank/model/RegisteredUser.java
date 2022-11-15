@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "registeredUsers")
@@ -16,6 +17,8 @@ import javax.persistence.*;
 @Setter
 public class RegisteredUser extends Person {
 
+    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<BloodDonorForm> bloodDonorForms;
     private BloodType bloodType;
     private String profession;
     private String professionInfo;
