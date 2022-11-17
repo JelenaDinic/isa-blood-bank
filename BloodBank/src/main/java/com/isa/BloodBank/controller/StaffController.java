@@ -55,8 +55,22 @@ public class StaffController {
         }
     }
     @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody StaffCreationDTO staffDTO) {
-        service.update(staffDTO);
+    public ResponseEntity<Object> update(@Valid @PathVariable int id, @RequestBody StaffCreationDTO staffDTO, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            System.err.println("Error updating staff!");
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error:bindingResult.getFieldErrors()){
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
+        }
+        try {
+            service.update(staffDTO);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @GetMapping("/{id}")
     public StaffCreationDTO getById(@PathVariable("id") int id) {

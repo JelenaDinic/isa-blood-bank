@@ -7,14 +7,12 @@ import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.repository.AddressRepository;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
 import com.isa.BloodBank.repository.StaffRepository;
-import net.bytebuddy.build.Plugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StaffService {
@@ -64,6 +62,7 @@ public class StaffService {
         staff.setLastName(staffCreationDTO.getLastName());
         staff.setPersonalId(staffCreationDTO.getPersonalId());
         staff.setPhoneNumber(staffCreationDTO.getPhoneNumber());
+        staff.setPassword(staffCreationDTO.getPassword());
 
         return repository.save(staff);
     }
