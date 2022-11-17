@@ -38,8 +38,6 @@ public class RegisteredUserService {
 
         Address address = new Address(userCreationDTO.getStreet(), userCreationDTO.getNumber(), userCreationDTO.getCity(), userCreationDTO.getCountry());
 
-        addressRepository.save(address);
-
         registeredUser.setAddress(address);
         System.out.println(registeredUser);
         return repository.save(registeredUser);

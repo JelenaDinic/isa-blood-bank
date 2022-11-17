@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,8 @@ public class BloodBankCenterService {
         BloodBankCreationDTO bloodBankCreationDTO = new BloodBankCreationDTO(bloodBankCenter);
         return bloodBankCreationDTO;
     }
+
+    @Transactional
     public void create(BloodBankCreationDTO bloodBankCenterDTO){
         try {
             BloodBankCenter bloodBankCenter = new BloodBankCenter(bloodBankCenterDTO);

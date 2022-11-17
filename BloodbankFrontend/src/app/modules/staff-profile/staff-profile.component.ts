@@ -17,10 +17,11 @@ export class StaffProfileComponent implements OnInit {
   public oldPassword: string = "";
   public newPassword: string = "";
   public confirmPassword: string = "";
+  public maxDate: Date = new Date();
   constructor(private staffService: StaffService, private router: Router) { }
 
   ngOnInit(): void {
-    this.staffService.getById(13).subscribe(res => {
+    this.staffService.getById(2011).subscribe(res => {
       this.staff = res;
     })
   }
@@ -68,7 +69,7 @@ export class StaffProfileComponent implements OnInit {
       return false;
     } 
     else 
-    return true;
+      return true;
     }
 
 }
