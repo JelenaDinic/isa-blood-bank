@@ -26,6 +26,7 @@ import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-
 import { ToastrModule } from 'ngx-toastr';
 import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HomePageComponent,  
     StaffProfileComponent,
     BloodDonorFormComponent,
-    EditUserProfileComponent
+    EditUserProfileComponent,
+    BloodBankSearchPipe
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,6 @@ public class BloodDonorService {
 
         public BloodDonorForm create(BloodDonorCreationDTO bloodDonorCreationDTO) {
             BloodDonorForm bloodDonorForm = new BloodDonorForm(bloodDonorCreationDTO);
-            System.out.println(bloodDonorForm);
             return bloodDonorRepository.save(bloodDonorForm);
         }
 
