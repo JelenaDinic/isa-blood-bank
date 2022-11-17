@@ -21,26 +21,37 @@ public class BloodDonorForm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    //@OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    //private RegisteredUser registeredUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
+    private RegisteredUser registeredUser;
     private boolean isUnacceptableWeight;
-    private boolean isHealthy;
+    private boolean isUnhealthy;
     private boolean hasSkinProblems;
     private boolean hasUnacceptablePressure;
     private boolean isUnderTreatment;
     private boolean isOnPeriod;
     private boolean hasTattoo;
+    private boolean isRested;
+    private boolean isEpileptic;
+    private boolean hasAllergies;
+    private boolean hasDrankAlcohol;
+    private boolean isPregnant;
+
     private LocalDate dateOfFormFilling;
 
     public BloodDonorForm(BloodDonorCreationDTO dto){
         this.setUnacceptableWeight(Boolean.parseBoolean(dto.getIsUnacceptableWeight()));
-        this.setHealthy(Boolean.parseBoolean(dto.getIsHealthy()));
+        this.setUnhealthy(Boolean.parseBoolean(dto.getIsUnhealthy()));
         this.setHasSkinProblems(Boolean.parseBoolean(dto.getHasSkinProblems()));
         this.setHasUnacceptablePressure(Boolean.parseBoolean(dto.getHasUnacceptablePressure()));
         this.setUnderTreatment(Boolean.parseBoolean(dto.getIsUnderTreatment()));
         this.setOnPeriod(Boolean.parseBoolean(dto.getIsOnPeriod()));
         this.setHasTattoo(Boolean.parseBoolean(dto.getHasTattoo()));
+        this.setRested(Boolean.parseBoolean(dto.getIsRested()));
+        this.setEpileptic(Boolean.parseBoolean(dto.getIsEpileptic()));
+        this.setHasAllergies(Boolean.parseBoolean(dto.getHasAllergies()));
+        this.setHasDrankAlcohol(Boolean.parseBoolean(dto.getHasDrankAlcohol()));
+        this.setPregnant(Boolean.parseBoolean(dto.getIsPregnant()));
     }
 
 }
