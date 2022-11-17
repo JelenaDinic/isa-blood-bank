@@ -24,6 +24,7 @@ import { StaffProfileComponent } from './modules/staff-profile/staff-profile.com
 import { MatIconModule } from '@angular/material/icon';
 import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ToastrModule } from 'ngx-toastr';
     UserRegistrationComponent,
     HomePageComponent,  
     StaffProfileComponent,
-    BloodDonorFormComponent
+    BloodDonorFormComponent,
+    BloodBankSearchPipe
   ],
   imports: [
     BrowserModule,

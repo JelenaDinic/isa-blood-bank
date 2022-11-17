@@ -50,3 +50,11 @@ button {
 button:hover {
     background-color: firebrick;
 }
+input{
+    margin-left: 20px;
+    height: 36px;
+}
+
+.ratingFilter{
+    margin-left: 20px;
+}

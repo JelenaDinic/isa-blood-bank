@@ -17,8 +17,18 @@
         <i *ngIf="sortDirection==='asc'">Sort desc</i>
         <i *ngIf="sortDirection==='desc'">Sort asc</i>
     </button>
+    <input type="text" placeholder="Search by name" [(ngModel)] = 'SearchName'/>
+    <input type="text" placeholder="Search by city" [(ngModel)] = 'SearchCity'/>
+    <select class="ratingFilter" [(ngModel)] = 'FilterByRating' (change)="onChange()">
+        <option value="" selected disabled>Filter centres by rating</option>
+        <option value="0">All ratings</option>
+        <option value="1">Between 1 and 2</option>
+        <option value="2">Between 2 and 3</option>
+        <option value="3">Between 3 and 4</option>
+        <option value="4">Between 4 and 5</option>
+    </select>
     <div class="row">
-        <div *ngFor="let bloodBank of allBloodBanks | bloodBankSort:[SortByParam, sortDirection]" class="col-md-6 col-xl-3">
+        <div *ngFor="let bloodBank of allBloodBanks | bloodBankSort:[SortByParam, sortDirection] | bloodBankSearch: [SearchName, SearchCity]" class="col-md-6 col-xl-3">
             <div class="card m-b-30">
                 <div>
                     <div class="card-body row">
