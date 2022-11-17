@@ -50,6 +50,7 @@ export class HomePageComponent implements OnInit {
       this.allBloodBanks = this.temp_data;
     }
     else{
+      this.allBloodBanks = this.temp_data;
       for(let center of this.allBloodBanks){
         if((Number(center.averageGrade) >= this.FilterByRating) && (Number(center.averageGrade) <= this.FilterByRating + 1)){
           temp.push(center);

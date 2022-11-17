@@ -20,7 +20,7 @@ export class BloodBankCenterComponent implements OnInit {
   
 
   ngOnInit(): void {
-        this.bloodBankCenterService.getBloodBankCenter(11).subscribe(res => {
+        this.bloodBankCenterService.getBloodBankCenter(2006).subscribe(res => {
           this.bloodBankCenter = res;
           console.log(this.bloodBankCenter)
           this.staffService.getStaffByCenterId(this.bloodBankCenter.id).subscribe(res => {

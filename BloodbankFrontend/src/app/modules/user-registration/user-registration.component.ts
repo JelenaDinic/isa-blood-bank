@@ -39,7 +39,7 @@ export class UserRegistrationComponent implements OnInit {
     console.log(this.user)
     this.userService.create(this.user).subscribe(data=>{
       alert("User successfully registered")
-    },error=>alert("User is not registered"));
+    },error=>console.log(error.message));
   
   }
 }

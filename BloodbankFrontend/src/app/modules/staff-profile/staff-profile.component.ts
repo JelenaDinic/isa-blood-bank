@@ -21,7 +21,7 @@ export class StaffProfileComponent implements OnInit {
   constructor(private staffService: StaffService, private router: Router) { }
 
   ngOnInit(): void {
-    this.staffService.getById(13).subscribe(res => {
+    this.staffService.getById(2011).subscribe(res => {
       this.staff = res;
     })
   }
@@ -80,7 +80,7 @@ export class StaffProfileComponent implements OnInit {
       return false;
     }
     else 
-    return true;
+      return true;
     }
 
 }
