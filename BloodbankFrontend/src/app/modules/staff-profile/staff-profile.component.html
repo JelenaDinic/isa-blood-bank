@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Date of birth </label>
-                                    <input [(ngModel)]="staff.dob" class="form-control form-control-lg" type="date" name="dob">
+                                    <input [(ngModel)]="staff.dob" class="form-control form-control-lg" type="date" name="dob" max="{{getDate()}}">
                                 </div>
                                 <div *ngIf="bottonPressed" class="form-group">
                                     <label>Old password </label>
