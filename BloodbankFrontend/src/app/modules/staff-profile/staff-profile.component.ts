@@ -13,6 +13,10 @@ const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export class StaffProfileComponent implements OnInit {
 
   public staff: Staff = new Staff;
+  public bottonPressed: boolean = false;
+  public oldPassword: string = "";
+  public newPassword: string = "";
+  public confirmPassword: string = "";
   constructor(private staffService: StaffService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,6 +28,9 @@ export class StaffProfileComponent implements OnInit {
   public update(staff: Staff): void {
     if (this.isValidInput())
     {
+      if(this.bottonPressed){
+        staff.password = this.newPassword;
+      }
       this.staffService.update(staff).subscribe(res => {
         alert("Updated successfully!")
         this.router.navigate(['/staff-profile']);
@@ -31,6 +38,13 @@ export class StaffProfileComponent implements OnInit {
       });
     }
   }
+  public changePassword(): void {
+    if(this.bottonPressed)
+      this.bottonPressed = false 
+    else 
+      this.bottonPressed = true
+  }
+
   private isValidInput(): boolean {
     if (!(this.staff?.firstName != '' && this.staff?.lastName != ''
     && this.staff?.city != '' && this.staff?.country != ''
@@ -43,7 +57,17 @@ export class StaffProfileComponent implements OnInit {
     } else if(!expression.test(this.staff?.email)){
       alert("Email format is not correct!")
       return false
-    } else 
+    }  else if (this.bottonPressed && !(this.oldPassword != "" && this.newPassword != "" && this.confirmPassword != "")){
+      alert("Fields cannot be empty!")
+      return false;
+    }else if (this.bottonPressed && this.oldPassword != this.staff.password){
+      alert("Incorrect old password!")
+      return false;
+    } else if (this.bottonPressed && this.newPassword != this.confirmPassword){
+      alert("Passwords do not match!")
+      return false;
+    } 
+    else 
     return true;
     }
 

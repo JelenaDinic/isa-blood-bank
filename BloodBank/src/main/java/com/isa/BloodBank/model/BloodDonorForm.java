@@ -21,7 +21,7 @@ public class BloodDonorForm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private RegisteredUser registeredUser;
     private boolean isUnacceptableWeight;
