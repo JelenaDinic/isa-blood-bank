@@ -24,13 +24,13 @@
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Do you have any signs of cold?</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="coldParam" id="true2" value="false" [(ngModel)]="bloodDonor.isHealthy" checked>
+                        <input class="form-check-input" type="radio" name="coldParam" id="true2" value="true" [(ngModel)]="bloodDonor.isUnhealthy" checked>
                         <label class="form-check-label" for="exampleRadios1">
                         Yes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="coldParam" id="false2" value="true" [(ngModel)]="bloodDonor.isHealthy">
+                        <input class="form-check-input" type="radio" name="coldParam" id="false2" value="false" [(ngModel)]="bloodDonor.isUnhealthy">
                         <label class="form-check-label" for="exampleRadios2">
                         No
                         </label>
@@ -82,6 +82,83 @@
                     </div>
                 </div>
                 <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Did you get a tattoo or piercing in less than 6 mounths?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tattooParam" id="true7" value="true" [(ngModel)]="bloodDonor.hasTattoo" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tattooParam" id="false7" value="false" [(ngModel)]="bloodDonor.hasTattoo">
+                        <label class="form-check-label" for="exampleRadios2">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Do you feel rested at the moment?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="restParam" id="true8" value="true" [(ngModel)]="bloodDonor.isRested" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="restParam" id="false8" value="false" [(ngModel)]="bloodDonor.isRested">
+                        <label class="form-check-label" for="exampleRadios2">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Do you suffer from epilepsy?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="epilepsyParam" id="true9" value="true" [(ngModel)]="bloodDonor.isEpileptic" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="epilepsyParam" id="false9" value="false" [(ngModel)]="bloodDonor.isEpileptic">
+                        <label class="form-check-label" for="exampleRadios2">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Do you have any allergies?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allergyParam" id="true10" value="true" [(ngModel)]="bloodDonor.hasAllergies" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allergyParam" id="false10" value="false" [(ngModel)]="bloodDonor.hasAllergies">
+                        <label class="form-check-label" for="exampleRadios2">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Did you drink alcohol in the last 6 hours?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="alcoholParam" id="true11" value="true" [(ngModel)]="bloodDonor.hasDrankAlcohol" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="alcoholParam" id="false11" value="false" [(ngModel)]="bloodDonor.hasDrankAlcohol">
+                        <label class="form-check-label" for="exampleRadios2">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <h5>For woman only</h5>
+                <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Are you on your period?</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="periodParam" id="true6" value="true" [(ngModel)]="bloodDonor.isOnPeriod" checked>
@@ -97,15 +174,15 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Did you get a tattoo or piercing in less than 6 mounths?</label>
+                    <label for="exampleFormControlInput1" class="form-label">Are you pregnant?</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tattooParam" id="true7" value="true" [(ngModel)]="bloodDonor.hasTattoo" checked>
+                        <input class="form-check-input" type="radio" name="pregnancyParam" id="true11" value="true" [(ngModel)]="bloodDonor.isPregnant" checked>
                         <label class="form-check-label" for="exampleRadios1">
                         Yes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tattooParam" id="false7" value="false" [(ngModel)]="bloodDonor.hasTattoo">
+                        <input class="form-check-input" type="radio" name="pregnancyParam" id="false11" value="false" [(ngModel)]="bloodDonor.isPregnant">
                         <label class="form-check-label" for="exampleRadios2">
                         No
                         </label>

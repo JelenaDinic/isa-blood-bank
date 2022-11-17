@@ -24,6 +24,10 @@ import { StaffProfileComponent } from './modules/staff-profile/staff-profile.com
 import { MatIconModule } from '@angular/material/icon';
 import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { ToastrModule } from 'ngx-toastr';
     UserRegistrationComponent,
     HomePageComponent,  
     StaffProfileComponent,
-    BloodDonorFormComponent
+    BloodDonorFormComponent,
+    EditUserProfileComponent,
+    BloodBankSearchPipe
   ],
   imports: [
     BrowserModule,
@@ -53,6 +59,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatGridListModule,
     ToastrModule.forRoot()
   ],
   providers: [UserService],

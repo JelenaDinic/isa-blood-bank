@@ -47,6 +47,8 @@ public class UserDisplayDTO {
 //            case ZERO_POS: this.setBloodType("0+");
 //                break;
 //        }
+        this.setGender(registeredUser.getGender());
+        this.setPersonalId(registeredUser.getPersonalId().toString());
     }
 
     public UserDisplayDTO(Staff staff) {

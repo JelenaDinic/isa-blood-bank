@@ -16,6 +16,10 @@ export class HomePageComponent implements OnInit {
   public allBloodBanks : BloodBankDisplayDTO[] = [];
   SortByParam = '';
   sortDirection = 'asc';
+  SearchName : string = '';
+  SearchCity : string = '';
+  FilterByRating : number = 0;
+  public temp_data: BloodBankDisplayDTO[] = [];
 
   constructor(private homePageService: HomePageService) { }
   
@@ -25,6 +29,7 @@ export class HomePageComponent implements OnInit {
       (response: BloodBankDisplayDTO[]) => {
         this.bloodBanks = response;
         this.allBloodBanks = this.bloodBanks;
+        this.temp_data = this.allBloodBanks;
         
         console.log(this.allBloodBanks);
       }
@@ -39,4 +44,19 @@ export class HomePageComponent implements OnInit {
       this.sortDirection = 'desc';
   }
 
+  onChange(){
+    let temp : BloodBankDisplayDTO[] = [];
+    if(this.FilterByRating == 0){
+      this.allBloodBanks = this.temp_data;
+    }
+    else{
+      for(let center of this.allBloodBanks){
+        if((Number(center.averageGrade) >= this.FilterByRating) && (Number(center.averageGrade) <= this.FilterByRating + 1)){
+          temp.push(center);
+        }
+      }
+      this.allBloodBanks = temp;
+    }
+  }
+  
 }
