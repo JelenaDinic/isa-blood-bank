@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatLine } from '@angular/material/core';
 import { Observable } from 'rxjs';
 import {UserDisplayDTO} from '../dto/userDisplayDTO'
+import { UserProfileDisplayDTO} from '../dto/userProfileDisplayDTO';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -19,5 +21,13 @@ export class UserService{
   }
   public create(user: User): Observable<any> {
     return this.http.post<any>(this.apiServerUrl + '/api/registered-user', user, {headers: this.headers});
+  }
+
+  public findByEmail(email : string) : Observable<UserProfileDisplayDTO>{
+    return this.http.get<UserProfileDisplayDTO>(`${this.apiServerUrl}/api/registered-user/byEmail/`+ email, {headers: this.headers})
+  }
+
+  public update(user: UserProfileDisplayDTO): Observable<UserProfileDisplayDTO>{
+    return this.http.put<UserProfileDisplayDTO>(this.apiServerUrl + '/api/registered-user', user, {headers: this.headers})
   }
 }

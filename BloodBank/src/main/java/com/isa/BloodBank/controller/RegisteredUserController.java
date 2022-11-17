@@ -2,6 +2,7 @@ package com.isa.BloodBank.controller;
 
 import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
+import com.isa.BloodBank.dto.UserProfileDisplayDTO;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,16 @@ public class RegisteredUserController {
         List<UserDisplayDTO> userDisplayDTOs = service.findAllUsers();
         return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }
+
+    @GetMapping(path="/byEmail/{email}")
+    public UserProfileDisplayDTO findByEmail(@PathVariable String email){
+        return service.findByEmailDTO(email);
+    }
+
+    @PutMapping(consumes = "application/json")
+    public ResponseEntity<UserProfileDisplayDTO> update(@RequestBody UserProfileDisplayDTO userProfileDTO){
+        service.update(userProfileDTO);
+        return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
+    }
+
 }
