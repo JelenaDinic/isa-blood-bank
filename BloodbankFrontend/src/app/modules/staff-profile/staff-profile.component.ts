@@ -17,13 +17,21 @@ export class StaffProfileComponent implements OnInit {
   public oldPassword: string = "";
   public newPassword: string = "";
   public confirmPassword: string = "";
-  public maxDate: Date = new Date();
+
   constructor(private staffService: StaffService, private router: Router) { }
 
   ngOnInit(): void {
     this.staffService.getById(2011).subscribe(res => {
       this.staff = res;
     })
+  }
+
+  public getDate(): string {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return `${year}-${month < 9 ? ('0'+month) : month}-${day < 9 ? ('0'+day) : day}`;
   }
 
   public update(staff: Staff): void {
@@ -67,7 +75,10 @@ export class StaffProfileComponent implements OnInit {
     } else if (this.bottonPressed && this.newPassword != this.confirmPassword){
       alert("Passwords do not match!")
       return false;
-    } 
+    } else if (this.staff.personalId.toString().length != 13) {
+      alert("Personal Id must be exactly 13 digits")
+      return false;
+    }
     else 
       return true;
     }

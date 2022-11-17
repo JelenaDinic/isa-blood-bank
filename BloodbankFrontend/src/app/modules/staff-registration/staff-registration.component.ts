@@ -26,7 +26,13 @@ export class StaffRegistrationComponent implements OnInit {
       console.log(this.bloodbanks);
     })
   }
-
+  public getDate(): string {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return `${year}-${month < 9 ? ('0'+month) : month}-${day < 9 ? ('0'+day) : day}`;
+  }
   public registerStaff() {
 
     if(this.isInputValid()) {

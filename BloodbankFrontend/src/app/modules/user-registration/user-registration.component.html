@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Date of birth</label>
-                    <input type="date" class="form-control" id="date" name="date" [(ngModel)]="user.dob">
+                    <input type="date" class="form-control" id="date" name="date" [(ngModel)]="user.dob" max="{{getDate()}}">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
