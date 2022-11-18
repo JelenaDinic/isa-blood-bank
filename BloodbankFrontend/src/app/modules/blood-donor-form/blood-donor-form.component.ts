@@ -16,6 +16,8 @@ export class BloodDonorFormComponent implements OnInit {
   ngOnInit(): void {}
   
   bloodDonorRegister(){
+
+    
     if (this.bloodDonor.hasSkinProblems.trim() == '' || this.bloodDonor.hasTattoo.trim() == '' || this.bloodDonor.hasUnacceptablePressure.trim() == '' || this.bloodDonor.isUnhealthy.trim() == ''
     || this.bloodDonor.isUnacceptableWeight.trim() == '' || this.bloodDonor.isUnderTreatment.trim() == ''|| this.bloodDonor.isRested.trim() == '' 
     || this.bloodDonor.isEpileptic.trim() == ''|| this.bloodDonor.hasDrankAlcohol.trim() == ''|| this.bloodDonor.hasAllergies.trim() == ''){
