@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.isa.BloodBank.model.Address;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,14 +25,16 @@ public class RegisteredUserService {
     private final BloodBankCenterRepository bloodBankCenterRepository;
     private final AddressRepository addressRepository;
     private final SystemAdminRepository systemAdminRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository) {
+    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository, UserRepository userRepository) {
         this.repository = repository;
         this.staffRepository = staffRepository;
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.systemAdminRepository = systemAdminRepository;
         this.addressRepository = addressRepository;
+        this.userRepository = userRepository;
     }
 
     public RegisteredUser create(UserCreationDTO userCreationDTO) {
@@ -47,29 +51,13 @@ public class RegisteredUserService {
         return repository.findAll();
     }
 
-    public List<UserDisplayDTO> findAllUsers() {
-        List<UserDisplayDTO> userDTOs = new ArrayList<>();
+    public List<UserDisplayDTO> findAllUsers(Pageable page) {
+        List<UserDisplayDTO> userDTOs= new ArrayList<>();
 
-        for(RegisteredUser registeredUser : repository.findAll()) {
-            UserDisplayDTO dto = new UserDisplayDTO(registeredUser);
-
+        for(Person person : userRepository.findAll(page)) {
+            UserDisplayDTO dto = new UserDisplayDTO(person);
             userDTOs.add(dto);
         }
-
-        for (Staff staffMember : staffRepository.findAll()) {
-            UserDisplayDTO dto = new UserDisplayDTO(staffMember);
-            BloodBankCenter bloodBankCenter = staffMember.getBloodBankCenter();
-            dto.setBloodBankName(bloodBankCenter.getName());
-
-            userDTOs.add(dto);
-        }
-
-        for(SystemAdmin systemAdmin : systemAdminRepository.findAll()) {
-            UserDisplayDTO dto = new UserDisplayDTO(systemAdmin);
-
-            userDTOs.add(dto);
-        }
-
         return userDTOs;
     }
 
@@ -113,6 +101,19 @@ public class RegisteredUserService {
         user.setProfession(userProfileDTO.getProfession());
         user.setProfessionInfo(userProfileDTO.getProfessionInfo());
         //user.setDob(new Date(userProfileDTO.getDateOfBirth()));
+    }
+
+    public List<UserDisplayDTO> searchUsers(Pageable page, String searchText) {
+        Page<Person> personPage = userRepository.findAllByFirstNameOrLastName(searchText, page);
+
+        List<UserDisplayDTO> userDTOs = new ArrayList<>();
+
+        for(Person person : personPage) {
+            UserDisplayDTO dto = new UserDisplayDTO(person);
+            userDTOs.add(dto);
+        }
+
+        return userDTOs;
     }
 
 }

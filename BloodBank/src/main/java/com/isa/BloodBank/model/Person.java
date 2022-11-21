@@ -8,11 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

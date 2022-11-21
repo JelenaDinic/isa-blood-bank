@@ -13,20 +13,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.*;
 
 @RestController
 @RequestMapping(path="api/registered-user")
 public class RegisteredUserController {
 
-    private final RegisteredUserService service;
-
     @Autowired
-    public RegisteredUserController(RegisteredUserService service) {
-        this.service = service;
-    }
+    private RegisteredUserService service;
+
 
     @GetMapping
     public ResponseEntity<List<RegisteredUser>> getAll() {
@@ -57,8 +55,16 @@ public class RegisteredUserController {
     }
 
     @GetMapping(path = "/allUsers")
-    public ResponseEntity<List<UserDisplayDTO>> findAllUsers() {
-        List<UserDisplayDTO> userDisplayDTOs = service.findAllUsers();
+    public ResponseEntity<List<UserDisplayDTO>> findAllUsers(Pageable page) {
+        ArrayList<UserDisplayDTO> userDisplayDTOs = (ArrayList<UserDisplayDTO>) service.findAllUsers(page);
+
+        return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/searchUsers")
+    public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
+        List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
+
         return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }
 
