@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

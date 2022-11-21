@@ -12,27 +12,36 @@ export class SearchUsersComponent implements OnInit {
 
   public users: UserDisplayDTO[] = [];
   public allUsers: UserDisplayDTO[] = [];
+  page: number = 0;
+  cardsCount: number = 2;
+  count: number = 0;
   searchTerm = '';
 
   constructor(private userService: UserService) { }
 
-  public getAllUsers(): void {
-    this.userService.getAllUsers().subscribe(
+  public getUsers(searchText: string = ''): void {
+    this.userService.search(searchText).subscribe(
       (response: UserDisplayDTO[]) => {
         this.users = response;
-        this.allUsers = this.users;
+        this.count = this.users.length;
+      },
+      (error) => {
+        console.log(error.message);
       }
      );
   }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.getUsers();
   }
 
   search(value: string): void {
-    this.users = this.allUsers.filter((val) =>
-      val.name.toLowerCase().includes(value)
-    );
+    this.getUsers(value);
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getUsers(this.searchTerm);
   }
 
 }

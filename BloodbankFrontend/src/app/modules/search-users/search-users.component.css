@@ -51,3 +51,8 @@ a {
 .heading-container {
     text-align: center;
 }
+
+.active {
+    background-color: firebrick;
+    color: white;
+}

@@ -15,7 +15,10 @@
 
 <div class="container all-users-container" id="main-container">
     <div class="row">
-      <div *ngFor="let user of users | userSearchFilter: searchTerm; index as i" class="col-md-6 col-xl-3">
+      <div *ngFor="let user of users | paginate: {
+      itemsPerPage: cardsCount,
+      currentPage: page,
+      totalItems: count};" class="col-md-6 col-xl-3">
          <div class="card m-b-30">
             <div class="card-body row">
                <div class="col-12 card-title align-self-center mb-0">
@@ -31,9 +34,13 @@
                <li class="list-group-item"><i class="fa fa-calendar float-right"></i>DoB: {{user?.dob}}</li>
                <li class="list-group-item"><i class="fa fa-venus-mars float-right"></i>Gender: {{user?.gender}}</li>
                <li *ngIf="user.bloodBankName != null" class="list-group-item"><i class="fa fa-stethoscope float-right"></i>Works in: {{user?.bloodBankName}}</li>
-               <li *ngIf="user.bloodType != null" class="list-group-item"><i class="fa fa-tint float-right"></i>BloodType: {{user?.bloodType}}</li>
+               <!-- <li *ngIf="user.bloodType != null" class="list-group-item"><i class="fa fa-tint float-right"></i>BloodType: {{user?.bloodType}}</li> -->
             </ul>
          </div>
       </div>
     </div>
+    <ul class="nav justify-content-center|justify-content-end">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </ul>
    </div>

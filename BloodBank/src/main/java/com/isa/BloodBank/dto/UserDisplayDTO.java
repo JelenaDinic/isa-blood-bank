@@ -1,5 +1,6 @@
 package com.isa.BloodBank.dto;
 
+import com.isa.BloodBank.model.Person;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.model.SystemAdmin;
@@ -71,6 +72,17 @@ public class UserDisplayDTO {
         this.setRole("System administrator");
         this.setGender(systemAdmin.getGender());
         this.setPersonalId(systemAdmin.getPersonalId().toString());
+    }
+
+    public UserDisplayDTO(Person person) {
+        this.setName(person.getFirstName() + " " + person.getLastName());
+        this.setAddress(person.getAddress().toString());
+        this.setDob(person.getDob().toString());
+        this.setPhoneNumber(person.getPhoneNumber());
+        this.setEmail(person.getEmail());
+        this.setRole(person.getRole().toString());
+        this.setGender(person.getGender());
+        this.setPersonalId(person.getPersonalId().toString());
     }
 
 }

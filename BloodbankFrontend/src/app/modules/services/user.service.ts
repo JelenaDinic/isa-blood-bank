@@ -16,8 +16,8 @@ export class UserService{
 
   constructor(private http: HttpClient) { }
 
-  public getAllUsers(): Observable<UserDisplayDTO[]> {
-    return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/allUsers`)
+  public getAllUsers(page:number): Observable<UserDisplayDTO[]> {
+    return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/allUsers?page=`+ page +'&size=3')
   }
   public create(user: User): Observable<any> {
     return this.http.post<any>(this.apiServerUrl + '/api/registered-user', user, {headers: this.headers});
@@ -29,5 +29,9 @@ export class UserService{
 
   public update(user: UserProfileDisplayDTO): Observable<UserProfileDisplayDTO>{
     return this.http.put<UserProfileDisplayDTO>(this.apiServerUrl + '/api/registered-user', user, {headers: this.headers})
+  }
+
+  public search(searchText : string = '') : Observable<UserDisplayDTO[]>{
+    return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/searchUsers?searchText=` + searchText, {headers: this.headers})
   }
 }
