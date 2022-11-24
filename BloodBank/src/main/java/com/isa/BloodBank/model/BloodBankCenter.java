@@ -10,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name="bloodBankCenters")
 @Table(name = "bloodBankCenters")
 @NoArgsConstructor
 @AllArgsConstructor

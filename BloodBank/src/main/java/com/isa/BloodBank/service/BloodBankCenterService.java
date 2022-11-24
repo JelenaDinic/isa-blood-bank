@@ -1,22 +1,28 @@
 package com.isa.BloodBank.service;
 
 import com.isa.BloodBank.dto.BloodBankCreationDTO;
+import com.isa.BloodBank.dto.BloodbankDisplayDTO;
+import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.model.Address;
 import com.isa.BloodBank.model.BloodBankCenter;
+import com.isa.BloodBank.model.Person;
 import com.isa.BloodBank.repository.AddressRepository;
 import com.isa.BloodBank.repository.BloodBankCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BloodBankCenterService {
-    private final BloodBankCenterRepository bloodBankCenterRepository;
+    private  BloodBankCenterRepository bloodBankCenterRepository;
     private final AddressRepository addressRepository;
 
     @Autowired
@@ -67,5 +73,29 @@ public class BloodBankCenterService {
     public List<BloodBankCenter> findAll() {
         return bloodBankCenterRepository.findAll();
     }
+    public List<BloodbankDisplayDTO> findAllCenters(Pageable page) {
+        List<BloodbankDisplayDTO> bankDTOs= new ArrayList<>();
+
+        for(BloodBankCenter center : bloodBankCenterRepository.findAll(page)) {
+            BloodbankDisplayDTO dto = new BloodbankDisplayDTO(center);
+            bankDTOs.add(dto);
+        }
+        return bankDTOs;
+    }
+
+    public List<BloodbankDisplayDTO> searchBanks(Pageable page, String searchName, String searchCity) {
+        Page<BloodBankCenter> centerPage = bloodBankCenterRepository.findAllByNameAndCity(searchName,searchCity, page);
+
+        List<BloodbankDisplayDTO> centerDTOs = new ArrayList<>();
+
+        for(BloodBankCenter center : centerPage) {
+            BloodbankDisplayDTO dto = new BloodbankDisplayDTO(center);
+            centerDTOs.add(dto);
+        }
+
+        return centerDTOs;
+    }
+
+
 
 }
