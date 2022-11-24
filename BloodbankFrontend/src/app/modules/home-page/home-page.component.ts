@@ -39,19 +39,7 @@ export class HomePageComponent implements OnInit {
   }
 
   onChange(){
-    let temp : BloodBankDisplayDTO[] = [];
-    if(this.FilterByRating == 0){
-      this.allBloodBanks = this.temp_data;
-    }
-    else{
-      this.allBloodBanks = this.temp_data;
-      for(let center of this.allBloodBanks){
-        if((Number(center.averageGrade) >= this.FilterByRating) && (Number(center.averageGrade) <= this.FilterByRating + 1)){
-          temp.push(center);
-        }
-      }
-      this.allBloodBanks = temp;
-    }
+    this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating)
   }
 
   onTableDataChange(event: any) {
@@ -59,35 +47,22 @@ export class HomePageComponent implements OnInit {
     this.getBloodBanks(this.SearchName, this.SearchCity);
   }
   
-  public getBloodBanks(searchName: string = '', searchCity: string = ''): void {
-    this.homePageService.searchBloodBanks(searchName, searchCity).subscribe(
+  public getBloodBanks(searchName: string = '', searchCity: string = '', filterbyRating: number = 0): void {
+    this.homePageService.searchBloodBanks(searchName, searchCity, filterbyRating).subscribe(
       (response: BloodBankDisplayDTO[]) => {
         this.bloodBanks = response;
         this.allBloodBanks = this.bloodBanks;
         this.temp_data = this.allBloodBanks;
         
         console.log(this.allBloodBanks);
-        this.count = this.allBloodBanks.length; // i ovde takodje
+        this.count = this.allBloodBanks.length;
       },
       (error) => {
         console.log(error.message);
       }
      );
-    //  this.homePageService.searchBloodBanksCity(searchCity).subscribe(
-    //   (response: BloodBankDisplayDTO[]) => {
-    //     this.bloodBanks = response;
-    //     this.allBloodBanks = this.bloodBanks;
-    //     this.temp_data = this.allBloodBanks;
-        
-    //     console.log(this.allBloodBanks);
-    //     this.count = this.allBloodBanks.length; // i ovde takodje
-    //   },
-    //   (error) => {
-    //     console.log(error.message);
-    //   }
-    //  );
   }
-  searchBloodBanks(value1: string, value2: string){
-    this.getBloodBanks(value1, value2);
+  searchBloodBanks(name: string, city: string, rating: number){
+    this.getBloodBanks(name, city, rating);
   }
 }

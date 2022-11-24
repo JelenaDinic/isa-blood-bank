@@ -66,8 +66,8 @@ public class BloodBankCenterController {
     }
 
     @GetMapping(path = "/searchBanks")
-    public ResponseEntity<List<BloodbankDisplayDTO>> searchBanks(Pageable page, @RequestParam("searchName") Optional<String> searchName, @RequestParam("searchCity") Optional<String> searchCity) {
-        List<BloodbankDisplayDTO> bloodbankDisplayDTOs = bloodBankCenterService.searchBanks(page, searchName.get(), searchCity.get());
+    public ResponseEntity<List<BloodbankDisplayDTO>> searchBanks(Pageable page, @RequestParam("searchName") Optional<String> searchName, @RequestParam("searchCity") Optional<String> searchCity, @RequestParam("filterByRating") Optional<Double> filterByRating) {
+        List<BloodbankDisplayDTO> bloodbankDisplayDTOs = bloodBankCenterService.searchBanks(page, searchName.get(), searchCity.get(), filterByRating.get());
 
         return new ResponseEntity<>(bloodbankDisplayDTOs, HttpStatus.OK);
     }
