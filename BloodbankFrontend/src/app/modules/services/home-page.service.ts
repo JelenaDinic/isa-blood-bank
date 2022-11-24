@@ -19,8 +19,8 @@ import { BloodBankDisplayDTO } from "../dto/bloodBankDisplayDTO";
       return this.http.get<BloodBankDisplayDTO[]>(`${this.apiHost}api/blood-bank-center/all-bloodBankDTOs?page=`+ page +'&size=3')
     }
 
-    searchBloodBanks(searchName : string = '', searchCity : string = '') : Observable<BloodBankDisplayDTO[]>{
-      return this.http.get<BloodBankDisplayDTO[]>(`${this.apiHost}api/blood-bank-center/searchBanks?searchName=` + searchName + "&searchCity=" + searchCity, {headers: this.headers})
+    searchBloodBanks(searchName : string = '', searchCity : string = '', filterByRating : number = 0) : Observable<BloodBankDisplayDTO[]>{
+      return this.http.get<BloodBankDisplayDTO[]>(`${this.apiHost}api/blood-bank-center/searchBanks?searchName=` + searchName + "&searchCity=" + searchCity + "&filterByRating=" + filterByRating, {headers: this.headers})
     }
 
   }

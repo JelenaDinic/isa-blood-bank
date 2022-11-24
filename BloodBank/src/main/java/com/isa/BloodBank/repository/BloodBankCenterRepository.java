@@ -14,9 +14,6 @@ import java.util.Optional;
 public interface BloodBankCenterRepository extends JpaRepository<BloodBankCenter, Integer> {
     BloodBankCenter findBloodBankCenterById(int id);
     Page<BloodBankCenter> findAll(Pageable pageable);
-    @Query("select b from bloodBankCenters b, adresses adr where b.address.id = adr.id and lower(b.name) like %?1% and lower(adr.city) like %?2%")
-    Page<BloodBankCenter> findAllByNameAndCity(String searchName,String searchCity, Pageable pageable);
+    @Query("select b from bloodBankCenters b, adresses adr where b.address.id = adr.id and lower(b.name) like %?1% and lower(adr.city) like %?2% and b.averageGrade >= ?3")
+    Page<BloodBankCenter> findAllByNameAndCityAndRating(String searchName, String searchCity, Double filterByRating, Pageable pageable);
 }
-//SELECT * FROM public.blood_bank_centers b, public.adresses adr
- //       where b.address_id = adr.id
-   //     and lower(b.name) like '%'||'nk'||'%' and lower(adr.city) like '%'||'kr'||'%'

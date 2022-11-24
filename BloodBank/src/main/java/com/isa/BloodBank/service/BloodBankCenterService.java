@@ -83,8 +83,8 @@ public class BloodBankCenterService {
         return bankDTOs;
     }
 
-    public List<BloodbankDisplayDTO> searchBanks(Pageable page, String searchName, String searchCity) {
-        Page<BloodBankCenter> centerPage = bloodBankCenterRepository.findAllByNameAndCity(searchName,searchCity, page);
+    public List<BloodbankDisplayDTO> searchBanks(Pageable page, String searchName, String searchCity, Double filterByRating) {
+        Page<BloodBankCenter> centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRating(searchName,searchCity,filterByRating, page);
 
         List<BloodbankDisplayDTO> centerDTOs = new ArrayList<>();
 
