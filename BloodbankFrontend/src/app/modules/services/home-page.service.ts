@@ -13,8 +13,14 @@ import { BloodBankDisplayDTO } from "../dto/bloodBankDisplayDTO";
   
     constructor(private http: HttpClient) { }
 
-    getAll(): Observable<BloodBankDisplayDTO[]> {
-      return this.http.get<BloodBankDisplayDTO[]>(this.apiHost + 'api/blood-bank-center/all-bloodbankDTOs', {headers: this.headers});
+
+
+    public getAll(page:number): Observable<BloodBankDisplayDTO[]> {
+      return this.http.get<BloodBankDisplayDTO[]>(`${this.apiHost}api/blood-bank-center/all-bloodBankDTOs?page=`+ page +'&size=3')
+    }
+
+    searchBloodBanks(searchName : string = '', searchCity : string = '') : Observable<BloodBankDisplayDTO[]>{
+      return this.http.get<BloodBankDisplayDTO[]>(`${this.apiHost}api/blood-bank-center/searchBanks?searchName=` + searchName + "&searchCity=" + searchCity, {headers: this.headers})
     }
 
   }

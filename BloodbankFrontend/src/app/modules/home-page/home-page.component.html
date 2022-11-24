@@ -17,8 +17,8 @@
         <i *ngIf="sortDirection==='asc'">Sort desc</i>
         <i *ngIf="sortDirection==='desc'">Sort asc</i>
     </button>
-    <input type="text" placeholder="Search by name" [(ngModel)] = 'SearchName'/>
-    <input type="text" placeholder="Search by city" [(ngModel)] = 'SearchCity'/>
+    <input type="text" placeholder="Search by name" [(ngModel)] = 'SearchName' (input)="searchBloodBanks(SearchName, SearchCity)"/>
+    <input type="text" placeholder="Search by city" [(ngModel)] = 'SearchCity' (input)="searchBloodBanks(SearchName, SearchCity)"/>
     <select class="ratingFilter" [(ngModel)] = 'FilterByRating' (change)="onChange()">
         <option value="" selected disabled>Filter centres by rating</option>
         <option value="0">All ratings</option>
@@ -28,7 +28,12 @@
         <option value="4">Higher than 4</option>
     </select>
     <div class="row">
-        <div *ngFor="let bloodBank of allBloodBanks | bloodBankSort:[SortByParam, sortDirection] | bloodBankSearch: [SearchName, SearchCity]" class="col-md-6 col-xl-3">
+        <div *ngFor="let bloodBank of allBloodBanks | paginate: {
+            itemsPerPage: cardsCount,
+            currentPage: page,
+            totalItems: count};" class="col-md-6 col-xl-3">
+        <!-- <div *ngFor="let bloodBank of allBloodBanks | bloodBankSort:[SortByParam, sortDirection] | bloodBankSearch: [SearchName, SearchCity]" class="col-md-6 col-xl-3"> -->
+            
             <div class="card m-b-30">
                 <div>
                     <div class="card-body row">
@@ -45,4 +50,8 @@
             </div>
         </div>
 </div>
+<ul class="nav justify-content-center|justify-content-end">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </ul>
 </div>

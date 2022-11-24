@@ -2,10 +2,12 @@ package com.isa.BloodBank.controller;
 
 import com.isa.BloodBank.dto.BloodBankCreationDTO;
 import com.isa.BloodBank.dto.BloodbankDisplayDTO;
+import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.model.BloodBankCenter;
 import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.service.BloodBankCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,7 +24,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path="api/blood-bank-center")
 public class BloodBankCenterController {
-    private final BloodBankCenterService bloodBankCenterService;
+        private final BloodBankCenterService bloodBankCenterService;
     @Autowired
     public BloodBankCenterController(BloodBankCenterService bloodBankCenterService) {
         this.bloodBankCenterService = bloodBankCenterService;
@@ -56,16 +58,18 @@ public class BloodBankCenterController {
         return new ResponseEntity<>(bloodBankCenters, HttpStatus.OK);
     }
     @GetMapping("/all-bloodbankDTOs")
-    public ResponseEntity<List<BloodbankDisplayDTO>> getAllDTOs() {
+    public ResponseEntity<List<BloodbankDisplayDTO>> getAllDTOs(Pageable page) {
 
-        List<BloodbankDisplayDTO> bloodBanks = new ArrayList();
-        List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();
+        ArrayList<BloodbankDisplayDTO> bloodBanksDTOs = (ArrayList<BloodbankDisplayDTO>) bloodBankCenterService.findAllCenters(page);
 
-        for(BloodBankCenter bloodBankCenter : bloodBankCenters){
-            BloodbankDisplayDTO bloodbankDisplayDTO = new BloodbankDisplayDTO(bloodBankCenter);
-            bloodBanks.add(bloodbankDisplayDTO);
-        }
-        return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
+        return new ResponseEntity<>(bloodBanksDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/searchBanks")
+    public ResponseEntity<List<BloodbankDisplayDTO>> searchBanks(Pageable page, @RequestParam("searchName") Optional<String> searchName, @RequestParam("searchCity") Optional<String> searchCity) {
+        List<BloodbankDisplayDTO> bloodbankDisplayDTOs = bloodBankCenterService.searchBanks(page, searchName.get(), searchCity.get());
+
+        return new ResponseEntity<>(bloodbankDisplayDTOs, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
