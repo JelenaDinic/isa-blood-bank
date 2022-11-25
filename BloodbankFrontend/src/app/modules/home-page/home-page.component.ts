@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   public bloodBanks : BloodBankDisplayDTO[] = [];
   public allBloodBanks : BloodBankDisplayDTO[] = [];
   SortByParam = '';
-  sortDirection = 'asc';
+  SortDirection = 'asc';
   SearchName : string = '';
   SearchCity : string = '';
   FilterByRating : number = 0;
@@ -27,19 +27,26 @@ export class HomePageComponent implements OnInit {
   constructor(private homePageService: HomePageService) { }
   
   ngOnInit(): void {
-    this.getBloodBanks(this.SearchName, this.SearchCity)
+    this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating, this.SortByParam, this.SortDirection = '')
+    this.SortDirection= 'asc';
   }
 
   onSortDirection(){
-    if (this.sortDirection === 'desc'){
-      this.sortDirection = 'asc';
+    if (this.SortDirection === 'desc'){
+      this.SortDirection = 'asc';
+      this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating, this.SortByParam, this.SortDirection);
     }
     else
-      this.sortDirection = 'desc';
+      this.SortDirection = 'desc';
+      this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating, this.SortByParam, this.SortDirection);
+  }
+
+  onSortChange(){
+    this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating, this.SortByParam, this.SortDirection);
   }
 
   onChange(){
-    this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating)
+    this.getBloodBanks(this.SearchName, this.SearchCity, this.FilterByRating, this.SortByParam, this.SortDirection)
   }
 
   onTableDataChange(event: any) {
@@ -47,8 +54,8 @@ export class HomePageComponent implements OnInit {
     this.getBloodBanks(this.SearchName, this.SearchCity);
   }
   
-  public getBloodBanks(searchName: string = '', searchCity: string = '', filterbyRating: number = 0): void {
-    this.homePageService.searchBloodBanks(searchName, searchCity, filterbyRating).subscribe(
+  public getBloodBanks(searchName: string = '', searchCity: string = '', filterbyRating: number = 0, sortByParam: string = '', sortDirection: string = ''): void {
+    this.homePageService.searchBloodBanks(searchName, searchCity, filterbyRating, sortByParam, sortDirection).subscribe(
       (response: BloodBankDisplayDTO[]) => {
         this.bloodBanks = response;
         this.allBloodBanks = this.bloodBanks;
@@ -62,7 +69,7 @@ export class HomePageComponent implements OnInit {
       }
      );
   }
-  searchBloodBanks(name: string, city: string, rating: number){
-    this.getBloodBanks(name, city, rating);
+  searchBloodBanks(name: string, city: string, rating: number, sortParam: string, sortDirection: string){
+    this.getBloodBanks(name, city, rating, sortParam, sortDirection);
   }
 }

@@ -8,17 +8,18 @@
 </div>
 <div class="container">
     <label class="labelSort">Sort by &nbsp;</label>
-    <select [(ngModel)] = 'SortByParam'>
+    <select [(ngModel)] = 'SortByParam' (change)="onSortChange()">
+        <option value="" selected disabled>Select sorting parameter</option>
         <option value="name">Name</option>
         <option value="averageGrade">Average grade</option>
         <option value="city">City</option>
     </select>
-    <button class="btn btn-primary btn-xs" type="button" (click) = "onSortDirection()">
-        <i *ngIf="sortDirection==='asc'">Sort desc</i>
-        <i *ngIf="sortDirection==='desc'">Sort asc</i>
+    <button class="btn btn-primary btn-xs" type="button" (click) = "onSortDirection()" >
+        <i *ngIf="SortDirection==='asc'">Sort desc</i>
+        <i *ngIf="SortDirection==='desc'">Sort asc</i>
     </button>
-    <input type="text" placeholder="Search by name" [(ngModel)] = 'SearchName' (input)="searchBloodBanks(SearchName, SearchCity, FilterByRating)"/>
-    <input type="text" placeholder="Search by city" [(ngModel)] = 'SearchCity' (input)="searchBloodBanks(SearchName, SearchCity, FilterByRating)">
+    <input type="text" placeholder="Search by name" [(ngModel)] = 'SearchName' (input)="searchBloodBanks(SearchName, SearchCity, FilterByRating, SortByParam, SortDirection)">
+    <input type="text" placeholder="Search by city" [(ngModel)] = 'SearchCity' (input)="searchBloodBanks(SearchName, SearchCity, FilterByRating, SortByParam, SortDirection)">
     <select class="ratingFilter" [(ngModel)] = 'FilterByRating' (change)="onChange()">
         <option value="" selected disabled>Filter centres by rating</option>
         <option value="0">All ratings</option>

@@ -83,8 +83,29 @@ public class BloodBankCenterService {
         return bankDTOs;
     }
 
-    public List<BloodbankDisplayDTO> searchBanks(Pageable page, String searchName, String searchCity, Double filterByRating) {
+    public List<BloodbankDisplayDTO> searchBanks(Pageable page, String searchName, String searchCity, Double filterByRating, String sortByParam, String sortDirection) {
+        //Page<BloodBankCenter> centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRating(searchName,searchCity,filterByRating, page);
         Page<BloodBankCenter> centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRating(searchName,searchCity,filterByRating, page);
+
+        if(sortDirection.equalsIgnoreCase("asc")){
+            if(sortByParam.equalsIgnoreCase("name")){
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingNameAsc(searchName,searchCity,filterByRating, page);
+            } else if (sortByParam.equalsIgnoreCase("city")) {
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingCityAsc(searchName,searchCity,filterByRating, page);
+            } else if (sortByParam.equalsIgnoreCase("averageGrade")) {
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingAvgGradeAsc(searchName,searchCity,filterByRating, page);
+            }
+        } else if (sortDirection.equalsIgnoreCase("desc")) {
+            if(sortByParam.equalsIgnoreCase("name")){
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingNameDesc(searchName,searchCity,filterByRating, page);
+            } else if (sortByParam.equalsIgnoreCase("city")) {
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingCityDesc(searchName,searchCity,filterByRating, page);
+            } else if (sortByParam.equalsIgnoreCase("averageGrade")) {
+                centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRatingAvgGradeDesc(searchName,searchCity,filterByRating, page);
+            }
+        } else{
+            centerPage = bloodBankCenterRepository.findAllByNameAndCityAndRating(searchName,searchCity,filterByRating, page);
+        }
 
         List<BloodbankDisplayDTO> centerDTOs = new ArrayList<>();
 
