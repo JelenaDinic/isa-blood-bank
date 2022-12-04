@@ -1,3 +1,4 @@
+import { AppointmentsComponent } from './modules/appointments/appointments.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchUsersComponent } from './modules/search-users/search-users.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'register-user', component: UserRegistrationComponent},
   { path: 'home-page', component: HomePageComponent},
   { path: 'blood-donor-form', component: BloodDonorFormComponent},
-  { path: 'edit-user-profile', component: EditUserProfileComponent}
+  { path: 'edit-user-profile', component: EditUserProfileComponent},
+  { path: 'appointments', component: AppointmentsComponent}
 
 ];
 

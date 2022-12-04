@@ -1,5 +1,6 @@
 package com.isa.BloodBank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.isa.BloodBank.dto.UserCreationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name = "registeredUsers")
 @Table(name = "registeredUsers")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +19,19 @@ import java.util.Set;
 public class RegisteredUser extends Person {
 
     @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<BloodDonorForm> bloodDonorForms;
+    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<AppointmentReport> appointmentReports;
+    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Appointment> appointments;
     private BloodType bloodType;
     private String profession;
     private String professionInfo;
+    private int penalties;
+
 
     public RegisteredUser(UserCreationDTO dto){
         this.setFirstName(dto.getFirstName());

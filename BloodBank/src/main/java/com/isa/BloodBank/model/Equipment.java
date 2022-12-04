@@ -7,17 +7,19 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name="bloodSupplies")
-@Table(name = "bloodSupplies")
+@Entity(name="equipments")
+@Table(name = "equipments")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class BloodSupply {
+public class Equipment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
-    private String idCenter;
-    private String amount;
-    private BloodType type;
+    private int id;
+    private String type;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="bloodBankCenter_id", nullable=false)
+    private BloodBankCenter bloodBankCenter;
+
 }

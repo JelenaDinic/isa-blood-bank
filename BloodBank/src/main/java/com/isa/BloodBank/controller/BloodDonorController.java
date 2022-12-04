@@ -31,6 +31,10 @@ public class BloodDonorController {
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
+    @GetMapping("/check/{id}")
+    public boolean checkForm(@PathVariable int id) {
+        return bloodDonorService.checkIfAllowed(id);
+    }
 
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodDonorCreationDTO bloodDonorCreationDTO, BindingResult bindingResult) {
