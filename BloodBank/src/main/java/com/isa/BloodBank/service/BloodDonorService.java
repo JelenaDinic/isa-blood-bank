@@ -6,6 +6,7 @@ import com.isa.BloodBank.repository.BloodDonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,6 +26,10 @@ public class BloodDonorService {
 
         public List<BloodDonorForm> findAll() {
             return bloodDonorRepository.findAll();
+        }
+
+        public boolean checkIfAllowed(int id) {
+            return true;
         }
 
 

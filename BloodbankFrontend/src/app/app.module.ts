@@ -28,6 +28,7 @@ import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AppointmentsComponent } from './modules/appointments/appointments.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     StaffProfileComponent,
     BloodDonorFormComponent,
     EditUserProfileComponent,
-    BloodBankSearchPipe
+    BloodBankSearchPipe,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,
