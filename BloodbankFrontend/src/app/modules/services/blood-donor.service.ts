@@ -16,8 +16,8 @@ export class BloodDonorService{
   public create(bloodDonor: BloodDonor): Observable<any> {
     return this.http.post<any>(this.apiServerUrl + '/api/blood-donor', bloodDonor, {headers: this.headers});
   }
-  public getLastByUserId(id: number): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + "/api/blood-donor/" + id, {headers: this.headers} )
+  public checkIfAllowed(id: number): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + "/api/blood-donor/check/" + id, {headers: this.headers} )
   }
   
 }

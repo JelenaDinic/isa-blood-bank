@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 public class BloodDonorCreationDTO {
 
+    private int userId;
+
     @NotNull
     @NotBlank(message = "You must choose one answer")
     private String isUnacceptableWeight;

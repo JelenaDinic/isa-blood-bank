@@ -1,5 +1,5 @@
 export class BloodDonor{
-
+    userId: number = 2010;
     isUnacceptableWeight : string = '';
     isUnhealthy : string = '';
     hasSkinProblems : string = '';

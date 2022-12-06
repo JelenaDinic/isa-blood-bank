@@ -1,3 +1,4 @@
+import { BloodDonorService } from './../services/blood-donor.service';
 import { Appointment } from './../model/appointment.model';
 import { AppointmentService } from './../services/appointment.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,17 +14,17 @@ export class AppointmentsComponent implements OnInit {
   public displayedColumns = ['user', 'date', 'duration', 'status', 'update'];
   public isAllowed: boolean | undefined;
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService, private bloodDonorService: BloodDonorService) { }
 
   ngOnInit(): void {
-    this.appointmentService.findByUserId(2010).subscribe(res => {
-      this.appointments = res;
-      if(this.appointments[0].status === "Not allowed")
-        this.isAllowed = false;
-      else
-        this.isAllowed = true
-      console.log(this.appointments)
+    this.bloodDonorService.checkIfAllowed(2010).subscribe(res => {
+      if(res != null)
+        this.isAllowed = res;
+      this.appointmentService.findByUserId(2010).subscribe(res => {
+        this.appointments = res;
+      })
     })
+    
   }
 
 }

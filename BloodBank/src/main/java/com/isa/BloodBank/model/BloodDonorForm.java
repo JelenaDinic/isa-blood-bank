@@ -9,8 +9,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "bloodDonorForm")
+@Entity(name = "bloodDonorForms")
+@Table(name = "bloodDonorForms")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,7 +39,7 @@ public class BloodDonorForm {
 
     private LocalDate dateOfFormFilling;
 
-    public BloodDonorForm(BloodDonorCreationDTO dto){
+    public BloodDonorForm(BloodDonorCreationDTO dto, RegisteredUser registredUser){
         this.setUnacceptableWeight(Boolean.parseBoolean(dto.getIsUnacceptableWeight()));
         this.setUnhealthy(Boolean.parseBoolean(dto.getIsUnhealthy()));
         this.setHasSkinProblems(Boolean.parseBoolean(dto.getHasSkinProblems()));
@@ -52,6 +52,7 @@ public class BloodDonorForm {
         this.setHasAllergies(Boolean.parseBoolean(dto.getHasAllergies()));
         this.setHasDrankAlcohol(Boolean.parseBoolean(dto.getHasDrankAlcohol()));
         this.setPregnant(Boolean.parseBoolean(dto.getIsPregnant()));
+        this.setRegisteredUser(registredUser);
     }
 
 }

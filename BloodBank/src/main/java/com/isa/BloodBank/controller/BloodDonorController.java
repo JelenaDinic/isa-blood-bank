@@ -32,7 +32,7 @@ public class BloodDonorController {
 
     }
     @GetMapping("/check/{id}")
-    public boolean checkForm(@PathVariable int id) {
+    public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
     }
 
