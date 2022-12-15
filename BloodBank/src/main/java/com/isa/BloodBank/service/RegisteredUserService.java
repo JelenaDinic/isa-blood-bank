@@ -11,11 +11,12 @@ import com.isa.BloodBank.model.Address;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import javax.transaction.Transactional;
+import java.util.*;
 
 import static com.isa.BloodBank.model.UserRole.USER;
+import static java.sql.DriverManager.println;
 
 @Service
 public class RegisteredUserService {
@@ -26,17 +27,26 @@ public class RegisteredUserService {
     private final AddressRepository addressRepository;
     private final SystemAdminRepository systemAdminRepository;
     private final UserRepository userRepository;
+    private final VerificationTokenService verificationTokenService;
 
     @Autowired
-    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository, UserRepository userRepository) {
+    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository,
+                                 BloodBankCenterRepository bloodBankCenterRepository,
+                                 SystemAdminRepository systemAdminRepository, AddressRepository addressRepository,
+                                 UserRepository userRepository, VerificationTokenService verificationTokenService) {
         this.repository = repository;
         this.staffRepository = staffRepository;
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.systemAdminRepository = systemAdminRepository;
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
+        this.verificationTokenService = verificationTokenService;
     }
 
+//    @Transactional
+//    public RegisteredUser save(RegisteredUser user){
+//        return repository.save(user);
+//    }
     public RegisteredUser create(UserCreationDTO userCreationDTO) {
         RegisteredUser registeredUser = new RegisteredUser(userCreationDTO);
 
@@ -44,7 +54,21 @@ public class RegisteredUserService {
 
         registeredUser.setAddress(address);
         System.out.println(registeredUser);
-        return repository.save(registeredUser);
+
+        Optional<RegisteredUser> saved = Optional.of(repository.save(registeredUser));
+        //return repository.save(registeredUser);
+
+        saved.ifPresent( u ->{
+            try{
+                String token = UUID.randomUUID().toString();
+                verificationTokenService.save(saved.get(), token);
+                println("uslo je ovde");
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        });
+        return saved.get();
     }
 
     public List<RegisteredUser> findAll() {

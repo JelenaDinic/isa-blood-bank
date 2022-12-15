@@ -34,14 +34,14 @@ public class RegisteredUserController {
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody UserCreationDTO userCreationDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
-            System.err.println("Error creating new user!");
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError error:bindingResult.getFieldErrors()){
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
-        }
+//        if(bindingResult.hasErrors()){
+//            System.err.println("Error creating new user!");
+//            Map<String, String> errors = new HashMap<>();
+//            for (FieldError error:bindingResult.getFieldErrors()){
+//                errors.put(error.getField(), error.getDefaultMessage());
+//            }
+//            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
+//        }
         try {
 //            service.create(userCreationDTO);
 //            return new ResponseEntity<>(HttpStatus.CREATED);
