@@ -22,5 +22,7 @@ insert into staff (id, blood_bank_center_id) values (2011, 2006);
 
 insert into system_administrators (id) values (2012);
 
-insert into appointments (id, user_id, date_time, duration, status) values (2001, 2010, '1995-05-03 12:00:00', 30, 0)
-insert into appointments (id, user_id, date_time, duration, status) values (2002, 2010, '1995-05-03 12:15:00', 30, 0)
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2001, 2010, '1995-05-03 12:00:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2002, 2010, '1995-05-03 12:15:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2002, 2010, '2022-12-20 8:00:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2002, 2009, '2022-12-20 11:00:00', 30, 0, 2006);

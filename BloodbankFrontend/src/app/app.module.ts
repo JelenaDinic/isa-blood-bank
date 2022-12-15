@@ -29,6 +29,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppointmentsComponent } from './modules/appointments/appointments.component';
+import { AppointmentCalendarComponent } from './modules/appointment-calendar/appointment-calendar.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AppointmentsComponent } from './modules/appointments/appointments.compo
     BloodDonorFormComponent,
     EditUserProfileComponent,
     BloodBankSearchPipe,
-    AppointmentsComponent
+    AppointmentsComponent,
+    AppointmentCalendarComponent
   ],
   imports: [
     BrowserModule,
