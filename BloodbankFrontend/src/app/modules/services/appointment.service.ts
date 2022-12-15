@@ -15,6 +15,10 @@ import { Observable } from "rxjs";
     findByUserId(id: number): Observable<any> {
       return this.http.get<any>(this.apiServerUrl + '/api/appointment/byUser/' + id, {headers: this.headers});
     }
+
+    findByBloodBank(id: number) : Observable<any> {
+      return this.http.get<any>(this.apiServerUrl + '/api/appointment/byBloodBank/' + id, {headers: this.headers});
+    }
   
   }
   

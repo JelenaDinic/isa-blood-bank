@@ -30,6 +30,11 @@ import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppointmentsComponent } from './modules/appointments/appointments.component';
 import { AppointmentCalendarComponent } from './modules/appointment-calendar/appointment-calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CommonModule } from '@angular/common';
+import { FlatpickrModule } from 'angularx-flatpickr';
+//import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -66,7 +71,11 @@ import { AppointmentCalendarComponent } from './modules/appointment-calendar/app
     MatIconModule,
     MatGridListModule,
     ToastrModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

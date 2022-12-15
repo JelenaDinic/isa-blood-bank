@@ -19,4 +19,8 @@ public class AppointmentService {
     public List<Appointment> findAllByUserId(int id) {
         return appointmentRepository.findAllByUserId(id);
     }
+
+    public List<Appointment> findAllByBloodBank(int id) {
+        return appointmentRepository.findAllByBloodBankId(id);
+    }
 }

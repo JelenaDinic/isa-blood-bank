@@ -1,5 +1,6 @@
 package com.isa.BloodBank.controller;
 
+import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
 import com.isa.BloodBank.dto.AppointmentDTO;
 import com.isa.BloodBank.model.Appointment;
 import com.isa.BloodBank.service.AppointmentService;
@@ -36,5 +37,17 @@ public class AppointmentController {
         }
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("byBloodBank/{bloodBankId}")
+    public ResponseEntity<List<AppointmentCalendarEventDTO>> getAppointmentsByBloodbank(@PathVariable int bloodBankId){
+        List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
+        List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
+        for(Appointment appointment : appointments) {
+            AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
+            appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+        }
+
+        return new ResponseEntity<>(appointmentCalendarEventDTOs, HttpStatus.OK);
     }
 }
