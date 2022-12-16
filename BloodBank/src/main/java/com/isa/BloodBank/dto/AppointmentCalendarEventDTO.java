@@ -16,9 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class AppointmentCalendarEventDTO {
     public String title;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss")
     public LocalDateTime start;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss")
     public LocalDateTime end;
 
     public AppointmentCalendarEventDTO(Appointment appointment) {
