@@ -29,7 +29,7 @@ public class Staff extends Person{
         this.setEmail(dto.getEmail());
         this.setPhoneNumber(dto.getPhoneNumber());
         this.setPassword(dto.getPassword());
-        this.setRole(dto.getRole());
+//        this.setRole(dto.getRole());
         this.setGender(dto.getGender());
         this.setPersonalId(dto.getPersonalId());
     }

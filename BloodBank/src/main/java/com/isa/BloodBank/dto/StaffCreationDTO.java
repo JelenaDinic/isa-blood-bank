@@ -84,7 +84,7 @@ public class StaffCreationDTO {
         this.setLastName(staff.getLastName());
         this.setEmail(staff.getEmail());
         this.setPassword(staff.getPassword());
-        this.setRole(staff.getRole());
+//        this.setRole(staff.getRole());
         this.setStreet(staff.getAddress().getStreet());
         this.setNumber(staff.getAddress().getNumber());
         this.setCity(staff.getAddress().getCity());

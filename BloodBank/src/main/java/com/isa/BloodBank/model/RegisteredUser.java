@@ -40,7 +40,7 @@ public class RegisteredUser extends Person {
         this.setEmail(dto.getEmail());
         this.setPhoneNumber(dto.getPhoneNumber());
         this.setPassword(dto.getPassword());
-        this.setRole(UserRole.USER);
+//        this.setRole(UserRole.USER);
         this.setProfession(dto.getProfession());
         this.setProfessionInfo(dto.getProfessionInfo());
         this.setPersonalId(dto.getPersonalId());

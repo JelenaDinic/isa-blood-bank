@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   cardsCount: number = 2;
   count: number = 0;
   public temp_data: BloodBankDisplayDTO[] = [];
+  token = localStorage.getItem('token');
 
   constructor(private homePageService: HomePageService) { }
   

@@ -10,6 +10,7 @@ import { HomePageComponent } from './modules/home-page/home-page.component';
 import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
 import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
+import { LoginUserComponent } from './modules/login-user/login-user.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'home-page', component: HomePageComponent},
   { path: 'blood-donor-form', component: BloodDonorFormComponent},
   { path: 'edit-user-profile', component: EditUserProfileComponent},
-  { path: 'appointments', component: AppointmentsComponent}
+  { path: 'appointments', component: AppointmentsComponent},
+  { path: 'login-user', component : LoginUserComponent }
 
 ];
 

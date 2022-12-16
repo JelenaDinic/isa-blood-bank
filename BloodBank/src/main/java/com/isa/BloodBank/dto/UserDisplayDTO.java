@@ -80,7 +80,7 @@ public class UserDisplayDTO {
         this.setDob(person.getDob().toString());
         this.setPhoneNumber(person.getPhoneNumber());
         this.setEmail(person.getEmail());
-        this.setRole(person.getRole().toString());
+//        this.setRole(person.getRole().toString());
         this.setGender(person.getGender());
         this.setPersonalId(person.getPersonalId().toString());
     }

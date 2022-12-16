@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './modules/services/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -29,6 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { BloodBankSearchPipe } from './modules/pipes/blood-bank-search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppointmentsComponent } from './modules/appointments/appointments.component';
+import { LoginUserComponent } from './modules/login-user/login-user.component';
+import { TokenInterceptor } from './modules/interceptor/TokenInterceptor';
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { AppointmentsComponent } from './modules/appointments/appointments.compo
     BloodDonorFormComponent,
     EditUserProfileComponent,
     BloodBankSearchPipe,
-    AppointmentsComponent
+    AppointmentsComponent,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,14 @@ import { AppointmentsComponent } from './modules/appointments/appointments.compo
     ToastrModule.forRoot(),
     NgxPaginationModule
   ],
-  providers: [UserService],
+  providers: [
+      UserService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptor,
+        multi: true
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
