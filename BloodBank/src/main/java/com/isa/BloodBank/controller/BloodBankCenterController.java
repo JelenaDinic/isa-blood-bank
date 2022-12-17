@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class BloodBankCenterController {
         List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();
         return new ResponseEntity<>(bloodBankCenters, HttpStatus.OK);
     }
+
     @GetMapping("/all-bloodbankDTOs")
     public ResponseEntity<List<BloodbankDisplayDTO>> getAllDTOs(Pageable page) {
 
