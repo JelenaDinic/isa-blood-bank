@@ -1,4 +1,4 @@
-package com.isa.BloodBank;
+package com.isa.BloodBank.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
