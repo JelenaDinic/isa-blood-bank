@@ -13,6 +13,7 @@ export class LoginUserComponent implements OnInit {
   public loginUser : LoginUser = new LoginUser();
   public token : string = "";
   public role : string = "";
+  public loggedUserId : string = "";
   constructor(private toastr: ToastrService, private loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -23,11 +24,18 @@ export class LoginUserComponent implements OnInit {
       this.token = response;
       localStorage.setItem('token',this.token);
       console.log(this.token)
+
       let decodedJWT = JSON.parse(window.atob(this.token.split('.')[1]));
       this.role = decodedJWT.role.authority;
       localStorage.setItem('loggedUserRole', this.role);
       console.log(this.role);
+
       this.toastr.success('Successfully logged in');
+
+      this.loggedUserId = decodedJWT.id.authority;
+      localStorage.setItem('loggedUserId', this.loggedUserId);
+      console.log(this.loggedUserId);
+
       if(this.role == 'ROLE_STAFF')
       window.location.href = '/staff-profile';
 
