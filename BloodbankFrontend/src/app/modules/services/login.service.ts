@@ -26,7 +26,7 @@ export class LoginService {
     if(token == null)
       token = "";
     var payLoad = JSON.parse(window.atob(token.split('.')[1]));
-    var userRole = payLoad.role;
+    var userRole = payLoad.role.authority;
     allowedRoles.forEach(element => {
       if (userRole == element) {
         isMatch = true;

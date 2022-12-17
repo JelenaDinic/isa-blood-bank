@@ -16,9 +16,9 @@ import { Guard } from './modules/guard/guard';
 
 
 const routes: Routes = [
-  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["USER"]}},
+  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}},
   { path: 'search-users', component: SearchUsersComponent},
-  { path: 'staff-profile', component: StaffProfileComponent},
+  { path: 'staff-profile', component: StaffProfileComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'register-blood-bank', component: BloodBankRegistrationComponent},
   { path: 'register-staff', component: StaffRegistrationComponent},
   { path: 'register-user', component: UserRegistrationComponent},
