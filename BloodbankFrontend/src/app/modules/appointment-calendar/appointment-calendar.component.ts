@@ -54,6 +54,8 @@ export class AppointmentCalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
+  month: Date = new Date();
+
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -112,6 +114,12 @@ export class AppointmentCalendarComponent implements OnInit {
       }
       return iEvent;
     });
+  }
+
+  public changeMonth(): void {
+    console.log(this.viewDate)
+    console.log(this.month)
+    this.viewDate = new Date(this.month)
   }
 
 
