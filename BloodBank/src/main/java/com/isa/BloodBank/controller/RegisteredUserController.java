@@ -8,6 +8,7 @@ import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
 import java.util.*;
+
 
 @RestController
 @RequestMapping(path="api/registered-user")
@@ -60,6 +62,8 @@ public class RegisteredUserController {
         return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(path = "/searchUsers")
     public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
         List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
@@ -79,3 +83,5 @@ public class RegisteredUserController {
     }
 
 }
+
+

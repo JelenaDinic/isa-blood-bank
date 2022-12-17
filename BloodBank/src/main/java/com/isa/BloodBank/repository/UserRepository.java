@@ -10,6 +10,8 @@ public interface UserRepository extends JpaRepository<Person, Integer> {
 
     Page<Person> findAll(Pageable pageable);
 
+    Person findByEmail(String email);
+
     @Query("select u from users u where lower(u.firstName) like %?1% or lower(u.lastName) like %?1%")
     Page<Person> findAllByFirstNameOrLastName(String searchTerm, Pageable pageable);
 }
