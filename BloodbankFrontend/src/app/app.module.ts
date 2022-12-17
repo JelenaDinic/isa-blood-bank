@@ -37,6 +37,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { TokenInterceptor } from './modules/interceptor/TokenInterceptor';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
