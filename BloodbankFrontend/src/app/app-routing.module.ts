@@ -12,10 +12,11 @@ import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-
 import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
 import { AppointmentCalendarComponent } from './modules/appointment-calendar/appointment-calendar.component';
 import { LoginUserComponent } from './modules/login-user/login-user.component';
+import { Guard } from './modules/guard/guard';
 
 
 const routes: Routes = [
-  { path: 'blood-bank-center', component: BloodBankCenterComponent},
+  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["USER"]}},
   { path: 'search-users', component: SearchUsersComponent},
   { path: 'staff-profile', component: StaffProfileComponent},
   { path: 'register-blood-bank', component: BloodBankRegistrationComponent},

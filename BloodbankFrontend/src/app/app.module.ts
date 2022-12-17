@@ -36,6 +36,7 @@ import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { TokenInterceptor } from './modules/interceptor/TokenInterceptor';
+import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -56,7 +57,8 @@ import { TokenInterceptor } from './modules/interceptor/TokenInterceptor';
     BloodBankSearchPipe,
     AppointmentsComponent,
     AppointmentCalendarComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

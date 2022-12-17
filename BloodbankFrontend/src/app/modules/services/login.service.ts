@@ -19,4 +19,19 @@ export class LoginService {
     return this.http.post(this.apiServerUrl + '/authenticate', loginUser, {headers: this.headers, responseType: 'text'});
   }
 
+
+  roleMatch(allowedRoles: string[]): boolean {
+    var isMatch = false;
+    var token = localStorage.getItem('token');
+    if(token == null)
+      token = "";
+    var payLoad = JSON.parse(window.atob(token.split('.')[1]));
+    var userRole = payLoad.role;
+    allowedRoles.forEach(element => {
+      if (userRole == element) {
+        isMatch = true;
+      }
+    });
+    return isMatch;
+  }
 }
