@@ -6,6 +6,7 @@ import com.isa.BloodBank.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,15 @@ public class StaffController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping
     public ResponseEntity<List<Staff>> getAll() {
         List<Staff> staff = service.findAll();
         return new ResponseEntity<>(staff, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/all-bloodbank-staff/{id}")
     public ResponseEntity<List<Staff>> getAllByCenterId(@PathVariable("id") int id) {
         List<Staff> staff = service.findAllByCenterId(id);
@@ -72,6 +77,9 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/{id}")
     public StaffCreationDTO getById(@PathVariable("id") int id) {
         return service.getById(id);

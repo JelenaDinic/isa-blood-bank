@@ -10,19 +10,24 @@ import { HomePageComponent } from './modules/home-page/home-page.component';
 import { StaffProfileComponent } from './modules/staff-profile/staff-profile.component';
 import { BloodDonorFormComponent } from './modules/blood-donor-form/blood-donor-form.component';
 import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-profile.component';
+import { AppointmentCalendarComponent } from './modules/appointment-calendar/appointment-calendar.component';
+import { LoginUserComponent } from './modules/login-user/login-user.component';
+import { Guard } from './modules/guard/guard';
 
 
 const routes: Routes = [
-  { path: 'blood-bank-center', component: BloodBankCenterComponent },
+  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}},
   { path: 'search-users', component: SearchUsersComponent},
-  { path: 'staff-profile', component: StaffProfileComponent},
+  { path: 'staff-profile', component: StaffProfileComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'register-blood-bank', component: BloodBankRegistrationComponent},
   { path: 'register-staff', component: StaffRegistrationComponent},
   { path: 'register-user', component: UserRegistrationComponent},
   { path: 'home-page', component: HomePageComponent},
   { path: 'blood-donor-form', component: BloodDonorFormComponent},
   { path: 'edit-user-profile', component: EditUserProfileComponent},
-  { path: 'appointments', component: AppointmentsComponent}
+  { path: 'appointments', component: AppointmentsComponent},
+  { path: 'login-user', component: LoginUserComponent},
+  { path: 'appointments-calendar', component: AppointmentCalendarComponent}
 
 ];
 

@@ -1,5 +1,6 @@
 package com.isa.BloodBank.controller;
 
+import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
 import com.isa.BloodBank.dto.AppointmentDTO;
 import com.isa.BloodBank.model.Appointment;
 import com.isa.BloodBank.model.RegisteredUser;
@@ -8,6 +9,7 @@ import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -42,5 +44,18 @@ public class AppointmentController {
     public void addPenalty(@RequestBody AppointmentDTO appointmentDTO) {
         userService.addPenalty(appointmentDTO.getUserId());
         service.changeStatusToNonApp(appointmentDTO.getId());
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("byBloodBank/{bloodBankId}")
+    public ResponseEntity<List<AppointmentCalendarEventDTO>> getAppointmentsByBloodbank(@PathVariable int bloodBankId){
+        List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
+        List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
+        for(Appointment appointment : appointments) {
+            AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
+            appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+        }
+
+        return new ResponseEntity<>(appointmentCalendarEventDTOs, HttpStatus.OK);
     }
 }

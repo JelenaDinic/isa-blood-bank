@@ -21,6 +21,7 @@ public class AppointmentService {
     public List<Appointment> findAllByUserId(int id) {
         return appointmentRepository.findAllByUserId(id);
     }
+
     public void changeStatusToDone(int id) {
         Appointment appointment = appointmentRepository.findAppointmentById(id);
         appointment.setStatus(AppointmentStatus.HAPPENED);
@@ -33,5 +34,10 @@ public class AppointmentService {
     }
     public Appointment findById(int id) {
         return appointmentRepository.findAppointmentById(id);
+
+
+    public List<Appointment> findAllByBloodBank(int id) {
+        return appointmentRepository.findAllByBloodBankId(id);
+
     }
 }

@@ -1,0 +1,20 @@
+.calendar-header {
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background-color: darkred;
+}
+
+.btn-primary:active {
+    background-color: white;
+    color: black;
+}
+
+.month-picker-wrapper {
+    margin-left: 10px;
+}
+
+h2{
+    font-size: 25px;
+}

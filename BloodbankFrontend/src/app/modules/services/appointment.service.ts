@@ -20,5 +20,10 @@ import { Observable } from "rxjs";
     addPenalty(appointment: Appointment): Observable<any> {
       return this.http.post<any>(this.apiServerUrl + '/api/appointment/penalty' ,appointment, {headers: this.headers})
     }
+
+    findByBloodBank(id: number) : Observable<any> {
+      return this.http.get<any>(this.apiServerUrl + '/api/appointment/byBloodBank/' + id, {headers: this.headers});
+    }
+  
   }
   
