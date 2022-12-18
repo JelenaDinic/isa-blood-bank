@@ -44,7 +44,7 @@ public class AppointmentController {
     public void addPenalty(@RequestBody AppointmentDTO appointmentDTO) {
         userService.addPenalty(appointmentDTO.getUserId());
         service.changeStatusToNonApp(appointmentDTO.getId());
-
+    }
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("byBloodBank/{bloodBankId}")

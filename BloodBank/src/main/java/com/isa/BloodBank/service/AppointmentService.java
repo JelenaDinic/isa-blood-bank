@@ -34,7 +34,7 @@ public class AppointmentService {
     }
     public Appointment findById(int id) {
         return appointmentRepository.findAppointmentById(id);
-
+    }
 
     public List<Appointment> findAllByBloodBank(int id) {
         return appointmentRepository.findAllByBloodBankId(id);
