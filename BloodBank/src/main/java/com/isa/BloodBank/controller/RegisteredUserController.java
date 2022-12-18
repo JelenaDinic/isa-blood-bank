@@ -77,5 +77,9 @@ public class RegisteredUserController {
         service.update(userProfileDTO);
         return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
     }
+    @GetMapping(path="/{id}")
+    public RegisteredUser getById(@PathVariable("id") int id){
+        return service.findById(id);
+    }
 
 }

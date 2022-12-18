@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Integer> {
     Page<RegisteredUser> findAll(Pageable pageable);
+    RegisteredUser findRegisteredUserById(int id);
 }

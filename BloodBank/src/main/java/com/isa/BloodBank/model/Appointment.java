@@ -21,9 +21,11 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     private RegisteredUser registeredUser;
+//    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+//    private AppointmentReport appointmentReport;
     private LocalDateTime dateTime;
     private int duration;
     private AppointmentStatus status;

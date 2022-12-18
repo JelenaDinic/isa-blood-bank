@@ -18,13 +18,13 @@ import java.util.Set;
 @Setter
 public class RegisteredUser extends Person {
 
-    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registeredUser",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<BloodDonorForm> bloodDonorForms;
-    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registeredUser",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<AppointmentReport> appointmentReports;
-    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Appointment> appointments;
     private BloodType bloodType;

@@ -88,6 +88,10 @@ public class RegisteredUserService {
         return null;
     }
 
+    public RegisteredUser findById(int id) {
+        return repository.findRegisteredUserById(id);
+    }
+
     private void updateUser(RegisteredUser user, UserProfileDisplayDTO userProfileDTO){
         user.setFirstName(userProfileDTO.getName());
         user.setLastName(userProfileDTO.getSurname());
@@ -115,5 +119,9 @@ public class RegisteredUserService {
 
         return userDTOs;
     }
-
+    public void addPenalty(int id) {
+        RegisteredUser user  = repository.findRegisteredUserById(id);
+        user.setPenalties(user.getPenalties() + 1);
+        userRepository.save(user);
+    }
 }
