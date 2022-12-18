@@ -3,7 +3,9 @@ export class Appointment {
     dateTime!: Date;
     duration: number = 0;
     status: string = "";
-    user: string = ""
+    user: string = "";
+    userId: number = 0;
+
 
     public constructor(obj?: any) {
         if (obj) {
@@ -12,6 +14,8 @@ export class Appointment {
             this.duration = obj.duration;
             this.status = obj.status;
             this.user = obj.user;
+            this.userId = obj.userId;
+            
             
         }
     }

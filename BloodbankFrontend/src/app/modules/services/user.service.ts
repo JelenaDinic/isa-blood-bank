@@ -34,4 +34,8 @@ export class UserService{
   public search(searchText : string = '') : Observable<UserDisplayDTO[]>{
     return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/searchUsers?searchText=` + searchText, {headers: this.headers})
   }
+
+  public getById(id: number): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + '/api/registered-user/' + id, {headers: this.headers});
+  }
 }

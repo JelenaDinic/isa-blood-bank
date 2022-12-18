@@ -17,6 +17,7 @@ public class AppointmentDTO {
     private LocalDateTime dateTime;
     private int duration;
     private String status;
+    private int userId;
     private String user;
 
     public AppointmentDTO(Appointment appointment) {
@@ -39,5 +40,6 @@ public class AppointmentDTO {
 
         }
         this.setUser(appointment.getRegisteredUser().getFirstName() + " " + appointment.getRegisteredUser().getLastName());
+        this.setUserId(appointment.getRegisteredUser().getId());
     }
 }

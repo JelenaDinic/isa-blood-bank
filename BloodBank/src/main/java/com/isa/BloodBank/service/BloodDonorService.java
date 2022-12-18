@@ -23,7 +23,7 @@ public class BloodDonorService {
         }
 
         public BloodDonorForm create(BloodDonorCreationDTO bloodDonorCreationDTO) {
-            RegisteredUser registeredUser = registeredUserRepository.getReferenceById(bloodDonorCreationDTO.getUserId());
+            RegisteredUser registeredUser = registeredUserRepository.findRegisteredUserById(bloodDonorCreationDTO.getUserId());
             BloodDonorForm bloodDonorForm = new BloodDonorForm(bloodDonorCreationDTO, registeredUser);
             return bloodDonorRepository.save(bloodDonorForm);
         }
