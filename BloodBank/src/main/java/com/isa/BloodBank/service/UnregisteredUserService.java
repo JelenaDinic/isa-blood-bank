@@ -19,7 +19,9 @@ public class UnregisteredUserService {
     public UnregisteredUserService(UnregisteredUserRepository unregisteredUserRepository) {
         this.unregisteredUserRepository = unregisteredUserRepository;
     }
-
+    public UnregisteredUser findByActivationCode(String activationCode){
+        return unregisteredUserRepository.findByActivationCode(activationCode);
+    }
     public UnregisteredUser create(UserCreationDTO userCreationDTO) {
         UnregisteredUser unregisteredUser = new UnregisteredUser(userCreationDTO);
 

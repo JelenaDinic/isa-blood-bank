@@ -3,8 +3,7 @@ package com.isa.BloodBank.controller;
 import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.dto.UserProfileDisplayDTO;
-import com.isa.BloodBank.model.RegisteredUser;
-import com.isa.BloodBank.model.UnregisteredUser;
+import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.service.EmailSenderService;
 import com.isa.BloodBank.service.RegisteredUserService;
 import com.isa.BloodBank.service.UnregisteredUserService;
@@ -16,9 +15,14 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -62,7 +66,7 @@ public class RegisteredUserController {
 
             //novo(sa verifikacijom)
             UnregisteredUser newUser = unregisteredUserService.create(userCreationDTO);
-            emailSenderService.sendSimpleEmail(newUser.getEmail(), "Please verify your email", "localhost:8082/api/registered-user/codeVerification/"+newUser.getActivationCode());
+            emailSenderService.sendSimpleEmail(newUser.getEmail(), "Please verify your email", "http://localhost:8082/api/registered-user/codeVerification/" + newUser.getActivationCode());
 
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
@@ -71,10 +75,27 @@ public class RegisteredUserController {
         }
     }
 
-    @PostMapping("/codeVerification/{activationCode}")
+    @GetMapping("/codeVerification/{activationCode}")
     public ResponseEntity<Boolean> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
         try {
             System.out.println(activationCode);
+            UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
+            Person registeredUser = new Person();
+            UserCreationDTO dto = new UserCreationDTO();
+
+            dto.setFirstName(newUser.getFirstName());
+            dto.setLastName(newUser.getLastName());
+            dto.setEmail(newUser.getEmail());
+            dto.setPassword(newUser.getPassword());
+            dto.setRole(newUser.getRole());
+            dto.setDob(newUser.getDob());
+            dto.setPhoneNumber(newUser.getPhoneNumber());
+            dto.setGender(newUser.getGender());
+            dto.setPersonalId(newUser.getPersonalId());
+
+            service.create(dto);
+            unregisteredUserService.delete(newUser);
+
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception("Bad activation");
