@@ -28,12 +28,12 @@ public class WelcomeController {
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
         try {
-            emailSenderService.sendSimpleEmail("vanjateodorovic00@gmail.com", "legendo", "ti si legenda");
+//            emailSenderService.sendSimpleEmail("vanjateodorovic00@gmail.com", "legendo", "ti si legenda");
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
             );
         } catch (Exception ex) {
-            throw new Exception("inavalid username/password");
+            throw new Exception("inavalid email/password");
         }
         return jwtUtil.generateToken(authRequest.getEmail());
     }

@@ -4,7 +4,10 @@ import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.dto.UserProfileDisplayDTO;
 import com.isa.BloodBank.model.RegisteredUser;
+import com.isa.BloodBank.model.UnregisteredUser;
+import com.isa.BloodBank.service.EmailSenderService;
 import com.isa.BloodBank.service.RegisteredUserService;
+import com.isa.BloodBank.service.UnregisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +29,18 @@ public class RegisteredUserController {
     @Autowired
     private RegisteredUserService service;
 
+    @Autowired
+    private UnregisteredUserService unregisteredUserService;
+
 
     @GetMapping
     public ResponseEntity<List<RegisteredUser>> getAll() {
         List<RegisteredUser> registeredUsers = service.findAll();
         return new ResponseEntity<>(registeredUsers, HttpStatus.OK);
     }
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody UserCreationDTO userCreationDTO, BindingResult bindingResult) {
@@ -47,13 +56,32 @@ public class RegisteredUserController {
         try {
 //            service.create(userCreationDTO);
 //            return new ResponseEntity<>(HttpStatus.CREATED);
-            RegisteredUser newRegisteredUser = service.create(userCreationDTO);
-            return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
+            //staro
+//            RegisteredUser newRegisteredUser = service.create(userCreationDTO);
+//            return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
+
+            //novo(sa verifikacijom)
+            UnregisteredUser newUser = unregisteredUserService.create(userCreationDTO);
+            emailSenderService.sendSimpleEmail(newUser.getEmail(), "Please verify your email", "localhost:8082/api/registered-user/codeVerification/"+newUser.getActivationCode());
+
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/codeVerification/{activationCode}")
+    public ResponseEntity<Boolean> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
+        try {
+            System.out.println(activationCode);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new Exception("Bad activation");
+        }
+    }
+
+
 
     @GetMapping(path = "/allUsers")
     public ResponseEntity<List<UserDisplayDTO>> findAllUsers(Pageable page) {
