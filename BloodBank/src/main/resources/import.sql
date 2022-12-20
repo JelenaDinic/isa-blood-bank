@@ -20,7 +20,7 @@ insert into registered_users (blood_type, profession, profession_info, id, penal
 
 insert into staff (id, blood_bank_center_id) values (2011, 2006);
 
-insert into system_administrators (id) values (2012);
+insert into system_administrators (id, requires_password_change) values (2012, false);
 
 
 insert into appointments (id, user_id, date_time, duration, status) values (2001, 2010, '1995-05-03 12:00:00', 30, 0)
