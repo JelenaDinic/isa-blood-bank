@@ -46,7 +46,7 @@ public class AppointmentController {
         service.changeStatusToNonApp(appointmentDTO.getId());
     }
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("byBloodBank/{bloodBankId}")
     public ResponseEntity<List<AppointmentCalendarEventDTO>> getAppointmentsByBloodbank(@PathVariable int bloodBankId){
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);

@@ -13,22 +13,27 @@ import { EditUserProfileComponent } from './modules/edit-user-profile/edit-user-
 import { AppointmentCalendarComponent } from './modules/appointment-calendar/appointment-calendar.component';
 import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { Guard } from './modules/guard/guard';
+import { SysadminRegistrationComponent } from './modules/sysadmin-registration/sysadmin-registration.component';
+import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
+import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-change/sysadmin-password-change.component';
 
 
 const routes: Routes = [
   { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}},
-  { path: 'search-users', component: SearchUsersComponent},
+  { path: 'search-users', component: SearchUsersComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF", "ROLE_SYSTEMADMIN"]}},
   { path: 'staff-profile', component: StaffProfileComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
-  { path: 'register-blood-bank', component: BloodBankRegistrationComponent},
-  { path: 'register-staff', component: StaffRegistrationComponent},
+  { path: 'register-blood-bank', component: BloodBankRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
+  { path: 'register-staff', component: StaffRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'register-user', component: UserRegistrationComponent},
   { path: 'home-page', component: HomePageComponent},
   { path: 'blood-donor-form', component: BloodDonorFormComponent},
-  { path: 'edit-user-profile', component: EditUserProfileComponent},
+  { path: 'edit-user-profile', component: EditUserProfileComponent, canActivate:[Guard]},
   { path: 'appointments', component: AppointmentsComponent},
   { path: 'login-user', component: LoginUserComponent},
-  { path: 'appointments-calendar', component: AppointmentCalendarComponent}
-
+  { path: 'appointments-calendar', component: AppointmentCalendarComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
+  { path: 'forbidden', component: ForbiddenComponent},
+  { path: 'register-sysadmin', component: SysadminRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
+  { path: 'password-change', component: SysadminPasswordChangeComponent},
 ];
 
 @NgModule({
