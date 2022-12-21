@@ -41,6 +41,7 @@ public class StaffController {
         return new ResponseEntity<>(staff, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody StaffCreationDTO staffCreationDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){

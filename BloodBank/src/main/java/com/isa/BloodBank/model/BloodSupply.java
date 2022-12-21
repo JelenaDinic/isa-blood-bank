@@ -17,7 +17,9 @@ public class BloodSupply {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    private String idCenter;
-    private String amount;
-    private BloodType type;
+    @ManyToOne
+    @JoinColumn(name="bloodBankCenter_id",referencedColumnName = "id", nullable= true)
+    private BloodBankCenter bloodBankCenter;
+    private int amount;
+    private BloodType bloodType;
 }

@@ -17,6 +17,22 @@ export class Guard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if(localStorage.getItem('token') != null){
+
+      let token = localStorage.getItem('token');
+      let requiresPasswordChange;
+      if(token != null) {
+        let decodedJWT = JSON.parse(window.atob(token.split(".")[1]))
+        requiresPasswordChange = decodedJWT.requiresPasswordChange;
+      }
+      
+      console.log(requiresPasswordChange);
+
+      if(requiresPasswordChange == 'true') {
+        this.router.navigate(['/password-change']);
+        return false;
+      }
+      
+
       let roles = route.data['permittedRoles'] as Array<string>;
       if(roles) { 
         if(this.loginService.roleMatch(roles)) return true;

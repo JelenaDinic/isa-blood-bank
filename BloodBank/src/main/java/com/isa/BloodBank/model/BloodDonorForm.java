@@ -21,7 +21,7 @@ public class BloodDonorForm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     private RegisteredUser registeredUser;
     private boolean isUnacceptableWeight;
