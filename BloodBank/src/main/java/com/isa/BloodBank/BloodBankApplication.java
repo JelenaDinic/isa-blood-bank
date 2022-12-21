@@ -10,6 +10,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+//email : bloodbankisa@gmail.com
+//sifra od emaila : IsaBloodBank41
 
 @SpringBootApplication
 public class BloodBankApplication {
