@@ -3,6 +3,7 @@ package com.isa.BloodBank.controller;
 import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
 import com.isa.BloodBank.dto.AppointmentDTO;
 import com.isa.BloodBank.model.Appointment;
+import com.isa.BloodBank.model.AppointmentStatus;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.AppointmentService;
 import com.isa.BloodBank.service.RegisteredUserService;
@@ -54,8 +55,10 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
         List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
         for(Appointment appointment : appointments) {
-            AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
-            appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+            if(appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) {
+                AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
+                appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+            }
         }
 
         return new ResponseEntity<>(appointmentCalendarEventDTOs, HttpStatus.OK);
