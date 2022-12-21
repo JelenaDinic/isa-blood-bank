@@ -6,7 +6,6 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
           const clonedRequest = req.clone({
               headers : req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'))
           });
-
+console.log(clonedRequest);
           return next.handle(clonedRequest).pipe(
               tap(
                   succ => {},

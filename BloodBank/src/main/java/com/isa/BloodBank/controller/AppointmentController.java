@@ -2,6 +2,7 @@ package com.isa.BloodBank.controller;
 
 import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
 import com.isa.BloodBank.dto.AppointmentDTO;
+import com.isa.BloodBank.dto.ScheduleAppointmentDTO;
 import com.isa.BloodBank.model.Appointment;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.AppointmentService;
@@ -45,6 +46,14 @@ public class AppointmentController {
         userService.addPenalty(appointmentDTO.getUserId());
         service.changeStatusToNonApp(appointmentDTO.getId());
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/scheduleAppointment")
+    public void scheduleAppointment(@RequestBody ScheduleAppointmentDTO dto) {
+        dto.setActivationQRCode();
+    }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("byBloodBank/{bloodBankId}")
