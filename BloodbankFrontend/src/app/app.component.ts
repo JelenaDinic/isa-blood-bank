@@ -11,15 +11,17 @@ export class AppComponent {
   title = 'BloodbankFrontend';
   loggedUserJwt = localStorage.getItem('token');
   loggedUserRole = localStorage.getItem('loggedUserRole');
+  loggedUserId = localStorage.getItem('loggedUserId')
 
   constructor(private router: Router, public store: StoreService) {
   }
 
   onLogout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('loggedUserRole')
+    localStorage.removeItem('loggedUserId')
     this.store.setLoginStatus(0);
-    // this.router.navigate(['/home']);
-    console.log(localStorage.getItem('token'))
-    location.reload();
+    this.router.navigate(['/login-user']);
+    location.reload()
   }
 }

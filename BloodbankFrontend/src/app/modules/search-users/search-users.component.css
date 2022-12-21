@@ -56,3 +56,10 @@ a {
     background-color: firebrick;
     color: white;
 }
+.show-btn {
+    background-color: cadetblue;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
