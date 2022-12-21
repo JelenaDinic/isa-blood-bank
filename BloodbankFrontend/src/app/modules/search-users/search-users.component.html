@@ -34,6 +34,7 @@
                <li class="list-group-item"><i class="fa fa-calendar float-right"></i>DoB: {{user?.dob}}</li>
                <li class="list-group-item"><i class="fa fa-venus-mars float-right"></i>Gender: {{user?.gender}}</li>
                <li *ngIf="user.bloodBankName != null" class="list-group-item"><i class="fa fa-stethoscope float-right"></i>Works in: {{user?.bloodBankName}}</li>
+               <li *ngIf="user.role === 'USER'" class="list-group-item"><div><i class="fa fa-tint float-right"></i><button class = "show-btn" (click)="showAppointments(user.id)">Show appointments</button></div></li>
                <!-- <li *ngIf="user.bloodType != null" class="list-group-item"><i class="fa fa-tint float-right"></i>BloodType: {{user?.bloodType}}</li> -->
             </ul>
          </div>

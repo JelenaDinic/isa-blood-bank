@@ -6,6 +6,7 @@ import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.BloodDonorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +26,22 @@ public class BloodDonorController {
         this.bloodDonorService = bloodDonorService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<BloodDonorForm>> getAll() {
         List<BloodDonorForm> bloodDonorForm = bloodDonorService.findAll();
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodDonorCreationDTO bloodDonorCreationDTO, BindingResult bindingResult) {
 
@@ -48,8 +54,6 @@ public class BloodDonorController {
             return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
         try {
-//            service.create(userCreationDTO);
-//            return new ResponseEntity<>(HttpStatus.CREATED);
             BloodDonorForm bloodDonorForm = bloodDonorService.create(bloodDonorCreationDTO);
             return new ResponseEntity<>(bloodDonorForm, HttpStatus.CREATED);
         }

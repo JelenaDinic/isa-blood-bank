@@ -12,12 +12,10 @@ import com.isa.BloodBank.service.BloodSupplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -37,7 +35,8 @@ public class AppointmentReportController {
         this.appointmentService = appointmentService;
         this.bloodSupplyService = bloodSupplyService;
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody AppointmentReportCreationDTO appointmentReportDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){

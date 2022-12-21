@@ -54,7 +54,8 @@ public class RegisteredUserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping(path = "/allUsers")
     public ResponseEntity<List<UserDisplayDTO>> findAllUsers(Pageable page) {
         ArrayList<UserDisplayDTO> userDisplayDTOs = (ArrayList<UserDisplayDTO>) service.findAllUsers(page);
@@ -63,7 +64,7 @@ public class RegisteredUserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping(path = "/searchUsers")
     public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
         List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
@@ -81,6 +82,8 @@ public class RegisteredUserController {
         service.update(userProfileDTO);
         return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping(path="/{id}")
     public RegisteredUser getById(@PathVariable("id") int id){
         return service.findById(id);

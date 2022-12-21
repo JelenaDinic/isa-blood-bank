@@ -5,23 +5,23 @@
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
-       <ul class="navbar-nav mr-auto">
+       <ul class="navbar-nav mr-auto" >
         <li *ngIf="loggedUserJwt === null" class="nav-item active">
           <a class="nav-link" routerLink="/login-user">Login</a>
        </li>
        <li *ngIf="loggedUserJwt !== null" class="nav-item active"(click)="onLogout()">
         <a class="nav-link" routerLink="/login-user">Logout</a>
      </li>
-          <li class="nav-item active">
+          <li *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'" class="nav-item active">
              <a class="nav-link" routerLink="/search-users">Search users</a>
           </li>
-          <li class="nav-item active">
+          <li *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'" class="nav-item active">
             <a class="nav-link" routerLink="/blood-bank-center">Update BloodBank</a>
          </li>
-         <li class="nav-item active">
+         <li *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'" class="nav-item active">
             <a class="nav-link" routerLink="/register-blood-bank">Register BloodBank</a>
           </li>
-          <li  class="nav-item active">
+          <li  *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'" class="nav-item active">
             <a class="nav-link" routerLink="/register-staff">Register Staff</a>
           </li>
           <li class="nav-item active">
@@ -30,14 +30,11 @@
           <li *ngIf="loggedUserRole === 'ROLE_STAFF'" class="nav-item active">
             <a class="nav-link" routerLink="/staff-profile">Profile</a>
           </li>
-          <li class="nav-item active">
+          <li *ngIf="loggedUserRole === 'ROLE_USER'" class="nav-item active">
             <a class="nav-link" routerLink="/blood-donor-form">Register for blood donor</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" routerLink="/edit-user-profile">User profile</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" routerLink="/appointments">Appointments</a>
+          <li *ngIf="loggedUserRole === 'ROLE_USER'" class="nav-item active">
+            <a class="nav-link" routerLink="/edit-user-profile">Profile</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" routerLink="/register-user">Sign up</a>

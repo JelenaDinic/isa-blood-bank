@@ -28,7 +28,8 @@ public class AppointmentController {
         this.service = service;
         this.userService = registeredUserService;
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping("/byUser/{id}")
     public ResponseEntity<List<AppointmentDTO>> getAll(@PathVariable int id) {
         List<Appointment> appointments = service.findAllByUserId(id);
@@ -40,6 +41,8 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @PostMapping("/penalty")
     public void addPenalty(@RequestBody AppointmentDTO appointmentDTO) {
         userService.addPenalty(appointmentDTO.getUserId());
