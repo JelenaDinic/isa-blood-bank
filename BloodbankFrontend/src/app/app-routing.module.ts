@@ -16,6 +16,7 @@ import { Guard } from './modules/guard/guard';
 import { SysadminRegistrationComponent } from './modules/sysadmin-registration/sysadmin-registration.component';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-change/sysadmin-password-change.component';
+import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'forbidden', component: ForbiddenComponent},
   { path: 'register-sysadmin', component: SysadminRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
   { path: 'password-change', component: SysadminPasswordChangeComponent},
+  { path: 'complaints-display', component: ComplaintsDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
 ];
 
 @NgModule({

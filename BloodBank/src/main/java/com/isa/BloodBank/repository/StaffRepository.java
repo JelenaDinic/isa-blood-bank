@@ -10,4 +10,6 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
     Staff findStaffById(int id);
 
     Page<Staff> findAll(Pageable pageable);
+
+    Staff findByEmail(String email);
 }

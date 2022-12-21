@@ -6,6 +6,7 @@ import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.BloodDonorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,9 @@ public class BloodDonorController {
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);

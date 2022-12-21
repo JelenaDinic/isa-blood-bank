@@ -29,6 +29,8 @@ public class AppointmentController {
         this.userService = registeredUserService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/byUser/{id}")
     public ResponseEntity<List<AppointmentDTO>> getAll(@PathVariable int id) {
         List<Appointment> appointments = service.findAllByUserId(id);
