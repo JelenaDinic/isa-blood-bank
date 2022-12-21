@@ -38,6 +38,9 @@ import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { TokenInterceptor } from './modules/interceptor/TokenInterceptor';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { SysadminRegistrationComponent } from './modules/sysadmin-registration/sysadmin-registration.component';
+import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-change/sysadmin-password-change.component';
+import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -59,7 +62,10 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
     AppointmentsComponent,
     AppointmentCalendarComponent,
     LoginUserComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    SysadminRegistrationComponent,
+    SysadminPasswordChangeComponent,
+    ComplaintsDisplayComponent
   ],
   imports: [
     BrowserModule,

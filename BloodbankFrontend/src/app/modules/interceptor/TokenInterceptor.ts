@@ -5,23 +5,40 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    token : any = localStorage.getItem('token');
+  constructor(private router: Router) {
 
-  constructor(public auth: LoginService) {}
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    if (this.token != null) {
-        request = request.clone({
-        setHeaders: {
-            Authorization: `Bearer ${this.token}`
-        }
-        });
-    }
-    return next.handle(request);
+  }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      if(localStorage.getItem('token') != null) {
+          const clonedRequest = req.clone({
+              headers : req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'))
+          });
+
+          return next.handle(clonedRequest).pipe(
+              tap(
+                  succ => {},
+                  err => {
+                      if(err.status == 401) {
+                          localStorage.removeItem('token');
+                          this.router.navigate(['/login-user']); 
+                      }
+                      else if(err.status == 403) {
+                          this.router.navigate(['/forbidden']);
+                      }
+                  }
+              )
+          )
+      }
+
+      else {
+          return next.handle(req.clone());
+      }
   }
 }

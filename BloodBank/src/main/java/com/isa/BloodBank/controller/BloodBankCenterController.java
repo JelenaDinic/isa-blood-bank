@@ -30,6 +30,9 @@ public class BloodBankCenterController {
     public BloodBankCenterController(BloodBankCenterService bloodBankCenterService) {
         this.bloodBankCenterService = bloodBankCenterService;
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodBankCreationDTO bloodBankCenter, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
@@ -53,6 +56,7 @@ public class BloodBankCenterController {
         return bloodBankCenterService.getById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<BloodBankCenter>> getAll() {
         List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();

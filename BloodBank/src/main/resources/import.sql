@@ -9,7 +9,7 @@ insert into blood_bank_centers (id, average_grade, description, name, address_id
 insert into blood_bank_centers (id, average_grade, description, name, address_id) values (2007, 3.6, 'Ekstra dobra banka brate vjeruj mi', 'Ekstra dobra banka', 2004);
 insert into blood_bank_centers (id, average_grade, description, name, address_id) values (2008, 2.1, 'Najbolja banka krvi u Beogradu', 'Bloody Marry', 2005);
 
-insert into users(id, dob, email, first_name, gender, last_name, password, personal_id, phone_number, role, address_id) values (2009, '1999-05-29', 'stefan@gmail.com', 'Stefan', 'male', 'Tosic', 'stefke', 1593281593284, '0635684284', 2, 2001);
+insert into users(id, dob, email, first_name, gender, last_name, password, personal_id, phone_number, role, address_id) values (2009, '1999-05-29', 'stefantosic32@gmail.com', 'Stefan', 'male', 'Tosic', 'stefke', 1593281593284, '0635684284', 2, 2001);
 insert into users(id, dob, email, first_name, gender, last_name, password, personal_id, phone_number, role, address_id) values (2010, '1997-05-29', 'vanja@gmail.com', 'Vanja', 'female', 'Teodorovic', 'vanjilica', 1693214533184, '0665827284', 2, 2002);
 insert into users(id, dob, email, first_name, gender, last_name, password, personal_id, phone_number, role, address_id) values (2011, '1998-04-04', 'jelena@gmail.com', 'Jelena', 'female', 'Dinic', 'jelena', 2093989533184, '0666327284', 0, 2003);
 insert into users(id, dob, email, first_name, gender, last_name, password, personal_id, phone_number, role, address_id) values (2012,  '1995-05-03', 'dusko@gmail.com', 'Dusko', 'male', 'Radicic', 'dusko', 8653989533542, '0666687484', 1, 2004);
@@ -20,7 +20,7 @@ insert into registered_users (blood_type, profession, profession_info, id, penal
 
 insert into staff (id, blood_bank_center_id) values (2011, 2006);
 
-insert into system_administrators (id) values (2012);
+insert into system_administrators (id, requires_password_change) values (2012, true);
 
 insert into blood_donor_forms (id, date_of_form_filling, has_allergies, has_drank_alcohol, has_skin_problems, has_tattoo, has_unacceptable_pressure, is_epileptic, is_on_period, is_pregnant, is_rested, is_unacceptable_weight, is_under_treatment, is_unhealthy, user_id ) values (2001, '2022-11-12',         false,          false,              false,              false, false,                       false,          false,      false,      false,      false,                  false,              false,          2010);
 
@@ -49,3 +49,7 @@ insert into appointments (id, user_id, date_time, duration, status, blood_bank_c
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2026, 2009, '2022-12-27 15:15:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2001, 2010, '1995-05-03 12:00:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2002, 2010, '1995-05-03 12:15:00', 30, 0, 2006);
+
+insert into complaints (id, text, center_id, staff_id, user_id) values (2040, 'Odvratno osoblje', null, 2011, 2009);
+insert into complaints (id, text, center_id, staff_id, user_id) values (2041, 'Sve je neuredno i neorganizovano', 2006, null, 2009);
+

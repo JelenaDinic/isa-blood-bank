@@ -3,8 +3,10 @@ package com.isa.BloodBank.controller;
 import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.dto.UserDisplayDTO;
 import com.isa.BloodBank.dto.UserProfileDisplayDTO;
-import com.isa.BloodBank.model.RegisteredUser;
+import com.isa.BloodBank.model.*;
+import com.isa.BloodBank.service.EmailSenderService;
 import com.isa.BloodBank.service.RegisteredUserService;
+import com.isa.BloodBank.service.UnregisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,14 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -26,12 +33,18 @@ public class RegisteredUserController {
     @Autowired
     private RegisteredUserService service;
 
+    @Autowired
+    private UnregisteredUserService unregisteredUserService;
+
 
     @GetMapping
     public ResponseEntity<List<RegisteredUser>> getAll() {
         List<RegisteredUser> registeredUsers = service.findAll();
         return new ResponseEntity<>(registeredUsers, HttpStatus.OK);
     }
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody UserCreationDTO userCreationDTO, BindingResult bindingResult) {
@@ -47,13 +60,49 @@ public class RegisteredUserController {
         try {
 //            service.create(userCreationDTO);
 //            return new ResponseEntity<>(HttpStatus.CREATED);
-            RegisteredUser newRegisteredUser = service.create(userCreationDTO);
-            return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
+            //staro
+//            RegisteredUser newRegisteredUser = service.create(userCreationDTO);
+//            return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
+
+            //novo(sa verifikacijom)
+            UnregisteredUser newUser = unregisteredUserService.create(userCreationDTO);
+            emailSenderService.sendSimpleEmail(newUser.getEmail(), "Please verify your email", "http://localhost:8082/api/registered-user/codeVerification/" + newUser.getActivationCode());
+
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/codeVerification/{activationCode}")
+    public ResponseEntity<Boolean> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
+        try {
+            System.out.println(activationCode);
+            UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
+            Person registeredUser = new Person();
+            UserCreationDTO dto = new UserCreationDTO();
+
+            dto.setFirstName(newUser.getFirstName());
+            dto.setLastName(newUser.getLastName());
+            dto.setEmail(newUser.getEmail());
+            dto.setPassword(newUser.getPassword());
+            dto.setRole(newUser.getRole());
+            dto.setDob(newUser.getDob());
+            dto.setPhoneNumber(newUser.getPhoneNumber());
+            dto.setGender(newUser.getGender());
+            dto.setPersonalId(newUser.getPersonalId());
+
+            service.create(dto);
+            unregisteredUserService.delete(newUser);
+
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new Exception("Bad activation");
+        }
+    }
+
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
     @GetMapping(path = "/allUsers")

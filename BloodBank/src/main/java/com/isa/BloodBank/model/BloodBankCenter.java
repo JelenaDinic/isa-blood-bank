@@ -30,6 +30,10 @@ public class BloodBankCenter {
     @JsonIgnore
     private Set<Staff> staff;
 
+    @OneToMany(mappedBy = "center",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Complaint> complaints;
+
     public BloodBankCenter(BloodBankCreationDTO bloodBankCreationDTO) {
         this.name = bloodBankCreationDTO.getName();
         this.description = bloodBankCreationDTO.getDescription();

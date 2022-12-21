@@ -31,6 +31,9 @@ public class RegisteredUser extends Person {
     private String profession;
     private String professionInfo;
     private int penalties;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Complaint> complaints;
 
 
     public RegisteredUser(UserCreationDTO dto){
