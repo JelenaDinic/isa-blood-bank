@@ -75,70 +75,76 @@ public class AppointmentController {
         Appointment appointment = service.findById(dto.getId());
         RegisteredUser user = userRepository.findById(dto.getCustomerId());
         List<Appointment> usersAppointments = new ArrayList<>();
-//        for(CancelledAppointment cancelledAppointment: cancelledAppointmentRepository.findAll()) {
-//            if (cancelledAppointment.getAppointmentId() == appointment.getId() && cancelledAppointment.getUserId() == user.getId()) {
-//                System.out.println("vec ste otkazali ovaj termin");
-//            } else {
-                //dobavi termine koji su bili pre manje od 6 meseci
-                for(Appointment a : service.getAll())
-                {
-                    if(a.getRegisteredUser() != null) {
-                        if (user.getId() == a.getRegisteredUser().getId()) {
+        Boolean alreadyCancelled = false;
+        for (CancelledAppointment cancelledAppointment : cancelledAppointmentRepository.findAll()) {
 
-                            if (a.getDateTime().plusMonths(6).isAfter(LocalDateTime.now())) {
-                                if (a.getStatus() == AppointmentStatus.HAPPENED) {
-                                    //termini koji su bili pre manje od 6 meseci
-                                    usersAppointments.add(a);
-                                }
-                            }
+            if (cancelledAppointment != null) {
+                if (cancelledAppointment.getAppointmentId() == appointment.getId() && cancelledAppointment.getUserId() == user.getId()) {
+                    System.out.println("vec ste otkazali ovaj termin");
+                    alreadyCancelled = true;
+                }
+            }
+        }
+
+
+        //dobavi termine koji su bili pre manje od 6 meseci
+        for (Appointment a : service.getAll()) {
+            if (a.getRegisteredUser() != null) {
+                if (user.getId() == a.getRegisteredUser().getId()) {
+
+                    if (a.getDateTime().plusMonths(6).isAfter(LocalDateTime.now())) {
+                        if (a.getStatus() == AppointmentStatus.HAPPENED) {
+                            //termini koji su bili pre manje od 6 meseci
+                            usersAppointments.add(a);
                         }
                     }
                 }
-                //da li ima popunjenu formu
-                if (user.getBloodDonorForms() != null) {
-                    //slanje mejla za verifikaciju
-                    for (Appointment a : service.getAll()) {
-                        //izaberi termin koji se poslao sa fronta
-                        if (a.getId() == dto.getId()) {
-                            //da li je izabrani termin u buducnosti
-                            if (a.getDateTime().isAfter(LocalDateTime.now())) {
-                                //proverava da li ima termina koji su bili pre manje od 6 meseci
-                                if(usersAppointments.isEmpty()){
+            }
+        }
+        if (alreadyCancelled == false) {
+            //da li ima popunjenu formu
+            if (user.getBloodDonorForms() != null) {
+                //slanje mejla za verifikaciju
+                for (Appointment a : service.getAll()) {
+                    //izaberi termin koji se poslao sa fronta
+                    if (a.getId() == dto.getId()) {
+                        //da li je izabrani termin u buducnosti
+                        if (a.getDateTime().isAfter(LocalDateTime.now())) {
+                            //proverava da li ima termina koji su bili pre manje od 6 meseci
+                            if (usersAppointments.isEmpty()) {
 
-                                        appointment.setActivationQRCode(activationCode);
-                                        appointment.setStatus(AppointmentStatus.PENDING);
-                                        appointment.setRegisteredUser(user);
+                                appointment.setActivationQRCode(activationCode);
+                                appointment.setStatus(AppointmentStatus.PENDING);
+                                appointment.setRegisteredUser(user);
 
-                                        emailSenderService.sendSimpleEmail(user.getEmail(),
-                                                "Please verify your appointment",
-                                                "http://localhost:8082/api/appointment/QRcodeVerification/" + activationCode);
+                                emailSenderService.sendSimpleEmail(user.getEmail(),
+                                        "Please verify your appointment",
+                                        "http://localhost:8082/api/appointment/QRcodeVerification/" + activationCode);
 
-            //                            emailSenderService.sendMailWithAttachment(dto.getUserEmail(),
-            //                                    "Scan this for verification",
-            //                                    "Please verify your appointment", "" +
-            //                                            "\"C:\\Users\\vanja\\Desktop\\isa\\projekat pravi bez logina\\frame.png\"");
-                                        repository.save(appointment);
-                                        System.out.println(appointment.getActivationQRCode());
+                                repository.save(appointment);
+                                System.out.println(appointment.getActivationQRCode());
 
-
-                                    } else {
-                                        appointment.setStatus(AppointmentStatus.FREE);
-
-                                        System.out.println("nije proslo 6 meseci od poslednjeg doniranja");
-                                    }
 
                             } else {
                                 appointment.setStatus(AppointmentStatus.FREE);
-                                System.out.println("termin je prosao");
+
+                                System.out.println("nije proslo 6 meseci od poslednjeg doniranja");
                             }
+
+                        } else {
+                            appointment.setStatus(AppointmentStatus.FREE);
+                            System.out.println("termin je prosao");
                         }
                     }
-                } else{
-                    System.out.println("nemate popunjenu formu");
                 }
-//            }
-//        }
+            } else {
+                System.out.println("nemate popunjenu formu");
+            }
+        }else{
+            System.out.println("ne mozete zakazati termin koji ste jednom otkazali");
+        }
     }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/QRcodeVerification/{activtionQRCode}")
