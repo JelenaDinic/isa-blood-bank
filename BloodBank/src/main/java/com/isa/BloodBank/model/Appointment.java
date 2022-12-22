@@ -32,4 +32,9 @@ public class Appointment {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
+
+    private String activationQRCode;
+    private Boolean isScheduled;
+    private Boolean isCancelled;
+    private Boolean lessThan24hours = false;
 }

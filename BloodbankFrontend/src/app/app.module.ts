@@ -40,6 +40,8 @@ import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { SysadminRegistrationComponent } from './modules/sysadmin-registration/sysadmin-registration.component';
 import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-change/sysadmin-password-change.component';
+import { AppointmentDisplayComponent } from './modules/appointment-display/appointment-display.component';
+import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -63,7 +65,9 @@ import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-cha
     LoginUserComponent,
     ForbiddenComponent,
     SysadminRegistrationComponent,
-    SysadminPasswordChangeComponent
+    SysadminPasswordChangeComponent,
+    AppointmentDisplayComponent,
+    ScheduledAppointmentsComponent
   ],
   imports: [
     BrowserModule,

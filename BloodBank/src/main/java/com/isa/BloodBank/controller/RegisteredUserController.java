@@ -45,8 +45,7 @@ public class RegisteredUserController {
 
     @Autowired
     private EmailSenderService emailSenderService;
-
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Object> create(@Valid @RequestBody UserCreationDTO userCreationDTO, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
@@ -60,9 +59,6 @@ public class RegisteredUserController {
         try {
 //            service.create(userCreationDTO);
 //            return new ResponseEntity<>(HttpStatus.CREATED);
-            //staro
-//            RegisteredUser newRegisteredUser = service.create(userCreationDTO);
-//            return new ResponseEntity<>(newRegisteredUser, HttpStatus.CREATED);
 
             //novo(sa verifikacijom)
             UnregisteredUser newUser = unregisteredUserService.create(userCreationDTO);
@@ -76,7 +72,7 @@ public class RegisteredUserController {
     }
 
     @GetMapping("/codeVerification/{activationCode}")
-    public ResponseEntity<Boolean> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
+    public ResponseEntity<String> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
         try {
             System.out.println(activationCode);
             UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
@@ -96,7 +92,7 @@ public class RegisteredUserController {
             service.create(dto);
             unregisteredUserService.delete(newUser);
 
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<>("Email successfully verified", HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception("Bad activation");
         }

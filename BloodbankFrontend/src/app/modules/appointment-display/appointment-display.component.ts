@@ -1,0 +1,53 @@
+import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
+import { AppointmentDisplay } from '../model/appointment-display.model';
+import { Appointment } from '../model/appointment.model';
+import { AppointmentService } from '../services/appointment.service';
+
+@Component({
+  selector: 'app-appointment-display',
+  templateUrl: './appointment-display.component.html',
+  styleUrls: ['./appointment-display.component.css']
+})
+export class AppointmentDisplayComponent {
+
+  public dataSource = new MatTableDataSource<AppointmentDisplay>();
+  // public isScheduled: string = 'true';
+  // public lessThan24h: string = '';
+  public displayedColumns = ['id', 'dateTime', 'duration', 'status', 'scheduleButton'];
+  public appointments: AppointmentDisplay[] = [];
+  public patientId!: number;
+  clickedRows = new Set<Appointment>();
+  row = new Appointment();
+  loggedUserId = Number(localStorage.getItem('loggedUserId'))
+  // public appointmentDTO!: ScheduleAppointmentDTO;
+
+  constructor(
+    private appointmentService: AppointmentService) { }
+
+    ngOnInit(): void {
+        this.appointmentService.getAll().subscribe(res => {
+          this.appointments = res;
+          this.dataSource.data = this.appointments;
+        })
+      }
+      
+
+    schedule(appointmentId: any){
+      console.log(appointmentId);
+      console.log(Number(localStorage.getItem('loggedUserId')));
+
+      let appointmentDTO = new ScheduleAppointmentDTO();
+
+      appointmentDTO.customerId = Number(localStorage.getItem('loggedUserId'));
+
+      appointmentDTO.id = appointmentId;
+
+      this.appointmentService.scheduleAppointment(appointmentDTO).subscribe(res => {
+        })
+  
+    }
+}
+
+

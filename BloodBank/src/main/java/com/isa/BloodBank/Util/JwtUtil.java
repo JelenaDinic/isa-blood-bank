@@ -52,8 +52,9 @@ public class JwtUtil {
 
         SystemAdmin systemAdmin = systemAdminRepository.findByEmail(email);
 
-
         Map<String, Object> claims = new HashMap<>();
+        UserDetails test = userDetailsService.loadUserByUsername(email);
+        userDetailsService.loadUserByUsername(email).getAuthorities();
         claims.put("role", userDetailsService.loadUserByUsername(email).getAuthorities().toArray()[1]);
         claims.put("id", userDetailsService.loadUserByUsername(email).getAuthorities().toArray()[0]);
 

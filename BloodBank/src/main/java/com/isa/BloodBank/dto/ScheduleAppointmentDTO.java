@@ -17,25 +17,11 @@ import java.time.LocalDateTime;
 @Setter
 public class ScheduleAppointmentDTO {
     private int id;
-    private LocalDateTime dateTime;
-    private int duration;
-    private AppointmentStatus status;
-    private RegisteredUser user;
-    private BloodBankCenter bloodBankCenter;
-
-    public boolean isScheduled;
-    public String activationQRCode;
+    private int customerId;
 
     public ScheduleAppointmentDTO(Appointment appointment) {
         this.setId(appointment.getId());
-        this.setDateTime(appointment.getDateTime());
-        this.setDuration(appointment.getDuration());
-        this.setStatus(appointment.getStatus());
-        {
-            this.setUser(appointment.getRegisteredUser());
-            this.setBloodBankCenter(appointment.getBloodBankCenter());
+        this.setCustomerId(appointment.getRegisteredUser().getId());
 
-        }
-        this.isScheduled = false;
     }
 }

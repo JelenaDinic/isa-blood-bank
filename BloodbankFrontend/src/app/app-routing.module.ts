@@ -16,6 +16,9 @@ import { Guard } from './modules/guard/guard';
 import { SysadminRegistrationComponent } from './modules/sysadmin-registration/sysadmin-registration.component';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-change/sysadmin-password-change.component';
+import { AppointmentDisplayComponent } from './modules/appointment-display/appointment-display.component';
+import { ScheduleAppointmentDTO } from './modules/dto/scheduleAppointmentDTO';
+import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 
 
 const routes: Routes = [
@@ -29,11 +32,13 @@ const routes: Routes = [
   { path: 'blood-donor-form', component: BloodDonorFormComponent},
   { path: 'edit-user-profile', component: EditUserProfileComponent, canActivate:[Guard]},
   { path: 'appointments', component: AppointmentsComponent},
+  { path: 'appointments-display', component: AppointmentDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}},
   { path: 'login-user', component: LoginUserComponent},
   { path: 'appointments-calendar', component: AppointmentCalendarComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'forbidden', component: ForbiddenComponent},
   { path: 'register-sysadmin', component: SysadminRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
   { path: 'password-change', component: SysadminPasswordChangeComponent},
+  { path : 'scheduled-appointments', component: ScheduledAppointmentsComponent}
 ];
 
 @NgModule({

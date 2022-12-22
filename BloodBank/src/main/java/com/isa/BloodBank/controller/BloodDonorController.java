@@ -6,6 +6,7 @@ import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.BloodDonorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://locahost:4200")
 @RequestMapping(path="api/blood-donor")
 public class BloodDonorController {
 
@@ -25,17 +27,20 @@ public class BloodDonorController {
         this.bloodDonorService = bloodDonorService;
     }
 
+    @CrossOrigin(origins = "http://locahost:4200")
     @GetMapping
     public ResponseEntity<List<BloodDonorForm>> getAll() {
         List<BloodDonorForm> bloodDonorForm = bloodDonorService.findAll();
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
+    @CrossOrigin(origins = "http://locahost:4200")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
     }
 
+    @CrossOrigin(origins = "http://locahost:4200")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodDonorCreationDTO bloodDonorCreationDTO, BindingResult bindingResult) {
 

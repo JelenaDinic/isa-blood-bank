@@ -36,8 +36,14 @@
           <li class="nav-item active">
             <a class="nav-link" routerLink="/edit-user-profile">User profile</a>
           </li>
-          <li class="nav-item active">
+          <li *ngIf="loggedUserRole === 'ROLE_USER'" class="nav-item active">
             <a class="nav-link" routerLink="/appointments">Appointments</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/appointments-display">Schedule appointment</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/scheduled-appointments">View scheduled appointments</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" routerLink="/register-sysadmin">Register sysadmin</a>
