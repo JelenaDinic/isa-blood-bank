@@ -1,5 +1,6 @@
 package com.isa.BloodBank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.isa.BloodBank.dto.StaffCreationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,10 @@ public class Staff extends Person{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
+
+    @OneToMany(mappedBy = "staffMember",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Complaint> complaints;
 
     public Staff(StaffCreationDTO dto) {
         this.setFirstName(dto.getFirstName());

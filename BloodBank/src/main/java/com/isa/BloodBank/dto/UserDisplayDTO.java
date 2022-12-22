@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UserDisplayDTO {
+    private int id;
     private String name;
     private String email;
     private String role;
@@ -75,6 +76,7 @@ public class UserDisplayDTO {
     }
 
     public UserDisplayDTO(Person person) {
+        this.setId(person.getId());
         this.setName(person.getFirstName() + " " + person.getLastName());
         this.setAddress(person.getAddress().toString());
         this.setDob(person.getDob().toString());

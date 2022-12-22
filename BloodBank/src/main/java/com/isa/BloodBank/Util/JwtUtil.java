@@ -1,7 +1,9 @@
 package com.isa.BloodBank.Util;
 
 import com.isa.BloodBank.model.Person;
+import com.isa.BloodBank.model.Staff;
 import com.isa.BloodBank.model.SystemAdmin;
+import com.isa.BloodBank.repository.StaffRepository;
 import com.isa.BloodBank.repository.SystemAdminRepository;
 import com.isa.BloodBank.repository.UserRepository;
 import com.isa.BloodBank.service.CustomUserDetailsService;
@@ -28,6 +30,9 @@ public class JwtUtil {
     @Autowired
     private SystemAdminRepository systemAdminRepository;
 
+    @Autowired
+    private StaffRepository staffRepository;
+
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -51,6 +56,7 @@ public class JwtUtil {
     public String generateToken(String email) {
 
         SystemAdmin systemAdmin = systemAdminRepository.findByEmail(email);
+        Staff staff = staffRepository.findByEmail(email);
 
         Map<String, Object> claims = new HashMap<>();
         UserDetails test = userDetailsService.loadUserByUsername(email);
@@ -63,6 +69,10 @@ public class JwtUtil {
                 claims.put("requiresPasswordChange", "true");
             else
                 claims.put("requiresPasswordChange", "false");
+        }
+
+        if(staff != null) {
+            claims.put("bloodBankCenterId", staff.getBloodBankCenter().getId());
         }
 
         return createToken(claims, email);

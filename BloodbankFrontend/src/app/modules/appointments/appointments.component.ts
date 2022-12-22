@@ -24,7 +24,11 @@ export class AppointmentsComponent implements OnInit {
   public userLastName: string = "";
   public startedAppointmentId: number = 0;
   public equipmentArr: Equipment[] = [];
+<<<<<<< HEAD
   public loggedUserRole: String | null = localStorage.getItem('loggedUserRole');
+=======
+  public userId!: number;
+>>>>>>> develop
 
   constructor(
     private appointmentService: AppointmentService,
@@ -35,12 +39,13 @@ export class AppointmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isPressed = false;
-    this.bloodDonorService.checkIfAllowed(2010).subscribe(res => {
+    this.userId = parseInt(localStorage.getItem("selectedUser")!)
+    this.bloodDonorService.checkIfAllowed(this.userId).subscribe(res => {
       if (res != null)
         this.isAllowed = res;
-      this.appointmentService.findByUserId(2010).subscribe(res => {
+      this.appointmentService.findByUserId(this.userId).subscribe(res => {
         this.appointments = res;
-        this.startedAppointmentId = res[0].id
+
       })
     })
   }
@@ -49,7 +54,7 @@ export class AppointmentsComponent implements OnInit {
     this.userService.getById(appointment.userId).subscribe(res => {
       this.userFirstName = res.firstName;
       this.userLastName = res.lastName;
-
+      this.startedAppointmentId = appointment.id
     })
   }
   addPenalty(appointment: Appointment): void {

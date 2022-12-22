@@ -99,7 +99,8 @@ public class RegisteredUserController {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
     @GetMapping(path = "/allUsers")
     public ResponseEntity<List<UserDisplayDTO>> findAllUsers(Pageable page) {
         ArrayList<UserDisplayDTO> userDisplayDTOs = (ArrayList<UserDisplayDTO>) service.findAllUsers(page);
@@ -108,7 +109,7 @@ public class RegisteredUserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEMADMIN', 'ROLE_STAFF')")
     @GetMapping(path = "/searchUsers")
     public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
         List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
@@ -126,6 +127,8 @@ public class RegisteredUserController {
         service.update(userProfileDTO);
         return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping(path="/{id}")
     public RegisteredUser getById(@PathVariable("id") int id){
         return service.findById(id);

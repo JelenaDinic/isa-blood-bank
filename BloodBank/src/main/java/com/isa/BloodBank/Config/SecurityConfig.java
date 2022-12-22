@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().and().authorizeRequests().antMatchers("/api/registered-user/codeVerification/**")
                 .permitAll().and().authorizeRequests().antMatchers("/api/blood-bank-center/searchBanks")
                 .permitAll().and().authorizeRequests().antMatchers("/api/appointment/QRcodeVerification/**")
+                .permitAll().and().authorizeRequests().antMatchers("/api/blood-bank-center/all-bloodbankDTOs")
                 .permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -36,8 +36,7 @@ export class LoginUserComponent implements OnInit {
       localStorage.setItem('loggedUserId', this.loggedUserId);
       console.log(this.loggedUserId);
 
-      if(this.role == 'ROLE_STAFF')
-      window.location.href = '/staff-profile';
+      window.location.href = '/home-page'
 
     },
     (error) => {

@@ -24,8 +24,8 @@
             <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
             <td mat-cell *matCellDef="let appointment" class="cell-center">
                 <div *ngIf="isAllowed && appointment.status == 'Possible blood donor'">
-                    <button class="start-btn" mat-raised-button (click)="start(appointment)"> Start appointment</button>
-                    <button class="non-btn" mat-raised-button (click)="addPenalty(appointment)"> Non appearance</button>
+                    <button style="margin: 5px 0px; width: 150px;" class="start-btn" mat-raised-button (click)="start(appointment)"> Start appointment</button>
+                    <button style="margin: 5px 0px; width: 150px;" class="non-btn" mat-raised-button (click)="addPenalty(appointment)"> Non appearance</button>
                 </div>
             </td>
         </ng-container>
@@ -60,9 +60,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Amount of blood in liters (l)</label>
+                                <label>Amount of blood in mililiters (ml)</label>
                                 <input [(ngModel)]="appointmentReport.amount" class="form-control form-control-lg"
-                                    type="number" name="amount">
+                                    type="number" name="amount" max="600" min="0">
                             </div>
                             <div class="form-group">
                                 <label>Hand</label>

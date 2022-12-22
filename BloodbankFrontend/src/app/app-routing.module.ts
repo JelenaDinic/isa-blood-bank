@@ -19,6 +19,7 @@ import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-cha
 import { AppointmentDisplayComponent } from './modules/appointment-display/appointment-display.component';
 import { ScheduleAppointmentDTO } from './modules/dto/scheduleAppointmentDTO';
 import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
+import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'forbidden', component: ForbiddenComponent},
   { path: 'register-sysadmin', component: SysadminRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
   { path: 'password-change', component: SysadminPasswordChangeComponent},
-  { path : 'scheduled-appointments', component: ScheduledAppointmentsComponent}
+  { path : 'scheduled-appointments', component: ScheduledAppointmentsComponent},
+  { path: 'complaints-display', component: ComplaintsDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
 ];
 
 @NgModule({

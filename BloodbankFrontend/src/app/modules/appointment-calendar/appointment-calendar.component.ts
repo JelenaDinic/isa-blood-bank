@@ -6,14 +6,8 @@ import {
   TemplateRef,
 } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import {
@@ -60,22 +54,6 @@ export class AppointmentCalendarComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   } | undefined;
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-      },
-    },
-  ];
 
   refresh = new Subject<void>();
 
@@ -132,11 +110,19 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appointmentService.findByBloodBank(2006).subscribe(
+
+    let token = localStorage.getItem('token');
+    let bloodBankCenterId;
+    if(token != null) {
+      let decodedJWT = JSON.parse(window.atob(token.split(".")[1]))
+      bloodBankCenterId = decodedJWT.bloodBankCenterId;
+    }
+
+    this.appointmentService.findByBloodBank(bloodBankCenterId).subscribe(
       (response: CalendarEvent[]) => {
         response.forEach(element => {
           element.start = new Date(element.start);
-          element.end = new Date(element.start);
+          element.end = new Date(element.start.getTime() + 30*60000);
         });
         this.events = response;
         console.log(this.events)

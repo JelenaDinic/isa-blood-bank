@@ -27,20 +27,24 @@ public class BloodDonorController {
         this.bloodDonorService = bloodDonorService;
     }
 
-    @CrossOrigin(origins = "http://locahost:4200")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<BloodDonorForm>> getAll() {
         List<BloodDonorForm> bloodDonorForm = bloodDonorService.findAll();
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
-    @CrossOrigin(origins = "http://locahost:4200")
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
     }
 
-    @CrossOrigin(origins = "http://locahost:4200")
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodDonorCreationDTO bloodDonorCreationDTO, BindingResult bindingResult) {
 
@@ -53,8 +57,6 @@ public class BloodDonorController {
             return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
         try {
-//            service.create(userCreationDTO);
-//            return new ResponseEntity<>(HttpStatus.CREATED);
             BloodDonorForm bloodDonorForm = bloodDonorService.create(bloodDonorCreationDTO);
             return new ResponseEntity<>(bloodDonorForm, HttpStatus.CREATED);
         }

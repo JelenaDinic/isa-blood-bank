@@ -33,6 +33,7 @@ export class SysadminRegistrationComponent{
       this.sysadminService.create(this.sysadmin).subscribe(res => 
       {
         this.router.navigate(['/']);
+        this.toastr.success("New system admin " + this.sysadmin.firstName + " successfully registered!");
       }, (error) => {
         console.log(error)
         this.errorMessage = error;

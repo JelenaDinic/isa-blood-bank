@@ -60,6 +60,8 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@Valid @PathVariable int id, @RequestBody StaffCreationDTO staffDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){

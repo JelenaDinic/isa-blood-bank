@@ -8,6 +8,9 @@ import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.repository.AppointmentRepository;
 import com.isa.BloodBank.repository.CancelledAppointmentRepository;
 import com.isa.BloodBank.repository.RegisteredUserRepository;
+import com.isa.BloodBank.model.Appointment;
+import com.isa.BloodBank.model.AppointmentStatus;
+import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.AppointmentService;
 import com.isa.BloodBank.service.EmailSenderService;
 import com.isa.BloodBank.service.RegisteredUserService;
@@ -46,7 +49,9 @@ public class AppointmentController {
         this.service = service;
         this.userService = registeredUserService;
     }
-
+    
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/byUser/{id}")
     public ResponseEntity<List<AppointmentDTO>> getAll(@PathVariable int id) {
         List<Appointment> appointments = service.findAllByUserId(id);
@@ -59,7 +64,8 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PostMapping("/penalty")
     public void addPenalty(@RequestBody AppointmentDTO appointmentDTO) {
         userService.addPenalty(appointmentDTO.getUserId());
@@ -210,8 +216,10 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
         List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
         for(Appointment appointment : appointments) {
-            AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
-            appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getIsCancelled() == false) {
+                AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
+                appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
+            }
         }
 
         return new ResponseEntity<>(appointmentCalendarEventDTOs, HttpStatus.OK);
