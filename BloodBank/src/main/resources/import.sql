@@ -40,15 +40,19 @@ insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values
 insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (7, 2006, 50, 6);
 insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (8, 2006, 50, 7);
 
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2020, 2010, '1995-05-03 12:00:00', 30, 0, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2021, 2010, '1995-05-03 12:15:00', 30, 0, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2022, 2010, '2022-12-20 8:00:00', 30, 0, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2023, 2009, '2022-12-20 11:00:00', 30, 0, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2024, 2009, '2022-12-16 13:00:00', 30, 0, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2025, 2010, '2022-12-19 9:30:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2020, 2010, '1995-05-03 12:00:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2021, 2010, '1995-05-03 12:15:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2022, 2010, '2022-12-20 8:00:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2023, 2009, '2022-12-20 11:00:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2024, 2009, '2022-12-16 13:00:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2025, 2010, '2022-12-19 9:30:00', 30, 1, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2026, 2009, '2022-12-27 15:15:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2027, 2009, '2022-12-29 14:15:00', 30, 2, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2028, 2009, '2023-01-04 14:15:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2029, 2010, '2023-01-03 12:30:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2001, 2010, '1995-05-03 12:00:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2002, 2010, '1995-05-03 12:15:00', 30, 0, 2006);
+
 
 insert into complaints (id, text, center_id, staff_id, user_id) values (2040, 'Odvratno osoblje', null, 2011, 2009);
 insert into complaints (id, text, center_id, staff_id, user_id) values (2041, 'Sve je neuredno i neorganizovano', 2006, null, 2009);
