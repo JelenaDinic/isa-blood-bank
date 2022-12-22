@@ -132,7 +132,7 @@ public class RegisteredUserController {
         return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
     }
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping(path="/{id}")
     public RegisteredUser getById(@PathVariable("id") int id){
         return service.findById(id);

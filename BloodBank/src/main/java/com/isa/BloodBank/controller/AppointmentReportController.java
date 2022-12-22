@@ -36,7 +36,7 @@ public class AppointmentReportController {
         this.bloodSupplyService = bloodSupplyService;
     }
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody AppointmentReportCreationDTO appointmentReportDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){

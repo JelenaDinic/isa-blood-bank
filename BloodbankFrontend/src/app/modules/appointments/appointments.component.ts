@@ -41,7 +41,7 @@ export class AppointmentsComponent implements OnInit {
         this.isAllowed = res;
       this.appointmentService.findByUserId(this.userId).subscribe(res => {
         this.appointments = res;
-        this.startedAppointmentId = res[0].id
+
       })
     })
   }
@@ -50,7 +50,7 @@ export class AppointmentsComponent implements OnInit {
     this.userService.getById(appointment.userId).subscribe(res => {
       this.userFirstName = res.firstName;
       this.userLastName = res.lastName;
-
+      this.startedAppointmentId = appointment.id
     })
   }
   addPenalty(appointment: Appointment): void {

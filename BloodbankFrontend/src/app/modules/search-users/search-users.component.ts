@@ -17,6 +17,7 @@ export class SearchUsersComponent implements OnInit {
   cardsCount: number = 2;
   count: number = 0;
   searchTerm = '';
+  loggedUserRole = localStorage.getItem('loggedUserRole');
 
   constructor(private router: Router, private userService: UserService) { }
 

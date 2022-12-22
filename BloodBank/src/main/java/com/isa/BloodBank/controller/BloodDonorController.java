@@ -35,7 +35,7 @@ public class BloodDonorController {
     }
     
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
