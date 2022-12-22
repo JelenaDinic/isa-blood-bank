@@ -21,7 +21,7 @@ public class EquipmentController {
         this.service = service;
     }
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PutMapping("/updateQuantity")
     public ResponseEntity<Object> update(@RequestBody Equipment[] equipmentArr) {
         try {

@@ -60,9 +60,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Amount of blood in liters (l)</label>
+                                <label>Amount of blood in mililiters (ml)</label>
                                 <input [(ngModel)]="appointmentReport.amount" class="form-control form-control-lg"
-                                    type="number" name="amount">
+                                    type="number" name="amount" max="600" min="0">
                             </div>
                             <div class="form-group">
                                 <label>Hand</label>
