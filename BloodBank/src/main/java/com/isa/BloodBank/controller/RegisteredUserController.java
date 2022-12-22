@@ -88,6 +88,10 @@ public class RegisteredUserController {
             dto.setPhoneNumber(newUser.getPhoneNumber());
             dto.setGender(newUser.getGender());
             dto.setPersonalId(newUser.getPersonalId());
+            dto.setCity(newUser.getAddress().getCity());
+            dto.setCountry(newUser.getAddress().getCountry());
+            dto.setStreet(newUser.getAddress().getStreet());
+            dto.setNumber(newUser.getAddress().getNumber());
 
             service.create(dto);
             unregisteredUserService.delete(newUser);

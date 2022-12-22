@@ -57,8 +57,10 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByUserId(id);
         List<AppointmentDTO> appointmentDTOS = new ArrayList<AppointmentDTO>();
         for(Appointment a : appointments) {
-            AppointmentDTO aDTO = new AppointmentDTO(a);
-            appointmentDTOS.add(aDTO);
+            if(a.getStatus() != AppointmentStatus.CANCELLED) {
+                AppointmentDTO aDTO = new AppointmentDTO(a);
+                appointmentDTOS.add(aDTO);
+            }
         }
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);

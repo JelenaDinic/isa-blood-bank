@@ -40,6 +40,9 @@ public class AppointmentReport {
             case "0":
                 this.setBloodType(BloodType.AB_POS);
                 break;
+            default:
+                this.setBloodType(BloodType.A_POS);
+                break;
 
         }
         this.setBloodAmount(dto.getAmount());
