@@ -1,0 +1,18 @@
+<div class="container col-md-4">
+  <h1>Login user</h1>
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="Login()">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" [(ngModel)]="loginUser.email"/>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginUser.password"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

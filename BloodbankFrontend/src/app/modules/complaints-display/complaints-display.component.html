@@ -1,0 +1,42 @@
+<div
+    class="container h-100" class="container">
+
+    <div *ngIf="isReplyClicked" class="reply-form">
+        <h2 style="text-align: left; font-size: 25px">Reply to complaint</h2>
+        <p style="text-align: left">Complaint by: {{complaintForReply.user}}</p>
+        <p style="text-align: left">Complaint regarding: {{complaintForReply.staffMember}} {{complaintForReply.center}}</p>
+        <p style="text-align: left">Complaint text: {{complaintForReply.text}}</p>
+        <input type="text" class="reply-input" [(ngModel)] = "replyText">
+        <br>
+        <button class="start-btn" mat-raised-button (click)="reply()"> Send reply</button>
+    </div>
+
+    <div class="table-header">
+        <h1 class="table-title">Complaints</h1>
+    </div>
+    <table mat-table [dataSource]="complaints">
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> User </th>
+            <td mat-cell *matCellDef="let complaint" class="cell-center">{{complaint.user}}</td>
+        </ng-container>
+        <ng-container matColumnDef="text">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Text </th>
+            <td mat-cell *matCellDef="let complaint" class="cell-center">{{complaint.text}}</td>
+        </ng-container>
+        <ng-container matColumnDef="regarding">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Regarding </th>
+            <td mat-cell *matCellDef="let complaint" class="cell-center">{{complaint.staffMember}} {{complaint.center}}</td>
+        </ng-container>
+        <ng-container matColumnDef="replyButton">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
+            <td mat-cell *matCellDef="let complaint" class="cell-center">
+                <div>
+                    <button mat-raised-button (click)="openReplyDialogue(complaint)">Reply</button>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  

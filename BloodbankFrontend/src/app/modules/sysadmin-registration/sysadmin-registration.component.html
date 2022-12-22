@@ -1,0 +1,91 @@
+<div style="background-image: url('../../../assets/bg5.webp'); max-width: 100% ;background-size: cover;" class="container h-100">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+            <div class="d-table-cell align-middle">
+
+                <div class="text-center mt-4">
+                    <h1 class="h2">Register a new system admin</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-sm-4">
+                            <form>
+                                <div class="form-group">
+                                    <label>Firstname</label>
+                                    <input [(ngModel)]="sysadmin.firstName" class="form-control form-control-lg" type="text" name="firstname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lastname</label>
+                                    <input [(ngModel)]="sysadmin.lastName" class="form-control form-control-lg" type="text" name="lastname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input [(ngModel)]="sysadmin.email" class="form-control form-control-lg" type="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input [(ngModel)]="sysadmin.password" class="form-control form-control-lg" type="password" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Street</label>
+                                    <input [(ngModel)]="sysadmin.street" class="form-control form-control-lg" type="text" name="street">
+                                </div>
+                                <div class="form-group">
+                                    <label>Number</label>
+                                    <input [(ngModel)]="sysadmin.number" class="form-control form-control-lg" type="text" name="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input [(ngModel)]="sysadmin.city" class="form-control form-control-lg" type="text" name="city">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select  [(ngModel)]="sysadmin.country" class="form-control form-control-lg" name="country">
+                                        <option value="Serbia">
+                                            Serbia
+                                        </option>
+                                        <option value="BiH">
+                                            BiH
+                                        </option>
+                                        <option value="Montenegro">
+                                            Montenegro
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone number</label>
+                                    <input [(ngModel)]="sysadmin.phoneNumber" class="form-control form-control-lg" type="text" name="phoneNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of birth </label>
+                                    <input [(ngModel)]="sysadmin.dob" class="form-control form-control-lg" type="date" name="dob" max="{{getDate()}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Personal id</label>
+                                    <input [(ngModel)]="sysadmin.personalId" class="form-control form-control-lg" type="text" name="personalId">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select  [(ngModel)]="sysadmin.gender" class="form-control form-control-lg" name="gender">
+                                        <option value="Male">
+                                            Male
+                                        </option>
+                                        <option value="Female">
+                                            Female
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button type="submit" class="btn btn-lg btn-primary" (click)="registerSysadmin()">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
