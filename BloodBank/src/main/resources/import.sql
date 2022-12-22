@@ -20,7 +20,7 @@ insert into registered_users (blood_type, profession, profession_info, id, penal
 
 insert into staff (id, blood_bank_center_id) values (2011, 2006);
 
-insert into system_administrators (id, requires_password_change) values (2012, true);
+insert into system_administrators (id, requires_password_change) values (2012, false);
 
 insert into blood_donor_forms (id, date_of_form_filling, has_allergies, has_drank_alcohol, has_skin_problems, has_tattoo, has_unacceptable_pressure, is_epileptic, is_on_period, is_pregnant, is_rested, is_unacceptable_weight, is_under_treatment, is_unhealthy, user_id ) values (2001, '2022-11-12',         false,          false,              false,              false, false,                       false,          false,      false,      false,      false,                  false,              false,          2010);
 

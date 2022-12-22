@@ -32,7 +32,7 @@ public class BloodBankCenterController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_STAFF')")
+    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody BloodBankCreationDTO bloodBankCenter, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
