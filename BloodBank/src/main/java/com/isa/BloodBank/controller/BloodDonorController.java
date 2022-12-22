@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://locahost:4200")
 @RequestMapping(path="api/blood-donor")
 public class BloodDonorController {
 
@@ -33,13 +34,14 @@ public class BloodDonorController {
         return new ResponseEntity<>(bloodDonorForm, HttpStatus.OK);
 
     }
-    
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/check/{id}")
     public boolean checkIfAllowed(@PathVariable int id) {
         return bloodDonorService.checkIfAllowed(id);
     }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_USER')")

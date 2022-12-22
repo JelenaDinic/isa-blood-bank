@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Integer> {
     Page<RegisteredUser> findAll(Pageable pageable);
     RegisteredUser findRegisteredUserById(int id);
+    RegisteredUser findById(int id);
+
+    RegisteredUser findByEmail(String email);
 }

@@ -62,6 +62,7 @@ public class BloodBankCenterController {
         List<BloodBankCenter> bloodBankCenters = bloodBankCenterService.findAll();
         return new ResponseEntity<>(bloodBankCenters, HttpStatus.OK);
     }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all-bloodbankDTOs")
     public ResponseEntity<List<BloodbankDisplayDTO>> getAllDTOs(Pageable page) {
@@ -70,6 +71,7 @@ public class BloodBankCenterController {
 
         return new ResponseEntity<>(bloodBanksDTOs, HttpStatus.OK);
     }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/searchBanks")
     public ResponseEntity<List<BloodbankDisplayDTO>> searchBanks(Pageable page, @RequestParam("searchName") Optional<String> searchName, @RequestParam("searchCity") Optional<String> searchCity, @RequestParam("filterByRating") Optional<Double> filterByRating, @RequestParam("sortByParam") Optional<String> sortByParam, @RequestParam("sortDirection") Optional<String> sortDirection) {

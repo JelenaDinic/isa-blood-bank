@@ -4,6 +4,7 @@ import com.isa.BloodBank.dto.UserCreationDTO;
 import com.isa.BloodBank.model.Address;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.model.UnregisteredUser;
+import com.isa.BloodBank.model.UserRole;
 import com.isa.BloodBank.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class UnregisteredUserService {
         unregisteredUser.setActivationCode(activationCode);
 
         unregisteredUser.setAddress(address);
+        unregisteredUser.setRole(UserRole.USER);
         System.out.println(unregisteredUser);
         return unregisteredUserRepository.save(unregisteredUser);
     }
