@@ -1,4 +1,5 @@
 export interface UserDisplayDTO {
+    id: number;
     name: string;
     email: string;
     role: string;

@@ -22,25 +22,23 @@ insert into staff (id, blood_bank_center_id) values (2011, 2006);
 
 insert into system_administrators (id, requires_password_change) values (2012, true);
 
+insert into blood_donor_forms (id, date_of_form_filling, has_allergies, has_drank_alcohol, has_skin_problems, has_tattoo, has_unacceptable_pressure, is_epileptic, is_on_period, is_pregnant, is_rested, is_unacceptable_weight, is_under_treatment, is_unhealthy, user_id ) values (2001, '2022-11-12',         false,          false,              false,              false, false,                       false,          false,      false,      false,      false,                  false,              false,          2010);
 
-insert into appointments (id, user_id, date_time, duration, status) values (2001, 2010, '1995-05-03 12:00:00', 30, 0)
-insert into appointments (id, user_id, date_time, duration, status) values (2002, 2010, '1995-05-03 12:15:00', 30, 0)
+insert into equipment (id, type, blood_bank_center_id, quantity) values (1, 0, 2006, 100);
+insert into equipment (id, type, blood_bank_center_id, quantity) values (2, 1, 2006, 100);
+insert into equipment (id, type, blood_bank_center_id, quantity) values (3, 2, 2006, 100);
+insert into equipment (id, type, blood_bank_center_id, quantity) values (4, 3, 2006, 100);
+insert into equipment (id, type, blood_bank_center_id, quantity) values (5, 4, 2006, 100);
+insert into equipment (id, type, blood_bank_center_id, quantity) values (6, 5, 2006, 100);
 
-insert into equipment (id, type, blood_bank_center_id, quantity) values (1, 0, 2006, 100)
-insert into equipment (id, type, blood_bank_center_id, quantity) values (2, 1, 2006, 100)
-insert into equipment (id, type, blood_bank_center_id, quantity) values (3, 2, 2006, 100)
-insert into equipment (id, type, blood_bank_center_id, quantity) values (4, 3, 2006, 100)
-insert into equipment (id, type, blood_bank_center_id, quantity) values (5, 4, 2006, 100)
-insert into equipment (id, type, blood_bank_center_id, quantity) values (6, 5, 2006, 100)
-
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (1, 2006, 50, 0)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (2, 2006, 50, 1)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (3, 2006, 50, 2)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (4, 2006, 50, 3)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (5, 2006, 50, 4)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (6, 2006, 50, 5)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (7, 2006, 50, 6)
-insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (8, 2006, 50, 7)
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (1, 2006, 50, 0);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (2, 2006, 50, 1);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (3, 2006, 50, 2);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (4, 2006, 50, 3);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (5, 2006, 50, 4);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (6, 2006, 50, 5);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (7, 2006, 50, 6);
+insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values (8, 2006, 50, 7);
 
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2020, 2010, '1995-05-03 12:00:00', 30, 1, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2021, 2010, '1995-05-03 12:15:00', 30, 1, 2006);
@@ -52,6 +50,9 @@ insert into appointments (id, user_id, date_time, duration, status, blood_bank_c
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2027, 2009, '2022-12-29 14:15:00', 30, 2, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2028, 2009, '2023-01-04 14:15:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2029, 2010, '2023-01-03 12:30:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2001, 2010, '1995-05-03 12:00:00', 30, 0, 2006);
+insert into appointments (id, user_id, date_time, duration, status,  blood_bank_center_id) values (2002, 2010, '1995-05-03 12:15:00', 30, 0, 2006);
+
 
 insert into complaints (id, text, center_id, staff_id, user_id) values (2040, 'Odvratno osoblje', null, 2011, 2009);
 insert into complaints (id, text, center_id, staff_id, user_id) values (2041, 'Sve je neuredno i neorganizovano', 2006, null, 2009);
