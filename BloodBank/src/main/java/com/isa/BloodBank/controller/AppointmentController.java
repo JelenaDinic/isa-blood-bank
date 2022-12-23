@@ -82,31 +82,11 @@ public class AppointmentController {
         RegisteredUser user = userRepository.findById(dto.getCustomerId());
         List<Appointment> usersAppointments = new ArrayList<>();
         Boolean alreadyCancelled = false;
-        for (CancelledAppointment cancelledAppointment : cancelledAppointmentRepository.findAll()) {
 
-            if (cancelledAppointment != null) {
-                if (cancelledAppointment.getAppointmentId() == appointment.getId() && cancelledAppointment.getUserId() == user.getId()) {
-                    System.out.println("vec ste otkazali ovaj termin");
-                    alreadyCancelled = true;
-                }
-            }
-        }
+        alreadyCancelled = service.checkIfAppointmentHasAlreadyBeenCancelled(dto);
 
+        usersAppointments = service.checkIf6MounthPassed(dto);
 
-        //dobavi termine koji su bili pre manje od 6 meseci
-        for (Appointment a : service.getAll()) {
-            if (a.getRegisteredUser() != null) {
-                if (user.getId() == a.getRegisteredUser().getId()) {
-
-                    if (a.getDateTime().plusMonths(6).isAfter(LocalDateTime.now())) {
-                        if (a.getStatus() == AppointmentStatus.HAPPENED) {
-                            //termini koji su bili pre manje od 6 meseci
-                            usersAppointments.add(a);
-                        }
-                    }
-                }
-            }
-        }
         if (alreadyCancelled == false) {
             //da li ima popunjenu formu
             if (user.getBloodDonorForms() != null) {
@@ -130,13 +110,11 @@ public class AppointmentController {
                                 repository.save(appointment);
                                 System.out.println(appointment.getActivationQRCode());
 
-
                             } else {
                                 appointment.setStatus(AppointmentStatus.FREE);
 
                                 System.out.println("nije proslo 6 meseci od poslednjeg doniranja");
                             }
-
                         } else {
                             appointment.setStatus(AppointmentStatus.FREE);
                             System.out.println("termin je prosao");
@@ -156,22 +134,7 @@ public class AppointmentController {
     @GetMapping("/QRcodeVerification/{activtionQRCode}")
     public ResponseEntity<String> codeVerification(@PathVariable("activtionQRCode") String activtionQRCode) throws Exception{
         try {
-            List<Appointment> allAppointments = service.getAll();
-            Appointment scheduledAppointment = new Appointment();
-
-            for(Appointment appointment : allAppointments){
-                if(appointment.getActivationQRCode() != null) {
-                    if (appointment.getActivationQRCode().equals(activtionQRCode)) {
-                        appointment.setIsScheduled(true);
-                        appointment.setStatus(AppointmentStatus.IN_FUTURE);
-
-                        System.out.println(appointment.getIsScheduled());
-                        repository.save(appointment);
-                        scheduledAppointment = appointment;
-                    }
-                }
-            }
-
+            service.codeVerification(activtionQRCode);
             return new ResponseEntity<>("Appointment verified successfully", HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception("Bad activation");
@@ -182,30 +145,7 @@ public class AppointmentController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/cancel")
     public void cancelAppointment(@RequestBody ScheduleAppointmentDTO dto) {
-        Appointment appointment = service.findById(dto.getId());
-        RegisteredUser user = userRepository.findById(dto.getCustomerId());
-
-        CancelledAppointment cancelledAppointment = new CancelledAppointment();
-
-
-        for (Appointment a: service.getAllSheduledAppointments(dto.getCustomerId())) {
-            Boolean isTomorrow = service.checkIfAppointmentIsInLessThan24Hours(a);
-            if(a.getRegisteredUser() !=null) {
-                if (appointment.getId() == a.getId()) {
-                    if (isTomorrow == false) {
-                        appointment.setStatus(AppointmentStatus.CANCELLED);
-                        appointment.setIsCancelled(true);
-                        appointment.setIsScheduled(false);
-
-                        cancelledAppointment.setAppointmentId(appointment.getId());
-                        cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
-
-                        cancelledAppointmentRepository.save(cancelledAppointment);
-                        repository.save(appointment);
-                    }
-                }
-            }
-        }
+        service.cancelAppointment(dto);
     }
 
 

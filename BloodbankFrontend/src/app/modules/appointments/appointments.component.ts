@@ -24,11 +24,8 @@ export class AppointmentsComponent implements OnInit {
   public userLastName: string = "";
   public startedAppointmentId: number = 0;
   public equipmentArr: Equipment[] = [];
-<<<<<<< HEAD
   public loggedUserRole: String | null = localStorage.getItem('loggedUserRole');
-=======
   public userId!: number;
->>>>>>> develop
 
   constructor(
     private appointmentService: AppointmentService,
