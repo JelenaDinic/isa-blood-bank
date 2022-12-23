@@ -155,7 +155,7 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
         List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
         for(Appointment appointment : appointments) {
-            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getStatus() != AppointmentStatus.HAPPENED) {
+            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getStatus() != AppointmentStatus.CANCELLED) {
                 AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
                 appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
             }

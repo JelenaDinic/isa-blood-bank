@@ -43,7 +43,7 @@ insert into blood_supplies (id, blood_bank_center_id, amount, blood_type) values
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2020, null, '2023-01-04 14:15:00', 30, 6, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2021, 2010, '2022-12-29 14:15:00', 30, 0, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2022, null, '2022-12-20 8:00:00', 30, 6, 2006);
-insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2023, 2009, '2022-12-20 11:00:00', 30, 1, 2006);
+insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2023, 2009, '2021-12-20 11:00:00', 30, 1, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2024, 2010, '2021-12-16 13:00:00', 30, 1, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2025, null, '2023-12-19 9:30:00', 30, 6, 2006);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id) values (2026, null, '2022-12-27 15:15:00', 30, 6, 2006);
