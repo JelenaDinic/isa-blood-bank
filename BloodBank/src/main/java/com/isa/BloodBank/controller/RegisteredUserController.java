@@ -74,23 +74,8 @@ public class RegisteredUserController {
     @GetMapping("/codeVerification/{activationCode}")
     public ResponseEntity<String> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
         try {
-            System.out.println(activationCode);
-            UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
-            Person registeredUser = new Person();
-            UserCreationDTO dto = new UserCreationDTO();
 
-            dto.setFirstName(newUser.getFirstName());
-            dto.setLastName(newUser.getLastName());
-            dto.setEmail(newUser.getEmail());
-            dto.setPassword(newUser.getPassword());
-            dto.setRole(newUser.getRole());
-            dto.setDob(newUser.getDob());
-            dto.setPhoneNumber(newUser.getPhoneNumber());
-            dto.setGender(newUser.getGender());
-            dto.setPersonalId(newUser.getPersonalId());
-
-            service.create(dto);
-            unregisteredUserService.delete(newUser);
+            service.codeVerification(activationCode);
 
             return new ResponseEntity<>("Email successfully verified", HttpStatus.OK);
         } catch (Exception e) {

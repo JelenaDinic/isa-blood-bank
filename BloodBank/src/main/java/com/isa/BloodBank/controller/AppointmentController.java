@@ -57,8 +57,10 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByUserId(id);
         List<AppointmentDTO> appointmentDTOS = new ArrayList<AppointmentDTO>();
         for(Appointment a : appointments) {
-            AppointmentDTO aDTO = new AppointmentDTO(a);
-            appointmentDTOS.add(aDTO);
+            if(a.getStatus() != AppointmentStatus.CANCELLED) {
+                AppointmentDTO aDTO = new AppointmentDTO(a);
+                appointmentDTOS.add(aDTO);
+            }
         }
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
@@ -95,7 +97,6 @@ public class AppointmentController {
                     //izaberi termin koji se poslao sa fronta
                     if (a.getId() == dto.getId()) {
                         //da li je izabrani termin u buducnosti
-                        if (a.getDateTime().isAfter(LocalDateTime.now())) {
                             //proverava da li ima termina koji su bili pre manje od 6 meseci
                             if (usersAppointments.isEmpty()) {
 
@@ -115,11 +116,7 @@ public class AppointmentController {
 
                                 System.out.println("nije proslo 6 meseci od poslednjeg doniranja");
                             }
-                        } else {
-                            appointment.setStatus(AppointmentStatus.FREE);
-                            System.out.println("termin je prosao");
                         }
-                    }
                 }
             } else {
                 System.out.println("nemate popunjenu formu");
@@ -156,7 +153,7 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
         List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
         for(Appointment appointment : appointments) {
-            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getIsCancelled() == false) {
+            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getStatus() != AppointmentStatus.HAPPENED) {
                 AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
                 appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
             }
@@ -171,6 +168,25 @@ public class AppointmentController {
         List<Appointment> appointments = service.getAll();
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/getAllForScheduling")
+    public ResponseEntity<List<Appointment>> getAllForScheduling() {
+        List<Appointment> scheduledAppointments = new ArrayList<>();
+        List<Appointment> allAppointments = service.getAll();
+
+        for(Appointment a: allAppointments){
+            if(a.getDateTime().isAfter(LocalDateTime.now())){
+
+                if(a.getStatus() == AppointmentStatus.FREE || a.getStatus() == AppointmentStatus.CANCELLED){
+                    scheduledAppointments.add(a);
+                }
+            }
+        }
+        return new ResponseEntity<>(scheduledAppointments, HttpStatus.OK);
+    }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_USER')")

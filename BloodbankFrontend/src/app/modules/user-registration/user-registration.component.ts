@@ -55,7 +55,7 @@ export class UserRegistrationComponent implements OnInit {
 
     console.log(this.user)
     this.userService.create(this.user).subscribe(data=>{
-      alert("User successfully registered")
+      alert("Verify registration on your email")
     },error=>console.log(error.message));
   
   }

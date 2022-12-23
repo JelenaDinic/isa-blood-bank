@@ -67,11 +67,9 @@ public class AppointmentService {
         List<Appointment> allAppointments = findAllByUserId(userId);
 
         for(Appointment appointment: allAppointments){
-            if(appointment.getIsScheduled() != null) {
-                if (appointment.getIsScheduled() == true) {
+                if (appointment.getStatus() == AppointmentStatus.IN_FUTURE) {
                     scheduledAppointments.add(appointment);
                 }
-            }
         }
 
         return scheduledAppointments;
@@ -79,13 +77,15 @@ public class AppointmentService {
 
     public Boolean checkIfAppointmentIsInLessThan24Hours(Appointment appointment){
 
+        Boolean lessThan24Hours = false;
+
         if(LocalDateTime.now().plusHours(24).isAfter(appointment.getDateTime())){
-            appointment.setLessThan24hours(true);
+            lessThan24Hours = true;
         }
         else{
-            appointment.setLessThan24hours(false);
+            lessThan24Hours = false;
         }
-        return appointment.getLessThan24hours();
+        return lessThan24Hours;
 
     }
 
@@ -135,10 +135,8 @@ public class AppointmentService {
         for(Appointment appointment : getAll()){
             if(appointment.getActivationQRCode() != null) {
                 if (appointment.getActivationQRCode().equals(activtionQRCode)) {
-                    appointment.setIsScheduled(true);
                     appointment.setStatus(AppointmentStatus.IN_FUTURE);
 
-                    System.out.println(appointment.getIsScheduled());
                     appointmentRepository.save(appointment);
                 }
             }
@@ -158,8 +156,6 @@ public class AppointmentService {
                 if (appointment.getId() == a.getId()) {
                     if (isTomorrow == false) {
                         appointment.setStatus(AppointmentStatus.CANCELLED);
-                        appointment.setIsCancelled(true);
-                        appointment.setIsScheduled(false);
 
                         cancelledAppointment.setAppointmentId(appointment.getId());
                         cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
