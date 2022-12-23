@@ -27,8 +27,8 @@ import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
       return this.http.get<any>(this.apiServerUrl + '/api/appointment/byBloodBank/' + id, {headers: this.headers});
     }
 
-    getAll(): Observable<AppointmentDisplay[]> {
-      return this.http.get<AppointmentDisplay[]>(this.apiServerUrl + '/api/appointment', {headers: this.headers});
+    getAllForScheduling(): Observable<AppointmentDisplay[]> {
+      return this.http.get<AppointmentDisplay[]>(this.apiServerUrl + '/api/appointment/getAllForScheduling', {headers: this.headers});
     }
 
     getAllScheduled(id: number): Observable<AppointmentDisplay[]> {

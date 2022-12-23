@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit {
   public loggedUserRole: String | null = localStorage.getItem('loggedUserRole');
   public userId!: number;
 
-
   constructor(
     private appointmentService: AppointmentService,
     private bloodDonorService: BloodDonorService,

@@ -13,9 +13,7 @@ import { AppointmentService } from '../services/appointment.service';
 export class ScheduledAppointmentsComponent {
 
   public dataSource = new MatTableDataSource<AppointmentDisplay>();
-  // public isCancelled: string = 'true';
-  // public lessThan24h: string = '';
-  public displayedColumns = ['id', 'dateTime', 'duration', 'status', 'cancelButton'];
+  public displayedColumns = ['dateTime', 'duration', 'status', 'bloodBankCenter', 'cancelButton'];
   public appointments: AppointmentDisplay[] = [];
   public patientId!: number;
   clickedRows = new Set<Appointment>();
@@ -44,6 +42,7 @@ export class ScheduledAppointmentsComponent {
 
       
       this.appointmentService.cancelAppointment(appointmentDTO).subscribe(res => {
+        alert("Appointment successfully cancelled")
         })
     }
 

@@ -34,7 +34,4 @@ public class Appointment {
     private BloodBankCenter bloodBankCenter;
 
     private String activationQRCode;
-    private Boolean isScheduled;
-    private Boolean isCancelled;
-    private Boolean lessThan24hours = false;
 }

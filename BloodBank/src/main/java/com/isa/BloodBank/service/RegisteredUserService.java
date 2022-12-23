@@ -12,10 +12,7 @@ import com.isa.BloodBank.model.Address;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static com.isa.BloodBank.model.UserRole.USER;
 
 @Service
 public class RegisteredUserService {
@@ -27,14 +24,17 @@ public class RegisteredUserService {
     private final SystemAdminRepository systemAdminRepository;
     private final UserRepository userRepository;
 
+    private final UnregisteredUserService unregisteredUserService;
+
     @Autowired
-    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository, UserRepository userRepository) {
+    public RegisteredUserService(RegisteredUserRepository repository, StaffRepository staffRepository, BloodBankCenterRepository bloodBankCenterRepository, SystemAdminRepository systemAdminRepository, AddressRepository addressRepository, UserRepository userRepository, UnregisteredUserService unregisteredUserService) {
         this.repository = repository;
         this.staffRepository = staffRepository;
         this.bloodBankCenterRepository = bloodBankCenterRepository;
         this.systemAdminRepository = systemAdminRepository;
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
+        this.unregisteredUserService = unregisteredUserService;
     }
 
     public RegisteredUser create(UserCreationDTO userCreationDTO) {
@@ -123,5 +123,28 @@ public class RegisteredUserService {
         RegisteredUser user  = repository.findRegisteredUserById(id);
         user.setPenalties(user.getPenalties() + 1);
         userRepository.save(user);
+    }
+
+    public void codeVerification(String activationCode) {
+        UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
+        Person registeredUser = new Person();
+        UserCreationDTO dto = new UserCreationDTO();
+
+        dto.setFirstName(newUser.getFirstName());
+        dto.setLastName(newUser.getLastName());
+        dto.setEmail(newUser.getEmail());
+        dto.setPassword(newUser.getPassword());
+        dto.setRole(newUser.getRole());
+        dto.setDob(newUser.getDob());
+        dto.setPhoneNumber(newUser.getPhoneNumber());
+        dto.setGender(newUser.getGender());
+        dto.setPersonalId(newUser.getPersonalId());
+        dto.setCity(newUser.getAddress().getCity());
+        dto.setCountry(newUser.getAddress().getCountry());
+        dto.setStreet(newUser.getAddress().getStreet());
+        dto.setNumber(newUser.getAddress().getNumber());
+
+        create(dto);
+        unregisteredUserService.delete(newUser);
     }
 }
