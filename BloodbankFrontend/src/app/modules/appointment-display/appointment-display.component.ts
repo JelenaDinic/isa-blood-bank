@@ -42,9 +42,12 @@ export class AppointmentDisplayComponent {
 
       appointmentDTO.id = appointmentId;
 
-      this.appointmentService.scheduleAppointment(appointmentDTO).subscribe(res => {
+      this.appointmentService.scheduleAppointment(appointmentDTO).subscribe(data => {
         alert("Verify scheduling appointment on your email")
-        })
+        },
+        (error) => {alert(error.error)
+        console.log(error)});
+        
   
     }
 }

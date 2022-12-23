@@ -77,7 +77,7 @@ public class AppointmentController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/scheduleAppointment")
-    public void scheduleAppointment(@RequestBody ScheduleAppointmentDTO dto) throws MessagingException {
+    public ResponseEntity<Object> scheduleAppointment(@RequestBody ScheduleAppointmentDTO dto) throws MessagingException {
 
         String activationCode = UUID.randomUUID().toString();
         Appointment appointment = service.findById(dto.getId());
@@ -113,17 +113,19 @@ public class AppointmentController {
 
                             } else {
                                 appointment.setStatus(AppointmentStatus.FREE);
+                                return new ResponseEntity<>("It hasn't been 6 months since your last blood donation", HttpStatus.BAD_REQUEST);
 
-                                System.out.println("nije proslo 6 meseci od poslednjeg doniranja");
                             }
-                        }
+                    }
                 }
             } else {
-                System.out.println("nemate popunjenu formu");
+                return new ResponseEntity<>("You don't have filled blood donor form", HttpStatus.BAD_REQUEST);
+
             }
         }else{
-            System.out.println("ne mozete zakazati termin koji ste jednom otkazali");
+            return new ResponseEntity<>("You can't schedule appointment you once cancelled", HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 
@@ -179,7 +181,7 @@ public class AppointmentController {
         for(Appointment a: allAppointments){
             if(a.getDateTime().isAfter(LocalDateTime.now())){
 
-                if(a.getStatus() == AppointmentStatus.FREE || a.getStatus() == AppointmentStatus.CANCELLED){
+                if(a.getStatus() == AppointmentStatus.FREE || a.getStatus() == AppointmentStatus.CANCELLED || a.getStatus() == AppointmentStatus.PENDING){
                     scheduledAppointments.add(a);
                 }
             }
