@@ -43,6 +43,7 @@ import { SysadminPasswordChangeComponent } from './modules/sysadmin-password-cha
 import { AppointmentDisplayComponent } from './modules/appointment-display/appointment-display.component';
 import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
+import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -69,7 +70,8 @@ import { ComplaintsDisplayComponent } from './modules/complaints-display/complai
     SysadminPasswordChangeComponent,
     AppointmentDisplayComponent,
     ScheduledAppointmentsComponent,
-    ComplaintsDisplayComponent
+    ComplaintsDisplayComponent,
+    FreeAppointmentsComponent
   ],
   imports: [
     BrowserModule,

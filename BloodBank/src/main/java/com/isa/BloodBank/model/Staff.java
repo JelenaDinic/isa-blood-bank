@@ -22,10 +22,12 @@ public class Staff extends Person{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
-
     @OneToMany(mappedBy = "staffMember",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Complaint> complaints;
+    @OneToMany(mappedBy="staff", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<FreeExamination> freeExaminations;
 
     public Staff(StaffCreationDTO dto) {
         this.setFirstName(dto.getFirstName());

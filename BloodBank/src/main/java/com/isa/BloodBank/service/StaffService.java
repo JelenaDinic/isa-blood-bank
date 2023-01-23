@@ -85,4 +85,9 @@ public class StaffService {
         return dto;
 
     }
+    public Staff getStaffById(int id) {
+        Staff staff = repository.findStaffById(id);
+        return staff;
+
+    }
 }
