@@ -24,8 +24,6 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     private RegisteredUser registeredUser;
-//    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
-//    private AppointmentReport appointmentReport;
     private LocalDateTime dateTime;
     private int duration;
     private AppointmentStatus status;

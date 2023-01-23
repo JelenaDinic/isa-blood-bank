@@ -20,6 +20,8 @@ import { AppointmentDisplayComponent } from './modules/appointment-display/appoi
 import { ScheduleAppointmentDTO } from './modules/dto/scheduleAppointmentDTO';
 import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
+import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
+
 
 
 const routes: Routes = [
@@ -41,6 +43,7 @@ const routes: Routes = [
   { path: 'password-change', component: SysadminPasswordChangeComponent},
   { path : 'scheduled-appointments', component: ScheduledAppointmentsComponent},
   { path: 'complaints-display', component: ComplaintsDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
+  { path : 'free-examination', component: FreeAppointmentsComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}}
 ];
 
 @NgModule({

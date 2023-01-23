@@ -52,6 +52,9 @@
           <li *ngIf="loggedUserRole === 'ROLE_SYSTEMADMIN'" class="nav-item active">
             <a class="nav-link" routerLink="/register-sysadmin">Register sysadmin</a>
           </li>
+          <li *ngIf="loggedUserRole === 'ROLE_STAFF'" class="nav-item active">
+            <a class="nav-link" routerLink="/free-examination">Create examinations</a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" routerLink="/register-user">Sign up</a>
           </li>
