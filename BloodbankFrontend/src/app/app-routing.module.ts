@@ -25,7 +25,7 @@ import { FreeAppointmentsComponent } from './modules/free-appointments/free-appo
 
 
 const routes: Routes = [
-  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}},
+  { path: 'blood-bank-center', component: BloodBankCenterComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF", "ROLE_USER"]}},
   { path: 'search-users', component: SearchUsersComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF", "ROLE_SYSTEMADMIN"]}},
   { path: 'staff-profile', component: StaffProfileComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'register-blood-bank', component: BloodBankRegistrationComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},

@@ -15,7 +15,7 @@
           <li *ngIf="loggedUserRole === 'ROLE_SYSTEMADMIN' || loggedUserRole === 'ROLE_STAFF'" class="nav-item active">
              <a class="nav-link" routerLink="/search-users">Search users</a>
           </li>
-          <li *ngIf="loggedUserRole === 'ROLE_SYSTEMADMIN'" class="nav-item active">
+          <li *ngIf="loggedUserRole === 'ROLE_STAFF'" class="nav-item active">
             <a class="nav-link" routerLink="/blood-bank-center">Update BloodBank</a>
          </li>
          <li *ngIf="loggedUserRole === 'ROLE_SYSTEMADMIN'" class="nav-item active">
