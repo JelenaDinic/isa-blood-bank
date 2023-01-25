@@ -13,6 +13,7 @@ import com.isa.BloodBank.model.AppointmentStatus;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.AppointmentService;
 import com.isa.BloodBank.service.EmailSenderService;
+import com.isa.BloodBank.service.NewAppointmentService;
 import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,7 +34,8 @@ public class AppointmentController {
 
     @Autowired
     private EmailSenderService emailSenderService;
-
+    @Autowired
+    private NewAppointmentService newAppointmentService;
     @Autowired
     private AppointmentRepository repository;
     @Autowired
@@ -45,11 +47,14 @@ public class AppointmentController {
     private CancelledAppointmentRepository cancelledAppointmentRepository;
 
     @Autowired
-    public AppointmentController(AppointmentService service, RegisteredUserService registeredUserService) {
+    public AppointmentController(AppointmentService service,
+                                 RegisteredUserService registeredUserService,
+                                 NewAppointmentService newAppointmentService) {
         this.service = service;
         this.userService = registeredUserService;
+        this.newAppointmentService = newAppointmentService;
     }
-    
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/byUser/{id}")
@@ -195,6 +200,16 @@ public class AppointmentController {
     @GetMapping("/scheduledAppointmentsForUser/{id}")
     public ResponseEntity<List<Appointment>> getAllScheduledByUserId(@PathVariable int id) {
         List<Appointment> appointments = service.getAllSheduledAppointments(id);
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/availableNewAppointments/{time}")
+    public ResponseEntity<List<Appointment>> getAllAvailableNewAppointments(@PathVariable String time) {
+        System.out.println(time);
+        LocalDateTime  dateTime = LocalDateTime.parse(time);
+        System.out.print("Datetime " + dateTime);
+        List<Appointment> appointments = newAppointmentService.getAllAvailableNewAppointments(dateTime);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 }

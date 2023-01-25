@@ -44,6 +44,7 @@ import { AppointmentDisplayComponent } from './modules/appointment-display/appoi
 import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
+import { NewAppointmentsComponent } from './modules/new-appointments/new-appointments.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -71,7 +72,8 @@ import { FreeAppointmentsComponent } from './modules/free-appointments/free-appo
     AppointmentDisplayComponent,
     ScheduledAppointmentsComponent,
     ComplaintsDisplayComponent,
-    FreeAppointmentsComponent
+    FreeAppointmentsComponent,
+    NewAppointmentsComponent
   ],
   imports: [
     BrowserModule,

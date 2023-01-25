@@ -32,4 +32,6 @@ public class Appointment {
     private BloodBankCenter bloodBankCenter;
 
     private String activationQRCode;
+
+
 }

@@ -48,5 +48,9 @@ import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
     verifyScheduling(activationCode: String): Observable<any> {
       return this.http.post<any>(this.apiServerUrl + '/api/appointment/QRcodeVerification/' ,activationCode, {headers: this.headers})
     }
+
+    getAavailableNewAppointments(date: String): Observable<Appointment[]> {
+      return this.http.get<Appointment[]>(this.apiServerUrl + '/api/appointment/availableNewAppointments/' + date, {headers: this.headers});
+    }
   }
   
