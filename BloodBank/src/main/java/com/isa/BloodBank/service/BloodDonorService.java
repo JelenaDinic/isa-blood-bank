@@ -36,7 +36,7 @@ public class BloodDonorService {
             BloodDonorForm bloodDonorForm = bloodDonorRepository.findFormByUserId(id);
             boolean isAllowed = true;
             if(bloodDonorForm != null) {
-            if (bloodDonorForm.isUnacceptableWeight() || bloodDonorForm.isUnhealthy() || bloodDonorForm.isHasSkinProblems() || bloodDonorForm.isHasUnacceptablePressure() || bloodDonorForm.isUnderTreatment() || bloodDonorForm.isOnPeriod() || bloodDonorForm.isHasTattoo()) {
+            if (bloodDonorForm.isUnacceptableWeight() || bloodDonorForm.isUnhealthy() || bloodDonorForm.isHasSkinProblems() || bloodDonorForm.isHasUnacceptablePressure() || bloodDonorForm.isUnderTreatment()  || bloodDonorForm.isHasTattoo()) {
                 isAllowed = false;
             }}
             return isAllowed;
