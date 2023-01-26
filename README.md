@@ -20,13 +20,13 @@
     SQL skripta za unos podataka se pokrece automatski kad se pokrene bekend aplikacija.
     
 *Email-ovi i lozinke za tipove korisnika:
+
       Staff:
         jelena@gmail.com 
         jelena
       Registered user: 
         stefan@gmail.com
-        stefke
-        
+        stefke       
         vanjateodorovic00@gmail.com
         vanjilica
       System admin: 
