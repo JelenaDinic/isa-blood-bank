@@ -51,7 +51,6 @@ insert into appointments (id, user_id, date_time, duration, status, blood_bank_c
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id, version) values (2028, 2009, '2023-02-08 15:15:00', 30, 0, 2006, 0);
 insert into appointments (id, user_id, date_time, duration, status, blood_bank_center_id, version) values (2029, 2010, '2023-02-08 13:30:00', 30, 0, 2006, 0);
 
-
 insert into blood_donor_forms (id, date_of_form_filling, has_allergies, has_drank_alcohol, has_skin_problems, has_tattoo, has_unacceptable_pressure, is_epileptic, is_on_period, is_pregnant, is_rested, is_unacceptable_weight, is_under_treatment, is_unhealthy, user_id ) values (2001, '2022-11-12',         false,          false,              false,              false, false,                       false,          false,      false,      false,      false,                  false,              false,          2010);
 
 
