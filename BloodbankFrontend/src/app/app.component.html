@@ -37,6 +37,9 @@
           <li *ngIf="loggedUserRole === 'ROLE_USER'" class="nav-item active">
             <a class="nav-link" routerLink="/scheduled-appointments">View scheduled appointments</a>
           </li>
+          <li *ngIf="loggedUserRole === 'ROLE_USER'" class="nav-item active">
+            <a class="nav-link" routerLink="/new-appointment">Schedule appointment 2.0</a>
+          </li>
           <li class="nav-item active">
           <li *ngIf="loggedUserRole === 'ROLE_STAFF'" class="nav-item active">
             <a class="nav-link" routerLink="/appointments-calendar">Appointments Calendar</a>

@@ -45,7 +45,6 @@ export class AppointmentDisplayComponent {
             {
               appointment.status = 'Free';
             }
-            appointment.dateTime = appointment.dateTime.substring(0, 10) + ", " + appointment.dateTime.substring(11, 16);
           });
         })
       }
@@ -66,7 +65,7 @@ export class AppointmentDisplayComponent {
         },
         (error) => {alert(error.error)
         console.log(error)});
-        
+        window.location.href = "/appointments-display"  
   
     }
 }

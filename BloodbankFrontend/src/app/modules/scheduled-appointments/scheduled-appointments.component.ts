@@ -45,8 +45,6 @@ export class ScheduledAppointmentsComponent {
             {
               appointment.status = 'Free';
             }
-            appointment.dateTime = appointment.dateTime.substring(0, 10) + ", " + appointment.dateTime.substring(11, 16);
-
           });
         })
       }
@@ -63,7 +61,8 @@ export class ScheduledAppointmentsComponent {
       
       this.appointmentService.cancelAppointment(appointmentDTO).subscribe(res => {
         alert("Appointment successfully cancelled")
-        })
+        window.location.href = "/scheduled-appointments"  
+      })
     }
 
 }

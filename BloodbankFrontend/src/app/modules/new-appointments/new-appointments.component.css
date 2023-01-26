@@ -1,0 +1,19 @@
+button {
+    background-color: darkred;
+    border: none;
+    color: white;
+}
+button:hover {
+    background-color: firebrick;
+}
+
+p{
+    margin-top: 10px;
+    margin-left: 40px;
+    font-size: 25px;
+
+}
+
+input{
+    margin-left: 40px;
+}

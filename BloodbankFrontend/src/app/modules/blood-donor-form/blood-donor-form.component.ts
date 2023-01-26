@@ -24,10 +24,6 @@ export class BloodDonorFormComponent implements OnInit {
         alert('Please fill in all fields!');
         return;
      };
-     if(this.bloodDonor.isPregnant.trim() == ''|| this.bloodDonor.isOnPeriod.trim() == ''){
-      alert('Please fill in all fields!');
-      return;
-     };
 
     console.log(this.bloodDonor)
     this.bloodDonorService.create(this.bloodDonor).subscribe(data=>{

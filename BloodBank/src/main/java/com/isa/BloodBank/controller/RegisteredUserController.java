@@ -151,6 +151,14 @@ public class RegisteredUserController {
         return service.findById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(path="/novo/{id}")
+    public UserProfileDisplayDTO getById2(@PathVariable("id") int id){
+        RegisteredUser user = service.findById(id);
+        return new UserProfileDisplayDTO(user);
+    }
+
 }
 
 

@@ -1,9 +1,6 @@
 package com.isa.BloodBank.controller;
 
-import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
-import com.isa.BloodBank.dto.AppointmentDTO;
-import com.isa.BloodBank.dto.ScheduleAppointmentDTO;
-import com.isa.BloodBank.dto.UserCreationDTO;
+import com.isa.BloodBank.dto.*;
 import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.repository.AppointmentRepository;
 import com.isa.BloodBank.repository.CancelledAppointmentRepository;
@@ -13,6 +10,7 @@ import com.isa.BloodBank.model.AppointmentStatus;
 import com.isa.BloodBank.model.RegisteredUser;
 import com.isa.BloodBank.service.AppointmentService;
 import com.isa.BloodBank.service.EmailSenderService;
+import com.isa.BloodBank.service.NewAppointmentService;
 import com.isa.BloodBank.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,7 +31,8 @@ public class AppointmentController {
 
     @Autowired
     private EmailSenderService emailSenderService;
-
+    @Autowired
+    private NewAppointmentService newAppointmentService;
     @Autowired
     private AppointmentRepository repository;
     @Autowired
@@ -45,11 +44,14 @@ public class AppointmentController {
     private CancelledAppointmentRepository cancelledAppointmentRepository;
 
     @Autowired
-    public AppointmentController(AppointmentService service, RegisteredUserService registeredUserService) {
+    public AppointmentController(AppointmentService service,
+                                 RegisteredUserService registeredUserService,
+                                 NewAppointmentService newAppointmentService) {
         this.service = service;
         this.userService = registeredUserService;
+        this.newAppointmentService = newAppointmentService;
     }
-    
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/byUser/{id}")
@@ -158,7 +160,7 @@ public class AppointmentController {
         List<Appointment> appointments = service.findAllByBloodBank(bloodBankId);
         List<AppointmentCalendarEventDTO> appointmentCalendarEventDTOs = new ArrayList<>();
         for(Appointment appointment : appointments) {
-            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED) && appointment.getStatus() != AppointmentStatus.CANCELLED) {
+            if((appointment.getStatus() == AppointmentStatus.IN_FUTURE || appointment.getStatus() == AppointmentStatus.HAPPENED || appointment.getStatus() == AppointmentStatus.FREE) && appointment.getStatus() != AppointmentStatus.CANCELLED) {
                 AppointmentCalendarEventDTO appointmentCalendarEventDTO = new AppointmentCalendarEventDTO(appointment);
                 appointmentCalendarEventDTOs.add(appointmentCalendarEventDTO);
             }
@@ -200,4 +202,32 @@ public class AppointmentController {
         List<Appointment> appointments = service.getAllSheduledAppointments(id);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
-}
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/availableNewAppointments/{time}")
+    public ResponseEntity<List<Appointment>> getAllAvailableNewAppointments(@PathVariable String time) {
+        System.out.println(time);
+        LocalDateTime  dateTime = LocalDateTime.parse(time);
+        System.out.print("Datetime " + dateTime);
+        List<Appointment> appointments = newAppointmentService.getAllAvailableNewAppointments(dateTime);
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/scheduleNewAppointment")
+    public ResponseEntity<Object> scheduleNewAppointment(@RequestBody NewAppointmentDTO dto) throws MessagingException {
+        boolean t = newAppointmentService.scheduleNewAppointment(dto);
+        if(t){
+            emailSenderService.sendSimpleEmail("dusko.radicic1@gmail.com",
+                    "Successfully scheduled appointment",
+                    "Your appointment is successfully scheduled.");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("It hasn't been 6 months since your last blood donation", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
+    }

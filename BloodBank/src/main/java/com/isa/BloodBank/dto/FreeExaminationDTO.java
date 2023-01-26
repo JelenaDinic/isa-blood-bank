@@ -18,7 +18,7 @@ public class FreeExaminationDTO {
     @NotBlank(message = "Datetime cannot be blank!")
     private String dateTime;
     @NotNull
-    @NotBlank(message = "Duration cannot be blank!")
+//    @NotBlank(message = "Duration cannot be blank!")
     private int duration;
     private int staffId;
 }

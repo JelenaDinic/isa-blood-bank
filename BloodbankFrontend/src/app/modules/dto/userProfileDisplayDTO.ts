@@ -1,6 +1,6 @@
 export class UserProfileDisplayDTO{
-    public name: String = "";
-    public surname: String = "";
+    public firstName: String = "";
+    public lastName: String = "";
     public email: String = "";
     public street: String = "";
     public number: String = "";

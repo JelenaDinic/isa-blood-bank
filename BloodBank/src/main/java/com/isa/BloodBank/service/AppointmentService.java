@@ -1,10 +1,8 @@
 package com.isa.BloodBank.service;
 
+import com.isa.BloodBank.dto.NewAppointmentDTO;
 import com.isa.BloodBank.dto.ScheduleAppointmentDTO;
-import com.isa.BloodBank.model.Appointment;
-import com.isa.BloodBank.model.AppointmentStatus;
-import com.isa.BloodBank.model.CancelledAppointment;
-import com.isa.BloodBank.model.RegisteredUser;
+import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.repository.AppointmentRepository;
 import com.isa.BloodBank.repository.CancelledAppointmentRepository;
 import com.isa.BloodBank.repository.RegisteredUserRepository;
@@ -138,27 +136,38 @@ public class AppointmentService {
     }
 
     public void cancelAppointment(ScheduleAppointmentDTO dto) {
-        Appointment appointment = findById(dto.getId());
-        RegisteredUser user = repository.findById(dto.getCustomerId());
-
-        CancelledAppointment cancelledAppointment = new CancelledAppointment();
-
-
         for (Appointment a: getAllSheduledAppointments(dto.getCustomerId())) {
+
+            Appointment appointment = findById(dto.getId());
+            RegisteredUser user = repository.findById(dto.getCustomerId());
             Boolean isTomorrow = checkIfAppointmentIsInLessThan24Hours(a);
-            if(a.getRegisteredUser() !=null) {
-                if (appointment.getId() == a.getId()) {
-                    if (isTomorrow == false) {
-                        appointment.setStatus(AppointmentStatus.CANCELLED);
+            CancelledAppointment cancelledAppointment = new CancelledAppointment();
+            if (isTomorrow == false) {
+                appointment.setStatus(AppointmentStatus.CANCELLED);
 
-                        cancelledAppointment.setAppointmentId(appointment.getId());
-                        cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
+                cancelledAppointment.setAppointmentId(appointment.getId());
+                cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
 
-                        cancelledAppointmentRepository.save(cancelledAppointment);
-                        appointmentRepository.save(appointment);
-                    }
-                }
+                cancelledAppointmentRepository.save(cancelledAppointment);
+                appointmentRepository.save(appointment);
             }
         }
+//        for (Appointment a: getAllSheduledAppointments(dto.getCustomerId())) {
+//            Boolean isTomorrow = checkIfAppointmentIsInLessThan24Hours(a);
+//            if(a.getRegisteredUser() !=null) {
+//                if (appointment.getId() == a.getId()) {
+//                    if (isTomorrow == false) {
+//                        appointment.setStatus(AppointmentStatus.CANCELLED);
+//
+//                        cancelledAppointment.setAppointmentId(appointment.getId());
+//                        cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
+//
+//                        cancelledAppointmentRepository.save(cancelledAppointment);
+//                        appointmentRepository.save(appointment);
+//                    }
+//                }
+//            }
+//        }
     }
+
 }

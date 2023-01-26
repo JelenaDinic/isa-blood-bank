@@ -23,7 +23,11 @@ public class AppointmentCalendarEventDTO {
         LocalDateTime endTime = appointment.getDateTime().plusMinutes(appointment.getDuration());
         String startTimeString = appointment.getDateTime().getHour() + ":" + appointment.getDateTime().getMinute();
         String endTimeString = endTime.getHour() + ":" + endTime.getMinute();
-        String user = appointment.getRegisteredUser().getFirstName() + " " + appointment.getRegisteredUser().getLastName();
+        String user = "Nema korisnika";
+        if(appointment.getRegisteredUser() != null){
+            user = appointment.getRegisteredUser().getFirstName() + " " + appointment.getRegisteredUser().getLastName();
+
+        }
         this.title = user + "  " + startTimeString + "  -  " + endTimeString;
         this.start = appointment.getDateTime();
         this.end = endTime;
