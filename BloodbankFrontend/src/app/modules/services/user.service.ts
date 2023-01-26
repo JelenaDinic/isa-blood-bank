@@ -38,4 +38,8 @@ export class UserService{
   public getById(id: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + '/api/registered-user/' + id, {headers: this.headers});
   }
+
+  public getById2(id: number): Observable<UserProfileDisplayDTO> {
+    return this.http.get<any>(this.apiServerUrl + '/api/registered-user/novo/' + id, {headers: this.headers});
+  }
 }

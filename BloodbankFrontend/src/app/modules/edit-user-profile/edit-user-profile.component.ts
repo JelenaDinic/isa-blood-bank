@@ -14,10 +14,26 @@ export class EditUserProfileComponent implements OnInit {
   visible : boolean = false;
   points : number = 0;
   user : UserProfileDisplayDTO = new UserProfileDisplayDTO();
+  currentUserId!: any;
 
   constructor(private service : UserService) { }
 
   ngOnInit(): void {
+    this.currentUserId = localStorage.getItem("loggedUserId");
+    this.service.getById2(this.currentUserId).subscribe(res => {
+      if(res == null){
+        this.user = new UserProfileDisplayDTO();
+        this.visible = false;
+        alert("User doesn't exist!");
+        this.input_email = "";
+      }
+      else{
+        this.user = res;
+        console.log(this.user);
+        
+        console.log(this.user.phoneNumber);
+        this.visible = true;
+      }});
   }
 
   searchUser(){
@@ -49,12 +65,12 @@ export class EditUserProfileComponent implements OnInit {
 
   public isValidInput(): boolean {
 
-    if(this.user.name.length > 20) {
+    if(this.user.firstName.length > 20) {
       alert('Name cannot be longer than 20 characters.');
       return false;
     }
 
-    if(this.user.surname.length > 30) {
+    if(this.user.lastName.length > 30) {
       alert('Surname cannot be longer than 30 characters.');
       return false;
     }
@@ -95,19 +111,19 @@ export class EditUserProfileComponent implements OnInit {
       return false;
     }
     var nameSurnameRegExp = /^(([A-Za-z]*))$/;
-    if(this.user.name == "") {
+    if(this.user.firstName == "") {
       alert('Name field cannot be empty.');
       return false;
     }
-    if(!nameSurnameRegExp.test(String(this.user.name))) {
+    if(!nameSurnameRegExp.test(String(this.user.firstName))) {
       alert('Name format is not valid')
       return false;
     }
-    if(this.user.surname == "") {
+    if(this.user.lastName == "") {
       alert('Surname field cannot be empty.');
       return false;
     }
-    if(!nameSurnameRegExp.test(String(this.user.surname))) {
+    if(!nameSurnameRegExp.test(String(this.user.lastName))) {
       alert('Surname format is not valid')
       return false;
     }
