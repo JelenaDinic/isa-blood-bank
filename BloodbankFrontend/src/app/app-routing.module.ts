@@ -22,6 +22,7 @@ import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments
 import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
 import { NewAppointmentsComponent } from './modules/new-appointments/new-appointments.component';
+import { QuestionnaireComponent } from './modules/questionnaire/questionnaire.component';
 
 
 
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'complaints-display', component: ComplaintsDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
   { path : 'free-examination', component: FreeAppointmentsComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'new-appointment', component: NewAppointmentsComponent},
+  { path : 'questionnaire', component: QuestionnaireComponent/*, canActivate:[Guard], data:{ permittedRoles:["ROLE_PATIENT"]}*/},
 ];
 
 @NgModule({

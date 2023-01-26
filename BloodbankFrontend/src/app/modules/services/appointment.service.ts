@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AppointmentDisplay } from '../model/appointment-display.model';
 import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
+import { NewAppointmentDTO } from '../dto/newAppointmentDTO';
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +13,19 @@ import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
   
     private apiServerUrl = 'http://localhost:8082';
     headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    private centerId!: number;
+    private dateOfAppointment!: Date;
   
     constructor(private http: HttpClient) { }
+
+    getCenterId(){return this.centerId;}
+
+    setCenterId(id: number){this.centerId = id;}
+
+    getDateOfAppointment(){return this.dateOfAppointment;}
+
+    setDateOfAppointment(date: Date){this.dateOfAppointment = date;}
 
     findByUserId(id: number): Observable<any> {
       return this.http.get<any>(this.apiServerUrl + '/api/appointment/byUser/' + id, {headers: this.headers});
@@ -49,8 +61,13 @@ import { ScheduleAppointmentDTO } from '../dto/scheduleAppointmentDTO';
       return this.http.post<any>(this.apiServerUrl + '/api/appointment/QRcodeVerification/' ,activationCode, {headers: this.headers})
     }
 
-    getAavailableNewAppointments(date: String): Observable<Appointment[]> {
-      return this.http.get<Appointment[]>(this.apiServerUrl + '/api/appointment/availableNewAppointments/' + date, {headers: this.headers});
+    getAavailableNewAppointments(date: String): Observable<AppointmentDisplay[]> {
+      return this.http.get<AppointmentDisplay[]>(this.apiServerUrl + '/api/appointment/availableNewAppointments/' + date, {headers: this.headers});
+    }
+
+    scheduleNewAppointment(appointment: NewAppointmentDTO): Observable<any> {
+  
+      return this.http.post<any>(this.apiServerUrl + '/api/appointment/scheduleNewAppointment/', appointment, {headers: this.headers})
     }
   }
   

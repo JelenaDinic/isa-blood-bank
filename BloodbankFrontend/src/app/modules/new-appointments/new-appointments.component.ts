@@ -3,6 +3,9 @@ import { Appointment } from '../model/appointment.model';
 import { AppointmentService } from '../services/appointment.service';
 import { BloodBankService } from '../services/blood-bank-center.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { Router } from '@angular/router';
+import { AppointmentDisplay } from '../model/appointment-display.model';
+
 
 @Component({
   selector: 'app-new-appointments',
@@ -13,13 +16,14 @@ export class NewAppointmentsComponent implements OnInit {
 
   date:Date = new Date();
   time: String = "07:00";
-  appointments:Appointment[] = [];
+  appointments:AppointmentDisplay[] = [];
   public displayedColumns = ['center', 'start', 'schedule'];
   public userId!: number;
 
   constructor(
     private appointmentService: AppointmentService,
-    private centerService: BloodBankService) { }
+    private centerService: BloodBankService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.userId = parseInt(localStorage.getItem("loggedUserId")!)
@@ -52,7 +56,11 @@ export class NewAppointmentsComponent implements OnInit {
           + String(val)).slice(String(val).length);
   }
 
-  schedule(appointment:Appointment){
-
+  schedule(appointment:AppointmentDisplay){
+    this.appointmentService.setCenterId(appointment.bloodBankCenter.id);
+    this.appointmentService.setDateOfAppointment(appointment.dateTime);
+    
+    this.router.navigate(["/questionnaire"]);
+    
   }
 }

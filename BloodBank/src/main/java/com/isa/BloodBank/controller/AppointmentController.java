@@ -1,9 +1,6 @@
 package com.isa.BloodBank.controller;
 
-import com.isa.BloodBank.dto.AppointmentCalendarEventDTO;
-import com.isa.BloodBank.dto.AppointmentDTO;
-import com.isa.BloodBank.dto.ScheduleAppointmentDTO;
-import com.isa.BloodBank.dto.UserCreationDTO;
+import com.isa.BloodBank.dto.*;
 import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.repository.AppointmentRepository;
 import com.isa.BloodBank.repository.CancelledAppointmentRepository;
@@ -212,4 +209,18 @@ public class AppointmentController {
         List<Appointment> appointments = newAppointmentService.getAllAvailableNewAppointments(dateTime);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
-}
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/scheduleNewAppointment")
+    public ResponseEntity<Object> scheduleNewAppointment(@RequestBody NewAppointmentDTO dto) throws MessagingException {
+        if(newAppointmentService.scheduleNewAppointment(dto)){
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("It hasn't been 6 months since your last blood donation", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
+    }
