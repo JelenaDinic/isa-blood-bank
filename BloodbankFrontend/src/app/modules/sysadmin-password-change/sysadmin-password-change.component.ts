@@ -19,10 +19,10 @@ export class SysadminPasswordChangeComponent {
 
   Submit(): void {
 
-    if(this.passwordChangeDTO.newPassword !== this.passwordChangeDTO.confirmNewPassord) {
-      this.toastr.error("Passwords do not match!");
-      return;
-    }
+    // if(this.passwordChangeDTO.newPassword !== this.passwordChangeDTO.confirmNewPassord) {
+    //   this.toastr.error("Passwords do not match!");
+    //   return;
+    // }
 
     let token = localStorage.getItem('token');
     let userId;

@@ -41,8 +41,37 @@ export class BloodBankRegistrationComponent implements OnInit {
       return false;
     }
 
+    if(!this.startsWithCapital(this.bloodBankCenter.name)) {
+      alert('Name must start with a capital letter!');
+      return false;
+    }
+
+    if(!this.startsWithCapital(this.bloodBankCenter.street)) {
+      alert('Street must start with a capital letter!');
+      return false;
+    }
+
+    if(!this.startsWithCapital(this.bloodBankCenter.city)) {
+      alert('City must start with a capital letter!');
+      return false;
+    }
+
+    if(!this.startsWithCapital(this.bloodBankCenter.country)) {
+      alert('Country must start with a capital letter!');
+      return false;
+    }
+
+    if(!this.bloodBankCenter.number.match("([0-9]{1,3})[A-Z]?")) {
+      alert('Invalid street number input!');
+      return false;
+    }
+
 
     return true;
+  }
+
+  public startsWithCapital(word: string){
+    return word.charCodeAt(0) >= 65 && word.charCodeAt(0) <= 90
   }
 
   private toastError() {
