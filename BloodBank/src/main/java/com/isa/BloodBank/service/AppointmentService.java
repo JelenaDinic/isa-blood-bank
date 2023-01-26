@@ -136,28 +136,38 @@ public class AppointmentService {
     }
 
     public void cancelAppointment(ScheduleAppointmentDTO dto) {
-        Appointment appointment = findById(dto.getId());
-        RegisteredUser user = repository.findById(dto.getCustomerId());
-
-        CancelledAppointment cancelledAppointment = new CancelledAppointment();
-
-
         for (Appointment a: getAllSheduledAppointments(dto.getCustomerId())) {
+
+            Appointment appointment = findById(dto.getId());
+            RegisteredUser user = repository.findById(dto.getCustomerId());
             Boolean isTomorrow = checkIfAppointmentIsInLessThan24Hours(a);
-            if(a.getRegisteredUser() !=null) {
-                if (appointment.getId() == a.getId()) {
-                    if (isTomorrow == false) {
-                        appointment.setStatus(AppointmentStatus.CANCELLED);
+            CancelledAppointment cancelledAppointment = new CancelledAppointment();
+            if (isTomorrow == false) {
+                appointment.setStatus(AppointmentStatus.CANCELLED);
 
-                        cancelledAppointment.setAppointmentId(appointment.getId());
-                        cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
+                cancelledAppointment.setAppointmentId(appointment.getId());
+                cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
 
-                        cancelledAppointmentRepository.save(cancelledAppointment);
-                        appointmentRepository.save(appointment);
-                    }
-                }
+                cancelledAppointmentRepository.save(cancelledAppointment);
+                appointmentRepository.save(appointment);
             }
         }
+//        for (Appointment a: getAllSheduledAppointments(dto.getCustomerId())) {
+//            Boolean isTomorrow = checkIfAppointmentIsInLessThan24Hours(a);
+//            if(a.getRegisteredUser() !=null) {
+//                if (appointment.getId() == a.getId()) {
+//                    if (isTomorrow == false) {
+//                        appointment.setStatus(AppointmentStatus.CANCELLED);
+//
+//                        cancelledAppointment.setAppointmentId(appointment.getId());
+//                        cancelledAppointment.setUserId(appointment.getRegisteredUser().getId());
+//
+//                        cancelledAppointmentRepository.save(cancelledAppointment);
+//                        appointmentRepository.save(appointment);
+//                    }
+//                }
+//            }
+//        }
     }
 
     public Appointment save(Appointment appointment) {

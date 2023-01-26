@@ -45,13 +45,13 @@ public class BloodDonorForm {
         this.setHasSkinProblems(Boolean.parseBoolean(dto.getHasSkinProblems()));
         this.setHasUnacceptablePressure(Boolean.parseBoolean(dto.getHasUnacceptablePressure()));
         this.setUnderTreatment(Boolean.parseBoolean(dto.getIsUnderTreatment()));
-        this.setOnPeriod(Boolean.parseBoolean(dto.getIsOnPeriod()));
+        this.setOnPeriod(false);
         this.setHasTattoo(Boolean.parseBoolean(dto.getHasTattoo()));
         this.setRested(Boolean.parseBoolean(dto.getIsRested()));
         this.setEpileptic(Boolean.parseBoolean(dto.getIsEpileptic()));
         this.setHasAllergies(Boolean.parseBoolean(dto.getHasAllergies()));
         this.setHasDrankAlcohol(Boolean.parseBoolean(dto.getHasDrankAlcohol()));
-        this.setPregnant(Boolean.parseBoolean(dto.getIsPregnant()));
+        this.setPregnant(false);
         this.setRegisteredUser(registredUser);
     }
 

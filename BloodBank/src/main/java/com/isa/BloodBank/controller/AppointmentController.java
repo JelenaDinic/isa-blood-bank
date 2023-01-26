@@ -103,13 +103,16 @@ public class AppointmentController {
                             if (usersAppointments.isEmpty()) {
 
                                 appointment.setActivationQRCode(activationCode);
-                                service.changeStatusToPending(appointment);
+//                                service.changeStatusToPending(appointment);
+                                appointment.setStatus(AppointmentStatus.PENDING);
                                 appointment.setRegisteredUser(user);
 
                                 emailSenderService.sendSimpleEmail(user.getEmail(),
                                         "Please verify your appointment",
                                         "http://localhost:8082/api/appointment/QRcodeVerification/" + activationCode);
 
+
+                                appointment.setId(dto.getId());
                                 repository.save(appointment);
                                 System.out.println(appointment.getActivationQRCode());
 

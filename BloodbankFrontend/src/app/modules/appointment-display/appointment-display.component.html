@@ -1,6 +1,9 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div  style="background-image: url('../../../assets/bg5.webp'); max-width: 100%;background-size: cover;" >
+
 <div class="backgroud-style">
 
-    <div >
+    <div>
         <h1 class="heading">Appointments</h1>
         <div class="container">
             <table class="appointments-table" mat-table mat-table [dataSource]="dataSource">
@@ -27,7 +30,7 @@
                 <ng-container matColumnDef="scheduleButton">
                     <th mat-header-cell *matHeaderCellDef class="cell-center"> Schedule </th>
                     <td  mat-cell *matCellDef="let appointment" class="cell-center">
-                        <button [disabled]="appointment.isScheduled" type="button" (click)="schedule(appointment.id)">Schedule</button>
+                        <button class="btn btn-primary" type="button" (click)="schedule(appointment.id)">Schedule</button>
                      </td>
                 </ng-container>
             

@@ -28,6 +28,24 @@ export class ScheduledAppointmentsComponent {
         this.appointmentService.getAllScheduled(this.loggedUserId).subscribe(res => {
           this.appointments = res;
           this.dataSource.data = this.appointments;
+          this.appointments.forEach(appointment => {
+            if(appointment.status == 'IN_FUTURE')
+            {
+              appointment.status = 'Scheduled';
+            }
+            if(appointment.status == 'CANCELLED')
+            {
+              appointment.status = 'Cancelled';
+            }
+            if(appointment.status == 'PENDING')
+            {
+              appointment.status = 'Pending';
+            }
+            if(appointment.status == 'FREE')
+            {
+              appointment.status = 'Free';
+            }
+          });
         })
       }
       
@@ -43,7 +61,8 @@ export class ScheduledAppointmentsComponent {
       
       this.appointmentService.cancelAppointment(appointmentDTO).subscribe(res => {
         alert("Appointment successfully cancelled")
-        })
+        window.location.href = "/scheduled-appointments"  
+      })
     }
 
 }

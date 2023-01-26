@@ -27,7 +27,7 @@ public class Appointment {
     private LocalDateTime dateTime;
     private int duration;
     private AppointmentStatus status;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
 

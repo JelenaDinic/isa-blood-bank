@@ -28,6 +28,24 @@ export class AppointmentDisplayComponent {
         this.appointmentService.getAllForScheduling().subscribe(res => {
           this.appointments = res;
           this.dataSource.data = this.appointments;
+          this.appointments.forEach(appointment => {
+            if(appointment.status == 'IN_FUTURE')
+            {
+              appointment.status = 'Scheduled';
+            }
+            if(appointment.status == 'CANCELLED')
+            {
+              appointment.status = 'Cancelled';
+            }
+            if(appointment.status == 'PENDING')
+            {
+              appointment.status = 'Pending';
+            }
+            if(appointment.status == 'FREE')
+            {
+              appointment.status = 'Free';
+            }
+          });
         })
       }
       
@@ -47,7 +65,7 @@ export class AppointmentDisplayComponent {
         },
         (error) => {alert(error.error)
         console.log(error)});
-        
+        window.location.href = "/appointments-display"  
   
     }
 }
