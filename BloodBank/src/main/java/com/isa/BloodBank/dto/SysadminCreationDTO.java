@@ -46,6 +46,7 @@ public class SysadminCreationDTO {
 
     @NotNull
     @NotBlank(message = "Street number cannot be blank")
+    @Pattern(regexp="([0-9]{1,3})[A-Z]?", message="Invalid street number input!")
     private String number;
 
     @NotNull

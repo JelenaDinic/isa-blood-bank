@@ -13,7 +13,7 @@ export class SearchUsersComponent implements OnInit {
 
   public users: UserDisplayDTO[] = [];
   public allUsers: UserDisplayDTO[] = [];
-  page: number = 0;
+  page: number = 1;
   cardsCount: number = 2;
   count: number = 0;
   searchTerm = '';
@@ -21,16 +21,38 @@ export class SearchUsersComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) { }
 
-  public getUsers(searchText: string = ''): void {
-    this.userService.search(searchText).subscribe(
-      (response: UserDisplayDTO[]) => {
-        this.users = response;
-        this.count = this.users.length;
-      },
-      (error) => {
-        console.log(error.message);
+  // public getUsers(searchText: string = ''): void {
+  //   this.userService.search(searchText).subscribe(
+  //     (response: UserDisplayDTO[]) => {
+  //       this.users = response;
+  //       this.count = this.users.length;
+  //     },
+  //     (error) => {
+  //       console.log(error.message);
+  //     }
+  //    );
+  // }
+
+  public getUsers(page: number = 0, size: number = 2,searchTerm : string = ''): void{
+    this.userService.search(page, size, searchTerm).subscribe(
+      (res) => {
+        this.users = res;
+        this.getNumberOfUsers(this.searchTerm);
+        console.log(res);
+        
       }
-     );
+    );
+  }
+
+  public getNumberOfUsers(searchTerm: string = ''): void{
+    this.userService.getResultCount(searchTerm).subscribe(
+      (res) => {
+        this.count = res;
+        if(this.page -1 > (this.count/this.cardsCount)){
+          this.onTableDataChange(1);
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -38,12 +60,12 @@ export class SearchUsersComponent implements OnInit {
   }
 
   search(value: string): void {
-    this.getUsers(value);
+    this.getUsers(this.page -1, this.cardsCount, this.searchTerm);
   }
 
   onTableDataChange(event: any) {
     this.page = event;
-    this.getUsers(this.searchTerm);
+    this.getUsers(this.page-1, this.cardsCount , this.searchTerm);
   }
 
   showAppointments(id: number): void {
