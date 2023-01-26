@@ -5,4 +5,5 @@ import com.isa.BloodBank.model.FreeExamination;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FreeExaminationRepository extends JpaRepository<FreeExamination, Integer> {
+    FreeExamination findFreeExaminationById(int id);
 }

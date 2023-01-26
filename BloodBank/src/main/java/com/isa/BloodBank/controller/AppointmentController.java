@@ -101,7 +101,7 @@ public class AppointmentController {
                             if (usersAppointments.isEmpty()) {
 
                                 appointment.setActivationQRCode(activationCode);
-                                appointment.setStatus(AppointmentStatus.PENDING);
+                                service.changeStatusToPending(appointment);
                                 appointment.setRegisteredUser(user);
 
                                 emailSenderService.sendSimpleEmail(user.getEmail(),

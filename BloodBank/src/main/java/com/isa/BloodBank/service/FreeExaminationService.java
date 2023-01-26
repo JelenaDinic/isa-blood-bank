@@ -17,7 +17,7 @@ public class FreeExaminationService {
     public FreeExaminationService(FreeExaminationRepository repository) {
         this.repository = repository;
     }
-    @Transactional
+
     public void create(FreeExamination freeExamination){
         try {
             repository.save(freeExamination);
@@ -28,5 +28,8 @@ public class FreeExaminationService {
             throw new UnsupportedOperationException("Can't save blood bank!");
         }
 
+    }
+    public FreeExamination getById(int id) {
+        return repository.findFreeExaminationById(id);
     }
 }

@@ -32,4 +32,11 @@ public class Appointment {
     private BloodBankCenter bloodBankCenter;
 
     private String activationQRCode;
+    @Version
+    private Long version;
+
+    public Appointment(int id, AppointmentStatus status) {
+        this.id = id;
+        this.status = status;
+    }
 }
