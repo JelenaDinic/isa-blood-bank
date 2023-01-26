@@ -1,0 +1,38 @@
+<div>
+    <p >Pick date:</p>
+    <input type="date" [(ngModel)]="date">
+    <p>Pick start time:</p>
+    <input placeholder="Time format 08:00" [(ngModel)]="time"> 
+
+    <button (click)="show()">Show appointments</button>
+    <table mat-table matSort [dataSource]="data" style="width: 100%;">
+        <ng-container matColumnDef="center">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Center </th>
+            <td mat-cell *matCellDef="let appointment" class="clickable cell-center">{{appointment.bloodBankCenter.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> City </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.bloodBankCenter.address.city}}</td>
+        </ng-container>
+        <ng-container matColumnDef="grade">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center"> Grade </th>
+            <td mat-cell *matCellDef="let appointment" class="clickable cell-center">5</td>
+        </ng-container>
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef class="cell-center"> Start </th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.dateTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="schedule">
+            <th mat-header-cell *matHeaderCellDef class="cell-center">Schedule</th>
+            <td mat-cell *matCellDef="let appointment" class="cell-center">
+                <!-- <div *ngIf="appointment.status == 'Possible blood donor'"> -->
+                    <button style="margin: 5px 0px; width: 150px;" class="start-btn" mat-raised-button color="primary" (click)="schedule(appointment)"> Schedule</button>
+                <!-- </div> -->
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
+

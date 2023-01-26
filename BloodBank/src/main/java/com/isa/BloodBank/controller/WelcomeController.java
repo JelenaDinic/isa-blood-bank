@@ -33,8 +33,9 @@ public class WelcomeController {
                     new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
             );
         } catch (Exception ex) {
-            throw new Exception("inavalid email/password");
+            throw new Exception("Invalid email/password");
         }
+
         return jwtUtil.generateToken(authRequest.getEmail());
     }
 }

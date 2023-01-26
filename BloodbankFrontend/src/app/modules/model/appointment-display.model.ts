@@ -1,3 +1,4 @@
+import { BloodBankCenter } from "./blood-bank-center.model";
 import { User } from "./user.model";
 
 export class AppointmentDisplay {
@@ -5,10 +6,8 @@ export class AppointmentDisplay {
     dateTime!: Date;
     duration: number = 0;
     status: string = "";
-    isCancelled: string = '';
-    isScheduled: string = '';
     registeredUser!: User;
-    ;
+    bloodBankCenter!: BloodBankCenter;
 
     public constructor(obj?: any) {
         if (obj) {
@@ -16,9 +15,8 @@ export class AppointmentDisplay {
             this.dateTime = obj.dateTime;
             this.duration = obj.duration;
             this.status = obj.status; 
-            this.isCancelled = obj.isCancelled; 
-            this.isScheduled = obj.isScheduled;  
-            this.registeredUser = obj.registeredUser;       
+            this.registeredUser = obj.registeredUser; 
+            this.bloodBankCenter = obj.bloodBankCenter;      
             
         }
     }

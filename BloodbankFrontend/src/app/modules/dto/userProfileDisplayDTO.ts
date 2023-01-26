@@ -1,6 +1,6 @@
 export class UserProfileDisplayDTO{
-    public name: String = "";
-    public surname: String = "";
+    public firstName: String = "";
+    public lastName: String = "";
     public email: String = "";
     public street: String = "";
     public number: String = "";
@@ -12,6 +12,7 @@ export class UserProfileDisplayDTO{
     public professionInfo: String = "";
     public dateOfBirth: String = "";
     public gender: String = "";
+    public addressId!: number;
 
     public constructor(obj?: any) {
         if(obj){

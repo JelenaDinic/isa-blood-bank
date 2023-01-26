@@ -24,17 +24,34 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     private RegisteredUser registeredUser;
-//    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
-//    private AppointmentReport appointmentReport;
     private LocalDateTime dateTime;
     private int duration;
     private AppointmentStatus status;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
 
     private String activationQRCode;
-    private Boolean isScheduled;
-    private Boolean isCancelled;
-    private Boolean lessThan24hours = false;
+
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", registeredUser=" + registeredUser +
+                ", dateTime=" + dateTime +
+                ", duration=" + duration +
+                ", status=" + status +
+                ", bloodBankCenter=" + bloodBankCenter +
+                ", activationQRCode='" + activationQRCode + '\'' +
+                '}';
+    }
+    @Version
+    private Long version;
+
+    public Appointment(int id, AppointmentStatus status) {
+        this.id = id;
+        this.status = status;
+
+    }
 }

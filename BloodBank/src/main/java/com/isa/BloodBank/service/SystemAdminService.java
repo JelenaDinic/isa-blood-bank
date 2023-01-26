@@ -55,4 +55,8 @@ public class SystemAdminService {
         repository.save(systemAdmin);
     }
 
+    public SystemAdmin getById(int id) {
+        return repository.findById(id);
+    }
+
 }

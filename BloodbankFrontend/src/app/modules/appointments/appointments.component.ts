@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit {
   public loggedUserRole: String | null = localStorage.getItem('loggedUserRole');
   public userId!: number;
 
-
   constructor(
     private appointmentService: AppointmentService,
     private bloodDonorService: BloodDonorService,
@@ -61,17 +60,30 @@ export class AppointmentsComponent implements OnInit {
     })
   }
   saveReport(appointmentReport: AppointmentReport): void {
-    appointmentReport.appointmentId = this.startedAppointmentId;
-    this.appointmentReportService.create(appointmentReport).subscribe(res => {
-      this.equipmentService.updateEquipment(this.equipmentArr).subscribe(res => {
-        alert("You have saved this report successfully!")
-        window.location.reload();
-      })
+    if(this.validate()) {
+      appointmentReport.appointmentId = this.startedAppointmentId;
+      this.appointmentReportService.create(appointmentReport).subscribe(res => {
+        this.equipmentService.updateEquipment(this.equipmentArr).subscribe(res => {
+          alert("You have saved this report successfully!")
+          window.location.reload();
+        })
+  
+      });
+    }
 
-    });
   }
   newEquipment(): void {
     this.equipmentArr.push({ type: "", quantity: 0 });
   }
+  private validate(): boolean {
+    if (!(this.appointmentReport?.bloodType != null && this.appointmentReport?.hand != ''
+    && this.appointmentReport?.amount > 0 && this.appointmentReport?.copperSulfate != ''
+    && this.appointmentReport?.hemoglobinometer != null)) {
+      alert('Please fill in all field!')
+      return false
+    } else {
+      return true
+    }
 
+  }
 }

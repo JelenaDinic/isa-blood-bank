@@ -10,7 +10,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query("select a from appointments a where user_id = ?1 ")
     List<Appointment> findAllByUserId(int id);
 
-
+    List<Appointment> findAll();
     Appointment findById(int id);
     Appointment findAppointmentById(int id);
 

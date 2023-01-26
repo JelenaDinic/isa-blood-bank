@@ -40,7 +40,10 @@ export class LoginUserComponent implements OnInit {
 
     },
     (error) => {
-      console.log(error.message);
+      this.toastr.error("Invalid email/password");
+      console.log(error);
+      // alert("Invalid email/password")
+
     }
    );
   }

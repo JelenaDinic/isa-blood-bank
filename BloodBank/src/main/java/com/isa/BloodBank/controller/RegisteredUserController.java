@@ -8,8 +8,10 @@ import com.isa.BloodBank.service.EmailSenderService;
 import com.isa.BloodBank.service.RegisteredUserService;
 import com.isa.BloodBank.service.UnregisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.BindingResult;
@@ -74,27 +76,8 @@ public class RegisteredUserController {
     @GetMapping("/codeVerification/{activationCode}")
     public ResponseEntity<String> codeVerification(@PathVariable("activationCode") String activationCode) throws Exception{
         try {
-            System.out.println(activationCode);
-            UnregisteredUser newUser = unregisteredUserService.findByActivationCode(activationCode);
-            Person registeredUser = new Person();
-            UserCreationDTO dto = new UserCreationDTO();
 
-            dto.setFirstName(newUser.getFirstName());
-            dto.setLastName(newUser.getLastName());
-            dto.setEmail(newUser.getEmail());
-            dto.setPassword(newUser.getPassword());
-            dto.setRole(newUser.getRole());
-            dto.setDob(newUser.getDob());
-            dto.setPhoneNumber(newUser.getPhoneNumber());
-            dto.setGender(newUser.getGender());
-            dto.setPersonalId(newUser.getPersonalId());
-            dto.setCity(newUser.getAddress().getCity());
-            dto.setCountry(newUser.getAddress().getCountry());
-            dto.setStreet(newUser.getAddress().getStreet());
-            dto.setNumber(newUser.getAddress().getNumber());
-
-            service.create(dto);
-            unregisteredUserService.delete(newUser);
+            service.codeVerification(activationCode);
 
             return new ResponseEntity<>("Email successfully verified", HttpStatus.OK);
         } catch (Exception e) {
@@ -112,13 +95,43 @@ public class RegisteredUserController {
         return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
     }
 
+//    @CrossOrigin(origins = "http://localhost:4200")
+//    @PreAuthorize("hasAnyRole('ROLE_SYSTEMADMIN', 'ROLE_STAFF')")
+//    @GetMapping(path = "/searchUsers")
+//    public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
+//        List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
+//
+//        return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
+//    }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAnyRole('ROLE_SYSTEMADMIN', 'ROLE_STAFF')")
-    @GetMapping(path = "/searchUsers")
-    public ResponseEntity<List<UserDisplayDTO>> searchUsers(Pageable page, @RequestParam("searchText") Optional<String> searchText) {
-        List<UserDisplayDTO> userDisplayDTOs = service.searchUsers(page, searchText.get());
+    @GetMapping(path = "/searchUsersPageble")
+    public ResponseEntity<List<UserDisplayDTO>> getUsers(@RequestParam("page") Optional<String> pageNumber,
+                                                      @RequestParam("size") Optional<String> size,
+                                                      @RequestParam("search") Optional<String> searchTerm) {
+        try {
+            Pageable page;
+            page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));
+            List<UserDisplayDTO> users = service.searchUsers(page, searchTerm.get());
+            return new ResponseEntity<>(users, HttpStatus.OK);
 
-        return new ResponseEntity<>(userDisplayDTOs, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(path="countOfSearchResults")
+    public ResponseEntity<Integer> getNumberOfUsers( @RequestParam("search") Optional<String> searchTerm) {
+        try {
+            int count = service.getSearchResultCount(searchTerm.get());
+            return new ResponseEntity<>(count, HttpStatus.OK);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(path="/byEmail/{email}")
@@ -136,6 +149,14 @@ public class RegisteredUserController {
     @GetMapping(path="/{id}")
     public RegisteredUser getById(@PathVariable("id") int id){
         return service.findById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(path="/novo/{id}")
+    public UserProfileDisplayDTO getById2(@PathVariable("id") int id){
+        RegisteredUser user = service.findById(id);
+        return new UserProfileDisplayDTO(user);
     }
 
 }

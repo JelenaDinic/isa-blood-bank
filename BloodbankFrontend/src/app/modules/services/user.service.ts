@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatLine } from '@angular/material/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError  } from 'rxjs';
 import {UserDisplayDTO} from '../dto/userDisplayDTO'
 import { UserProfileDisplayDTO} from '../dto/userProfileDisplayDTO';
 import { User } from '../model/user.model';
@@ -31,11 +31,23 @@ export class UserService{
     return this.http.put<UserProfileDisplayDTO>(this.apiServerUrl + '/api/registered-user', user, {headers: this.headers})
   }
 
-  public search(searchText : string = '') : Observable<UserDisplayDTO[]>{
-    return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/searchUsers?searchText=` + searchText, {headers: this.headers})
+  // public search(searchText : string = '') : Observable<UserDisplayDTO[]>{
+  //   return this.http.get<UserDisplayDTO[]>(`${this.apiServerUrl}/api/registered-user/searchUsers?searchText=` + searchText, {headers: this.headers})
+  // }
+
+  public search(page: number = 0, size: number = 2, search: string = ''): Observable<UserDisplayDTO[]> {
+    return this.http.get<UserDisplayDTO[]>( this.apiServerUrl + '/api/registered-user/searchUsersPageble?page=' + page + '&size=' + size + '&search=' + search, { headers: this.headers });
+  }
+
+  public getResultCount(search: string = ''): Observable<number> {
+    return this.http.get<number>(this.apiServerUrl + '/api/registered-user/countOfSearchResults?search=' + search, {headers: this.headers,});
   }
 
   public getById(id: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + '/api/registered-user/' + id, {headers: this.headers});
+  }
+
+  public getById2(id: number): Observable<UserProfileDisplayDTO> {
+    return this.http.get<any>(this.apiServerUrl + '/api/registered-user/novo/' + id, {headers: this.headers});
   }
 }

@@ -13,9 +13,7 @@ import { AppointmentService } from '../services/appointment.service';
 export class AppointmentDisplayComponent {
 
   public dataSource = new MatTableDataSource<AppointmentDisplay>();
-  // public isScheduled: string = 'true';
-  // public lessThan24h: string = '';
-  public displayedColumns = ['id', 'dateTime', 'duration', 'status', 'scheduleButton'];
+  public displayedColumns = ['dateTime', 'duration', 'status', 'bloodBankCenter', 'scheduleButton'];
   public appointments: AppointmentDisplay[] = [];
   public patientId!: number;
   clickedRows = new Set<Appointment>();
@@ -27,9 +25,27 @@ export class AppointmentDisplayComponent {
     private appointmentService: AppointmentService) { }
 
     ngOnInit(): void {
-        this.appointmentService.getAll().subscribe(res => {
+        this.appointmentService.getAllForScheduling().subscribe(res => {
           this.appointments = res;
           this.dataSource.data = this.appointments;
+          this.appointments.forEach(appointment => {
+            if(appointment.status == 'IN_FUTURE')
+            {
+              appointment.status = 'Scheduled';
+            }
+            if(appointment.status == 'CANCELLED')
+            {
+              appointment.status = 'Cancelled';
+            }
+            if(appointment.status == 'PENDING')
+            {
+              appointment.status = 'Pending';
+            }
+            if(appointment.status == 'FREE')
+            {
+              appointment.status = 'Free';
+            }
+          });
         })
       }
       
@@ -44,8 +60,12 @@ export class AppointmentDisplayComponent {
 
       appointmentDTO.id = appointmentId;
 
-      this.appointmentService.scheduleAppointment(appointmentDTO).subscribe(res => {
-        })
+      this.appointmentService.scheduleAppointment(appointmentDTO).subscribe(data => {
+        alert("Verify scheduling appointment on your email")
+        },
+        (error) => {alert(error.error)
+        console.log(error)});
+        window.location.href = "/appointments-display"  
   
     }
 }

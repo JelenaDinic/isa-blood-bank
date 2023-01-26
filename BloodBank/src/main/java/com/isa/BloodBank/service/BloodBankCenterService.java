@@ -36,6 +36,11 @@ public class BloodBankCenterService {
         return bloodBankCreationDTO;
     }
 
+    public BloodBankCenter findById(int id){
+        BloodBankCenter bloodBankCenter = bloodBankCenterRepository.findBloodBankCenterById(id);
+        return bloodBankCenter;
+    }
+
     @Transactional
     public void create(BloodBankCreationDTO bloodBankCenterDTO){
         try {

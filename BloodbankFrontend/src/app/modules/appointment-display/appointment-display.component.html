@@ -1,29 +1,36 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div  style="background-image: url('../../../assets/bg5.webp'); max-width: 100%;background-size: cover;" >
+
 <div class="backgroud-style">
 
-    <div >
+    <div>
         <h1 class="heading">Appointments</h1>
         <div class="container">
             <table class="appointments-table" mat-table mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="id">
+                <!-- <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef class="cell-center" mat-sort-header> Appointment id </th>
                     <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.id}} </td>
-                </ng-container>
+                </ng-container> -->
                 <ng-container matColumnDef="dateTime">
-                    <th mat-header-cell *matHeaderCellDef class="cell-center" mat-sort-header> Appointment time </th>
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Appointment time </th>
                     <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.dateTime}} </td>
                 </ng-container>
                 <ng-container matColumnDef="duration">
-                    <th mat-header-cell *matHeaderCellDef class="cell-center" mat-sort-header> Appointment duration </th>
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Appointment duration </th>
                     <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.duration}} </td>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef class="cell-center" mat-sort-header> Appointment status </th>
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Appointment status </th>
                     <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.status}} </td>
+                </ng-container>
+                <ng-container matColumnDef="bloodBankCenter">
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Blood bank </th>
+                    <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.bloodBankCenter.name}} </td>
                 </ng-container>
                 <ng-container matColumnDef="scheduleButton">
                     <th mat-header-cell *matHeaderCellDef class="cell-center"> Schedule </th>
                     <td  mat-cell *matCellDef="let appointment" class="cell-center">
-                        <button [disabled]="appointment.isScheduled" type="button" (click)="schedule(appointment.id)">Schedule</button>
+                        <button class="btn btn-primary" type="button" (click)="schedule(appointment.id)">Schedule</button>
                      </td>
                 </ng-container>
             
