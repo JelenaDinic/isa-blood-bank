@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Appointment } from '../model/appointment.model';
 import { AppointmentService } from '../services/appointment.service';
 import { BloodBankService } from '../services/blood-bank-center.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { AppointmentDisplay } from '../model/appointment-display.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -17,8 +19,14 @@ export class NewAppointmentsComponent implements OnInit {
   date:Date = new Date();
   time: String = "07:00";
   appointments:AppointmentDisplay[] = [];
-  public displayedColumns = ['center', 'start', 'schedule'];
+  public displayedColumns = ['center', 'city', 'grade', 'start', 'schedule'];
   public userId!: number;
+  data = new MatTableDataSource<AppointmentDisplay>();
+
+  @ViewChild(MatSort) set sort(sort: MatSort){
+    this.data.sort = sort;
+}
+  
 
   constructor(
     private appointmentService: AppointmentService,
@@ -35,8 +43,9 @@ export class NewAppointmentsComponent implements OnInit {
     var formatedDate = this.dateAsYYYYMMDDHHNNSS(this.date);
     console.log(formatedDate);
     this.appointmentService.getAavailableNewAppointments(formatedDate).subscribe(res=>{
-      console.log("OHOHOHOHO");
       this.appointments = res;
+      this.data.data = this.appointments;
+      this.data = new MatTableDataSource<AppointmentDisplay>(res);
       console.log(this.appointments);
     });
   }

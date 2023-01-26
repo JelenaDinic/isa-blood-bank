@@ -12,6 +12,7 @@ export class UserProfileDisplayDTO{
     public professionInfo: String = "";
     public dateOfBirth: String = "";
     public gender: String = "";
+    public addressId!: number;
 
     public constructor(obj?: any) {
         if(obj){

@@ -40,7 +40,7 @@ export class QuestionnaireComponent implements OnInit {
     console.log(this.bloodDonor)
     this.bloodDonorService.create(this.bloodDonor).subscribe(data=>{
       
-    },error=>alert("Questionnaire is not submited."));
+    });
     this.appointment.bloodBankCenterId = this.centerId;
     this.appointment.dateTime = this.dateOfApp;
     

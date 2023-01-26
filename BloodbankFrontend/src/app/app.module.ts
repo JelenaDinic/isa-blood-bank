@@ -48,6 +48,7 @@ import { NewAppointmentsComponent } from './modules/new-appointments/new-appoint
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { QuestionnaireComponent } from './modules/questionnaire/questionnaire.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { QuestionnaireComponent } from './modules/questionnaire/questionnaire.co
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatSortModule,
     MatGridListModule,
     ToastrModule.forRoot(),
     NgxPaginationModule,

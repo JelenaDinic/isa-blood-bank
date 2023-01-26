@@ -101,6 +101,8 @@ public class RegisteredUserService {
         address.setNumber(userProfileDTO.getNumber());
         address.setCity(userProfileDTO.getCity());
         address.setCountry(userProfileDTO.getCountry());
+        addressRepository.save(address);
+        user.setAddress(address);
         user.setPhoneNumber(userProfileDTO.getPhoneNumber());
         user.setProfession(userProfileDTO.getProfession());
         user.setProfessionInfo(userProfileDTO.getProfessionInfo());
