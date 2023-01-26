@@ -33,6 +33,7 @@ public class Appointment {
 
     private String activationQRCode;
 
+
     @Override
     public String toString() {
         return "Appointment{" +
@@ -44,5 +45,13 @@ public class Appointment {
                 ", bloodBankCenter=" + bloodBankCenter +
                 ", activationQRCode='" + activationQRCode + '\'' +
                 '}';
+
+    @Version
+    private Long version;
+
+    public Appointment(int id, AppointmentStatus status) {
+        this.id = id;
+        this.status = status;
+
     }
 }

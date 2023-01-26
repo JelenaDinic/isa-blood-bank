@@ -30,5 +30,12 @@ public class Complaint {
     @JoinColumn(name = "center_id", referencedColumnName = "id", nullable = true)
     private BloodBankCenter center;
 
+    private boolean isReplied;
+
+    private String replyText;
+
     private String text;
+
+    @Version
+    private Integer version;
 }

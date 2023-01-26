@@ -147,4 +147,9 @@ public class RegisteredUserService {
         create(dto);
         unregisteredUserService.delete(newUser);
     }
+
+    public int getSearchResultCount(String search) {
+        List<Person> users = userRepository.search(search.toLowerCase());
+        return users.size();
+    }
 }

@@ -7,6 +7,7 @@ import { StaffService } from '../services/staff.service';
 import { BloodSupplyService } from '../services/blood-supply.service';
 import { BloodSupplyDTO } from '../dto/bloodSupplyDTO';
 import { MatTableDataSource } from '@angular/material/table';
+import { Staff } from '../model/staff.model';
 
 @Component({
   selector: 'app-blood-bank-center',
@@ -18,21 +19,28 @@ export class BloodBankCenterComponent implements OnInit {
   public bloodBankCenter: BloodBankCenter = new BloodBankCenter;
   public staffList: any;
   public displayedColumns = ['bloodType', 'amount'];
+  public userId!: number;
+  public staff: Staff = new Staff;
   public dataSource = new MatTableDataSource<BloodSupplyDTO>();
   constructor(private bloodBankCenterService: BloodBankService, private staffService: StaffService, private bloodSupplyService: BloodSupplyService, private router: Router) { }
 
   
 
   ngOnInit(): void {
-        this.bloodBankCenterService.getBloodBankCenter(2006).subscribe(res => {
-          this.bloodBankCenter = res;
-          this.staffService.getStaffByCenterId(this.bloodBankCenter.id).subscribe(res => {
-            this.staffList = res;
-          })
-          this.bloodSupplyService.getByCenterId(this.bloodBankCenter.id).subscribe(res => {
-            this.dataSource = res;
-          })
+    this.userId = parseInt(localStorage.getItem("loggedUserId")!)
+    this.staffService.getById(this.userId).subscribe(res => {
+      this.staff = res
+      this.bloodBankCenterService.getBloodBankCenter(this.staff.bloodBankId).subscribe(res => {
+        this.bloodBankCenter = res;
+        this.staffService.getStaffByCenterId(this.bloodBankCenter.id).subscribe(res => {
+          this.staffList = res;
         })
+        this.bloodSupplyService.getByCenterId(this.bloodBankCenter.id).subscribe(res => {
+          this.dataSource = res;
+        })
+      })
+    });
+        
   }
   public update(bloodBankCenter: BloodBankCenter): void {
     if (!this.isValidInput())

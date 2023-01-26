@@ -9,6 +9,7 @@ import com.isa.BloodBank.repository.RegisteredUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,11 @@ public class AppointmentService {
         appointment.setStatus(AppointmentStatus.HAPPENED);
         appointmentRepository.save(appointment);
     }
+    @Transactional
+    public void changeStatusToPending(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.PENDING);
+        appointmentRepository.save(appointment);
+    }
     public void changeStatusToNonApp(int id) {
         Appointment appointment = appointmentRepository.findAppointmentById(id);
         appointment.setStatus(AppointmentStatus.NON_APPEARANCE);
@@ -47,18 +53,6 @@ public class AppointmentService {
     public List<Appointment> getAll(){
         return appointmentRepository.findAll();
     }
-
-//    public List<ScheduleAppointmentDTO> getAllDTOs(){
-//        List<ScheduleAppointmentDTO> dtos = new ArrayList<>();
-//        List<Appointment> appointments =  appointmentRepository.findAll();
-//
-//        for(Appointment appointment : appointments){
-//            ScheduleAppointmentDTO dto = new ScheduleAppointmentDTO(appointment);
-//            dtos.add(dto);
-//        }
-//
-//        return dtos;
-//    }
 
     public List<Appointment> getAllSheduledAppointments(int userId){
         List<Appointment> scheduledAppointments = new ArrayList<>();
@@ -127,7 +121,7 @@ public class AppointmentService {
         }
         return usersAppointments;
     }
-
+@Transactional
     public void codeVerification(String activtionQRCode){
 
         for(Appointment appointment : getAll()){

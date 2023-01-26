@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<Person, Integer> {
 
     Page<Person> findAll(Pageable pageable);
@@ -14,4 +16,7 @@ public interface UserRepository extends JpaRepository<Person, Integer> {
 
     @Query("select u from users u where lower(u.firstName) like %?1% or lower(u.lastName) like %?1%")
     Page<Person> findAllByFirstNameOrLastName(String searchTerm, Pageable pageable);
+
+    @Query("select u from users u where lower(u.firstName) like %?1% or lower(u.lastName) like %?1%")
+    List<Person> search(String searchTerm);
 }
