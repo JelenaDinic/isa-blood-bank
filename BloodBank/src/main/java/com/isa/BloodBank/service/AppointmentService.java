@@ -1,10 +1,8 @@
 package com.isa.BloodBank.service;
 
+import com.isa.BloodBank.dto.NewAppointmentDTO;
 import com.isa.BloodBank.dto.ScheduleAppointmentDTO;
-import com.isa.BloodBank.model.Appointment;
-import com.isa.BloodBank.model.AppointmentStatus;
-import com.isa.BloodBank.model.CancelledAppointment;
-import com.isa.BloodBank.model.RegisteredUser;
+import com.isa.BloodBank.model.*;
 import com.isa.BloodBank.repository.AppointmentRepository;
 import com.isa.BloodBank.repository.CancelledAppointmentRepository;
 import com.isa.BloodBank.repository.RegisteredUserRepository;
@@ -161,4 +159,5 @@ public class AppointmentService {
             }
         }
     }
+
 }

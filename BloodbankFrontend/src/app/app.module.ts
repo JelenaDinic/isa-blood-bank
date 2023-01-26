@@ -44,8 +44,10 @@ import { AppointmentDisplayComponent } from './modules/appointment-display/appoi
 import { ScheduledAppointmentsComponent } from './modules/scheduled-appointments/scheduled-appointments.component';
 import { ComplaintsDisplayComponent } from './modules/complaints-display/complaints-display.component';
 import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
+import { NewAppointmentsComponent } from './modules/new-appointments/new-appointments.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { QuestionnaireComponent } from './modules/questionnaire/questionnaire.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { FreeAppointmentsComponent } from './modules/free-appointments/free-appo
     AppointmentDisplayComponent,
     ScheduledAppointmentsComponent,
     ComplaintsDisplayComponent,
-    FreeAppointmentsComponent
+    FreeAppointmentsComponent,
+    NewAppointmentsComponent,
+    QuestionnaireComponent
   ],
   imports: [
     BrowserModule,

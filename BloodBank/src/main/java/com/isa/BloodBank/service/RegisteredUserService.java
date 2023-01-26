@@ -93,8 +93,8 @@ public class RegisteredUserService {
     }
 
     private void updateUser(RegisteredUser user, UserProfileDisplayDTO userProfileDTO){
-        user.setFirstName(userProfileDTO.getName());
-        user.setLastName(userProfileDTO.getSurname());
+        user.setFirstName(userProfileDTO.getFirstName());
+        user.setLastName(userProfileDTO.getLastName());
         user.setGender(userProfileDTO.getGender());
         Address address = addressRepository.findAddressById(userProfileDTO.getAddressId());
         address.setStreet(userProfileDTO.getStreet());
