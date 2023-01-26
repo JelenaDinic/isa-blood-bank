@@ -5,13 +5,13 @@ export class BloodDonor{
     hasSkinProblems : string = '';
     hasUnacceptablePressure : string = '';
     isUnderTreatment : string = '';
-    isOnPeriod : string = '';
+    isOnPeriod : string = 'false';
     hasTattoo : string = '';
     isRested : string = '';
     isEpileptic : string = '';
     hasAllergies : string = '';
     hasDrankAlcohol : string = '';
-    isPregnant : string = '';
+    isPregnant : string = 'false';
 
     
 }
