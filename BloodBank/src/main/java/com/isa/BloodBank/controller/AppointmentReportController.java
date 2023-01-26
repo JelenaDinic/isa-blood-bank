@@ -48,8 +48,7 @@ public class AppointmentReportController {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
         AppointmentReport appointmentReport = new AppointmentReport(appointmentReportDTO);
-        Appointment a = new Appointment();
-        a.setId(appointmentReportDTO.getAppointmentId());
+        Appointment a = appointmentService.findById(appointmentReportDTO.getAppointmentId());
         appointmentReport.setAppointment(a);
         service.create(appointmentReport);
         appointmentService.changeStatusToDone(appointmentReportDTO.getAppointmentId());

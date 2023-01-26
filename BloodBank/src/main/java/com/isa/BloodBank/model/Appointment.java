@@ -45,7 +45,7 @@ public class Appointment {
                 ", bloodBankCenter=" + bloodBankCenter +
                 ", activationQRCode='" + activationQRCode + '\'' +
                 '}';
-
+    }
     @Version
     private Long version;
 
