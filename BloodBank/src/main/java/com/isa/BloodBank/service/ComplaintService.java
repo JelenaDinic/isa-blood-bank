@@ -1,29 +1,24 @@
 package com.isa.BloodBank.service;
 
 import com.isa.BloodBank.model.Complaint;
-import com.isa.BloodBank.model.ComplaintReply;
-import com.isa.BloodBank.model.Person;
-import com.isa.BloodBank.repository.ComplaintReplyRepository;
 import com.isa.BloodBank.repository.ComplaintRepository;
 import com.isa.BloodBank.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class ComplaintService {
 
     private final ComplaintRepository repository;
-    private final ComplaintReplyRepository complaintReplyRepository;
 
     private final UserRepository userRepository;
 
     private EmailSenderService emailSenderService;
 
-    public ComplaintService(ComplaintRepository repository, ComplaintReplyRepository complaintReplyRepository, UserRepository userRepository, EmailSenderService emailSenderService) {
+    public ComplaintService(ComplaintRepository repository,UserRepository userRepository, EmailSenderService emailSenderService) {
         this.repository = repository;
-        this.complaintReplyRepository = complaintReplyRepository;
         this.userRepository = userRepository;
         this.emailSenderService = emailSenderService;
     }
@@ -32,14 +27,13 @@ public class ComplaintService {
         return repository.findAll();
     }
 
-    public void reply(String replyText, int complaintId) {
+
+    @Transactional
+    public void reply(String replyText, int complaintId) throws Exception{
         Complaint complaint = repository.findById(complaintId);
-
-        ComplaintReply reply = new ComplaintReply(complaint);
-        reply.setResponseText(replyText);
-
-        repository.delete(complaint);
-        complaintReplyRepository.save(reply);
+        complaint.setReplied(true);
+        complaint.setReplyText(replyText);
+        repository.save(complaint);
 
         String userEmail = complaint.getUser().getEmail();
         String regarding;
@@ -50,5 +44,14 @@ public class ComplaintService {
             regarding = complaint.getCenter().getName();
         }
         emailSenderService.sendSimpleEmail(userEmail, "Odgovor na Vasu zalbu na " + regarding, replyText);
+    }
+
+    public Complaint findById(int id) {
+        return repository.findById(id);
+    }
+
+    public Complaint save(Complaint complaint) {
+        Complaint savedComplaint = repository.save(complaint);
+        return savedComplaint;
     }
 }

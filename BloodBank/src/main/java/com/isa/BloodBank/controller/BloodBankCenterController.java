@@ -51,6 +51,8 @@ public class BloodBankCenterController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/{id}")
     public BloodBankCreationDTO getById(@PathVariable("id") int id) {
         return bloodBankCenterService.getById(id);
@@ -79,7 +81,8 @@ public class BloodBankCenterController {
 
         return new ResponseEntity<>(bloodbankDisplayDTOs, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PutMapping("/{id}")
     public void update(@PathVariable int id, @RequestBody BloodBankCreationDTO bloodBankDTO) {
         bloodBankCenterService.update(bloodBankDTO);
