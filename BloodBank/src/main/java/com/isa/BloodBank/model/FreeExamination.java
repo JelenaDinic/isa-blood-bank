@@ -31,5 +31,10 @@ public class FreeExamination {
         setDuration(dto.getDuration());
         setStaff(staff);
     }
+
+    public FreeExamination(int id) {
+        super();
+        this.id = id;
+    }
 }
 
