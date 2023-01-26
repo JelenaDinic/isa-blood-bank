@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserProfileDisplayDTO {
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
     private String email;
     private String street;
     private String number;
@@ -25,8 +25,8 @@ public class UserProfileDisplayDTO {
     private int addressId;
 
     public UserProfileDisplayDTO(RegisteredUser registeredUser){
-        this.name = registeredUser.getFirstName();
-        this.surname = registeredUser.getLastName();
+        this.firstName = registeredUser.getFirstName();
+        this.lastName = registeredUser.getLastName();
         this.email = registeredUser.getEmail();
         this.street = registeredUser.getAddress().getStreet();
         this.number = registeredUser.getAddress().getNumber();
