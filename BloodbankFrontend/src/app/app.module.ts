@@ -46,7 +46,7 @@ import { ComplaintsDisplayComponent } from './modules/complaints-display/complai
 import { FreeAppointmentsComponent } from './modules/free-appointments/free-appointments.component';
 import { NewAppointmentsComponent } from './modules/new-appointments/new-appointments.component';
 //import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [

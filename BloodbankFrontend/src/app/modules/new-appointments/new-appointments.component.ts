@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../model/appointment.model';
 import { AppointmentService } from '../services/appointment.service';
 import { BloodBankService } from '../services/blood-bank-center.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-new-appointments',
@@ -38,12 +39,13 @@ export class NewAppointmentsComponent implements OnInit {
 
   // https://stackoverflow.com/questions/40526102/how-do-you-format-a-date-time-in-typescript
   dateAsYYYYMMDDHHNNSS(date:any): string {
-    return "2023-01-26T07:00:00";
-    // return '2023'
-    //           + '-' + this.leftpad(date.getMonth() + 1)
-    //           + '-' + this.leftpad(date.getDate())
-    //           + ' ' + this.time
-    //           + ':' + this.leftpad(date.getSeconds());
+    //return "2023-01-26T07:00:00";
+    var date2 = new Date(this.date);
+    return date2.getFullYear()
+              + '-' + this.leftpad(date2.getMonth() + 1)
+              + '-' + this.leftpad(date2.getDate())
+              + 'T' + this.time
+              + ':' + "00";
   }
   leftpad(val:any, resultLength = 2, leftpadChar = '0'): string {
     return (String(leftpadChar).repeat(resultLength)

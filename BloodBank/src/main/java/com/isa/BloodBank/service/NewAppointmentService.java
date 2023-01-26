@@ -25,24 +25,25 @@ public class NewAppointmentService {
         List<Appointment> newAppointments = new ArrayList<>();
         List<Appointment> allAppointments = appointmentService.getAll();
         List<BloodBankCenter> allCenters = bloodBankCenterService.findAll();
+        boolean exsistInCenter= false;
         for(BloodBankCenter center: allCenters){
-
+            exsistInCenter= false;
             for(Appointment appointment: allAppointments){
-                System.out.println("aa" + appointment.getDateTime());
                 if(appointment.getBloodBankCenter().getId() == center.getId()){
-                    System.out.println(appointment.getDateTime());
-                    if(!appointment.getDateTime().equals(startTime)){
-//                        Appointment app = new Appointment();
-//                        app.setBloodBankCenter(center);
-//                        app.setDateTime(startTime);
-//                        newAppointments.add(app);
+                    if(startTime.isBefore(appointment.getDateTime().plusMinutes(20))
+                            && appointment.getDateTime().isBefore(startTime.plusMinutes(20))
+                            && appointment.getStatus()!=AppointmentStatus.FREE){
+                        exsistInCenter = true;
                     }
                 }
             }
-            Appointment app = new Appointment();
-            app.setBloodBankCenter(center);
-            app.setDateTime(startTime);
-            newAppointments.add(app);
+            if(!exsistInCenter){
+                Appointment app = new Appointment();
+                app.setBloodBankCenter(center);
+                app.setDateTime(startTime);
+                newAppointments.add(app);
+            }
+
         }
         return newAppointments;
     }
