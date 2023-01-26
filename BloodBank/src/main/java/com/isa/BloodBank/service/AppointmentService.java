@@ -161,4 +161,9 @@ public class AppointmentService {
             }
         }
     }
+
+    public Appointment save(Appointment appointment) {
+        Appointment ap = appointmentRepository.save(appointment);
+        return ap;
+    }
 }
