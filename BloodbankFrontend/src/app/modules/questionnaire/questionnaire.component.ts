@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NewAppointmentDTO } from '../dto/newAppointmentDTO';
 import { BloodDonor } from '../model/blood-donor-form.model';
 import { AppointmentService } from '../services/appointment.service';
@@ -17,9 +18,10 @@ export class QuestionnaireComponent implements OnInit {
   appointment: NewAppointmentDTO = new NewAppointmentDTO();
   d!: any;
 
-  constructor(private bloodDonorService: BloodDonorService, private appointmentService: AppointmentService) { 
+  constructor(private bloodDonorService: BloodDonorService, private appointmentService: AppointmentService, private router: Router) { 
     this.centerId = appointmentService.getCenterId();
     this.dateOfApp = appointmentService.getDateOfAppointment();
+  
 
   }
 
@@ -41,14 +43,17 @@ export class QuestionnaireComponent implements OnInit {
 
     console.log(this.bloodDonor)
     this.bloodDonorService.create(this.bloodDonor).subscribe(data=>{
-      alert("Appointment successfully scheduled")
-    },error=>alert("Appointment is not scheduled"));
+      
+    },error=>alert("Questionnaire is not submited."));
     this.appointment.bloodBankCenterId = this.centerId;
     this.appointment.dateTime = this.dateOfApp;
     
     this.d = localStorage.getItem('loggedUserId');
     this.appointment.patientId = this.d;
     console.log(this.appointment);
-    this.appointmentService.scheduleNewAppointment(this.appointment).subscribe(res => console.log("IZVRSENOs"));
+    this.appointmentService.scheduleNewAppointment(this.appointment).subscribe(res=>{
+      alert("Appointment successfully scheduled")
+      this.router.navigate(['/home-page']);
+    }, error=>alert("Appointment is not scheduled."));
   }
 }

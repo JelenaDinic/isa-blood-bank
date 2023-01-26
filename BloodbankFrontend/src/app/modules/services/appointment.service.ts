@@ -67,7 +67,7 @@ import { NewAppointmentDTO } from '../dto/newAppointmentDTO';
 
     scheduleNewAppointment(appointment: NewAppointmentDTO): Observable<any> {
   
-      return this.http.post<any>(this.apiServerUrl + '/api/appointment/scheduleNewAppointment/', appointment, {headers: this.headers})
+      return this.http.post<any>(this.apiServerUrl + '/api/appointment/scheduleNewAppointment', appointment, {headers: this.headers})
     }
   }
   

@@ -1,10 +1,8 @@
-<p>new-appointments works!</p>
-
 <div>
-    <p >Pick date</p>
+    <p >Pick date:</p>
     <input type="date" [(ngModel)]="date">
-    <p>Pick start time</p>
-    <input [(ngModel)]="time"> 
+    <p>Pick start time:</p>
+    <input placeholder="Time format 08:00" [(ngModel)]="time"> 
 
     <button (click)="show()">Show appointments</button>
     <table mat-table [dataSource]="appointments" style="width: 100%;">

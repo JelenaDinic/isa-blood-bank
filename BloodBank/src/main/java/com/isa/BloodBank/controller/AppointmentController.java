@@ -201,6 +201,7 @@ public class AppointmentController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/availableNewAppointments/{time}")
     public ResponseEntity<List<Appointment>> getAllAvailableNewAppointments(@PathVariable String time) {
         System.out.println(time);
@@ -211,10 +212,13 @@ public class AppointmentController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/scheduleNewAppointment")
     public ResponseEntity<Object> scheduleNewAppointment(@RequestBody NewAppointmentDTO dto) throws MessagingException {
-        if(newAppointmentService.scheduleNewAppointment(dto)){
+        boolean t = newAppointmentService.scheduleNewAppointment(dto);
+        if(t){
+            emailSenderService.sendSimpleEmail("dusko.radicic1@gmail.com",
+                    "Successfully scheduled appointment",
+                    "Your appointment is successfully scheduled.");
             return new ResponseEntity<>(true, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("It hasn't been 6 months since your last blood donation", HttpStatus.BAD_REQUEST);

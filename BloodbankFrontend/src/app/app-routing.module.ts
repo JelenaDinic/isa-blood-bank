@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'complaints-display', component: ComplaintsDisplayComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_SYSTEMADMIN"]}},
   { path : 'free-examination', component: FreeAppointmentsComponent, canActivate:[Guard], data:{ permittedRoles:["ROLE_STAFF"]}},
   { path: 'new-appointment', component: NewAppointmentsComponent},
-  { path : 'questionnaire', component: QuestionnaireComponent/*, canActivate:[Guard], data:{ permittedRoles:["ROLE_PATIENT"]}*/},
+  { path : 'questionnaire', component: QuestionnaireComponent/*, /*canActivate:[Guard], data:{ permittedRoles:["ROLE_USER"]}*/},
 ];
 
 @NgModule({

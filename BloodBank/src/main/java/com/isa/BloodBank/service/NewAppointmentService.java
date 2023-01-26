@@ -58,7 +58,6 @@ public class NewAppointmentService {
 
     public boolean scheduleNewAppointment(NewAppointmentDTO dto){
         List<Appointment> usersAppointments = new ArrayList<>();
-
         //dobavi termine koji su bili pre manje od 6 meseci
         List<Appointment> appointments = appointmentRepository.findAll();
         for (Appointment a : appointments) {

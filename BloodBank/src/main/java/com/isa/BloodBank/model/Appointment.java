@@ -27,11 +27,22 @@ public class Appointment {
     private LocalDateTime dateTime;
     private int duration;
     private AppointmentStatus status;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="bloodBankCenter_id", nullable=false)
     private BloodBankCenter bloodBankCenter;
 
     private String activationQRCode;
 
-
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", registeredUser=" + registeredUser +
+                ", dateTime=" + dateTime +
+                ", duration=" + duration +
+                ", status=" + status +
+                ", bloodBankCenter=" + bloodBankCenter +
+                ", activationQRCode='" + activationQRCode + '\'' +
+                '}';
+    }
 }
