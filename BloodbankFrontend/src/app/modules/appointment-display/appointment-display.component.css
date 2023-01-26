@@ -1,3 +1,15 @@
 .appointments-table{
     width: 800px;
+    margin: 0 auto;
+}
+
+.heading{
+    text-align: center;
+}
+button {
+    background-color: darkred;
+    border: none;
+}
+button:hover {
+    background-color: firebrick;
 }

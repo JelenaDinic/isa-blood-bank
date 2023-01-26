@@ -3,7 +3,7 @@ import { User } from "./user.model";
 
 export class AppointmentDisplay {
     id!: number;
-    dateTime!: Date;
+    dateTime!: string;
     duration: number = 0;
     status: string = "";
     registeredUser!: User;

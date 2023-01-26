@@ -28,6 +28,25 @@ export class AppointmentDisplayComponent {
         this.appointmentService.getAllForScheduling().subscribe(res => {
           this.appointments = res;
           this.dataSource.data = this.appointments;
+          this.appointments.forEach(appointment => {
+            if(appointment.status == 'IN_FUTURE')
+            {
+              appointment.status = 'Scheduled';
+            }
+            if(appointment.status == 'CANCELLED')
+            {
+              appointment.status = 'Cancelled';
+            }
+            if(appointment.status == 'PENDING')
+            {
+              appointment.status = 'Pending';
+            }
+            if(appointment.status == 'FREE')
+            {
+              appointment.status = 'Free';
+            }
+            appointment.dateTime = appointment.dateTime.substring(0, 10) + ", " + appointment.dateTime.substring(11, 16);
+          });
         })
       }
       

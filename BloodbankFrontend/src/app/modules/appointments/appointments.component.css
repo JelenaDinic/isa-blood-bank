@@ -24,7 +24,7 @@ table td {
 }
 
 .table-header {
-    display: flex;
+    margin: 0 auto;
 }
 
 .start-btn {
