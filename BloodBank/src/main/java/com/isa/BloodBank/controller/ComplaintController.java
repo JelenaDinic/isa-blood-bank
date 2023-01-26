@@ -30,8 +30,10 @@ public class ComplaintController {
         List<Complaint> complaints = service.getAll();
         List<ComplaintDisplayDTO> complaintDisplayDTOS = new ArrayList<>();
         for(Complaint complaint : complaints) {
-            ComplaintDisplayDTO complaintDisplayDTO = new ComplaintDisplayDTO(complaint);
-            complaintDisplayDTOS.add(complaintDisplayDTO);
+            if(complaint.isReplied() == false) {
+                ComplaintDisplayDTO complaintDisplayDTO = new ComplaintDisplayDTO(complaint);
+                complaintDisplayDTOS.add(complaintDisplayDTO);
+            }
         }
 
         return new ResponseEntity<>(complaintDisplayDTOS, HttpStatus.OK);
