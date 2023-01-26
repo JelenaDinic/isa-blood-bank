@@ -27,7 +27,6 @@ public class AppointmentReportCreationDTO {
     @NotNull
     @NotBlank(message = "Hand cannot be blank")
     private String hand;
-    @NotNull
     private double hemoglobinometer;
     @NotNull
     @NotBlank(message = "Copper Sulfate cannot be blank")
