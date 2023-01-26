@@ -62,6 +62,16 @@ public class SystemAdminController {
     @PostMapping(path = "/changePassword")
     public ResponseEntity<Object> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
         try {
+
+            if(!passwordChangeDTO.getNewPassword().equals(passwordChangeDTO.getConfirmNewPassord())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            SystemAdmin systemAdmin = service.getById(passwordChangeDTO.getUserId());
+            if(systemAdmin.getPassword().equals(passwordChangeDTO.getNewPassword())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
             service.changePassword(passwordChangeDTO.getNewPassword(), passwordChangeDTO.getUserId());
             return new ResponseEntity<>(HttpStatus.OK);
         }
