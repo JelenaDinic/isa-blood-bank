@@ -48,6 +48,7 @@
         dusko
         
 *Potrebno je instalirati POSTGRESQL bazu i podesiti svoj username i password u Pgadminu. Application.properties fajl koji je u gitignore zbog razlicitih passworda:
+
       server.port=8082
       spring.datasource.url=jdbc:postgresql://localhost:5432/bloodbank
       spring.datasource.username=postgres
