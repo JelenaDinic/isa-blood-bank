@@ -51,7 +51,7 @@
 
       server.port=8082
       spring.datasource.url=jdbc:postgresql://localhost:5432/bloodbank
-      spring.datasource.username=postgres
+      spring.datasource.username= VAS_USERNAME
       spring.datasource.password= VAS_PASSWORD
       spring.jpa.show-sql=true
       spring.jpa.hibernate.ddl-auto = create-drop
